@@ -1,0 +1,13 @@
+@import url('../assets/fonts/pretendard/pretendardvariable.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 전역 폰트 크기와 폰트 패밀리 설정 */
+html {
+  @apply text-base; /* lgBold로 설정된 폰트 크기를 적용 */
+}
+
+body {
+  @apply font-pretendard; /* Pretendard 폰트를 적용 */
+}

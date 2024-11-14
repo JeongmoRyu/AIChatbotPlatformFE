@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // 컴파일된 JavaScript 코드가 ES2020 사양을 따르도록 설정
+    "useDefineForClassFields": true, // 클래스 필드의 정의 동작을 설정
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // 프로젝트에서 사용할 라이브러리들
+    "module": "ESNext", // 모듈 시스템을 ESNext로 설정
+    "skipLibCheck": true, // 라이브러리 타입 검사 건너뛰기
+
+    /* Bundler mode */
+    "moduleResolution": "node", // 모듈 해석을 Node 방식으로 변경
+    "allowImportingTsExtensions": true, // TypeScript 파일 확장자 허용
+    "resolveJsonModule": true, // JSON 모듈을 가져올 수 있게 설정
+    "isolatedModules": true, // 각 파일을 독립 모듈로 처리
+    "noEmit": true, // 컴파일된 파일을 생성하지 않음
+    "jsx": "react-jsx", // JSX 코드를 React JSX로 변환
+
+    /* Linting */
+    "strict": true, // 모든 엄격한 타입 검사 옵션 활성화
+    "noUnusedLocals": true, // 사용되지 않는 지역 변수를 허용하지 않음
+    "noUnusedParameters": true, // 사용되지 않는 매개변수를 허용하지 않음
+    "noFallthroughCasesInSwitch": true, // switch 문에서 fallthrough 방지
+
+    /* Paths */
+    "baseUrl": ".", // 기준 경로를 현재 디렉터리로 설정
+    "paths": {
+      "@/*": ["src/*"] // '@'를 src 디렉터리로 매핑
+    },
+    /* Types for Node.js */
+    "types": ["node"], // Node.js의 타입 정의 포함
+    "esModuleInterop": true, // CommonJS와 ES Module 간의 호환성을 높임
+    "forceConsistentCasingInFileNames": true // 파일 이름 대소문자 일관성 강제
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx", ".prettierrc.cjs", "*.ts", "*.js"], // 컴파일 포함 경로 설정
+  "exclude": ["node_modules", "dist", "vite.config.ts"], // 컴파일 제외 경로 설정,
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ] // 다른 tsconfig 파일 참조
+}

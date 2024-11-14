@@ -1,0 +1,16 @@
+// tsconfig.node.json
+{
+  "compilerOptions": {
+    "composite": true, // 프로젝트 컴포지트 설정
+    "skipLibCheck": true, // 라이브러리 타입 검사 건너뛰기
+    "module": "ESNext", // 모듈 시스템을 ESNext로 설정
+    "moduleResolution": "node", // Node 방식의 모듈 해석
+    "allowSyntheticDefaultImports": true, // default import 허용
+    "strict": true, // 모든 엄격한 타입 검사 옵션 활성화
+    "typeRoots": [
+      "./node_modules/@types", // 타입 정의 파일 경로
+      "./src/shared/types" // 커스텀 타입 정의 파일 경로
+    ]
+  },
+  "include": ["vite.config.ts"] // 포함할 파일 경로
+}

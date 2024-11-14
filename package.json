@@ -1,0 +1,64 @@
+{
+  "name": "on-premise-llm",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "prettier:check:fix": "node prettier-actions.js",
+    "development": "tsc && vite build --mode development",
+    "staging": "tsc && vite build --mode staging",
+    "production": "tsc && vite build --mode production",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "framer-motion": "^11.11.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-loader-spinner": "^6.1.6",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.27.0",
+    "recoil": "^0.7.7",
+    "recoil-persist": "^5.1.0",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/socket.io-client": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.13.0",
+    "@typescript-eslint/parser": "^8.13.0",
+    "@vitejs/plugin-react-swc": "^3.7.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "postcss": "^8.4.47",
+    "prettier": "^3.3.3",
+    "tailwind-styled-components": "^2.2.0",
+    "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,html}": [
+      "npx prettier --cache --write",
+      "npx eslint --cache --fix --max-warnings=0"
+    ]
+  }
+}
