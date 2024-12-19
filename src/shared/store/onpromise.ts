@@ -85,7 +85,7 @@ const roomStatusState = atom<IRoomStatus>({
   },
 });
 
-const sequenceQuestionState = atom<IProAIQuestions[]>({
+const sequenceQuestionState = atom<IChathubQuestions[]>({
   key: 'sequenceQuestionState',
   default: [],
 });
@@ -108,8 +108,8 @@ const chatbotDiffAdmnin = atom<number>({
   default: 2,
 });
 
-const ProAIChatTimelineState = atom<IChatPlayTimelineInfo>({
-  key: 'ProAIChatTimelineState',
+const ChathubChatTimelineState = atom<IChatPlayTimelineInfo>({
+  key: 'ChathubChatTimelineState',
   default: {
     timeline: [],
   },
@@ -153,6 +153,10 @@ const LLMEngineSelectList = atom<SelectListType[] | undefined>({
 });
 const LLMOpenAIEngineSelectList = atom<SelectListType[] | undefined>({
   key: 'LLMOpenAIEngineSelectList',
+  default: undefined,
+});
+const LLMFnCallEngineApiList = atom<SelectListType[] | undefined>({
+  key: 'LLMFnCallEngineApiList',
   default: undefined,
 });
 const RAGEngineSelectList = atom<SelectListType[] | undefined>({
@@ -255,7 +259,7 @@ export {
   gptChatHistoryState,
   chatBuilderGptEngine,
   GuideInfo,
-  ProAIChatTimelineState,
+  ChathubChatTimelineState,
   userLoginState,
   userAuthority,
   chatBuilderState,
@@ -271,6 +275,7 @@ export {
   isMakingQuestions,
   LLMEngineSelectList,
   LLMOpenAIEngineSelectList,
+  LLMFnCallEngineApiList,
   RAGEngineSelectList,
   ESEngineSelectList,
   AddFunctionCall,

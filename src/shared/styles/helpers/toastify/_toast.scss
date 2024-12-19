@@ -1,0 +1,58 @@
+@use 'variables' as vars;
+
+.#{vars.$rt-namespace}__toast {
+  position: relative;
+  min-height: vars.$rt-toast-min-height;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow:
+    0 1px 10px 0 rgba(0, 0, 0, 0.1),
+    0 2px 15px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  max-height: vars.$rt-toast-max-height;
+  overflow: hidden;
+  font-family: vars.$rt-font-family;
+  cursor: pointer;
+  direction: ltr;
+  &--rtl {
+    direction: rtl;
+  }
+  &--dark {
+    background: vars.$rt-color-dark !important;
+    color: vars.$rt-text-color-dark;
+  }
+  &--default {
+    background: vars.$rt-color-default;
+    color: vars.$rt-text-color-default;
+  }
+  &--info {
+    background: vars.$rt-color-info;
+  }
+  &--success {
+    background: vars.$rt-color-success;
+  }
+  &--warning {
+    background: vars.$rt-color-warning;
+  }
+  &--error {
+    background: vars.$rt-color-error;
+  }
+  &-body {
+    margin: auto 0;
+    padding: 6px;
+  }
+}
+
+.#{vars.$rt-namespace}--animate {
+  animation-fill-mode: both;
+  animation-duration: 0.7s;
+}
+
+@media #{vars.$rt-mobile} {
+  .#{vars.$rt-namespace}__toast {
+    margin-bottom: 0;
+  }
+}

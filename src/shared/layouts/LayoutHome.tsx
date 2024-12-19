@@ -1,4 +1,4 @@
-import BgMainTop from '@/shared/assets/images/bg-main-top.svg';
+import BgMainTop from '/images/bg-main-top.svg';
 import tw from 'tailwind-styled-components';
 import { FC } from 'react';
 

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+    <defs>
+        <filter id="wgilkjma1a">
+            <feOffset/>
+            <feGaussianBlur stdDeviation=".5" result="blur"/>
+            <feFlood flood-color="#fff" flood-opacity=".502" result="color"/>
+            <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+            <feComposite operator="in" in="color"/>
+            <feComposite operator="in" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g transform="translate(9 9)">
+        <g data-type="innerShadowGroup">
+            <rect data-name="ball" width="30" height="30" rx="12" transform="translate(-9 -9)" style="fill:#ff9731"/>
+            <g style="filter:url(#wgilkjma1a)">
+                <rect data-name="ball" width="30" height="30" rx="12" style="fill:#fff" transform="translate(-9 -9)"/>
+            </g>
+        </g>
+        <g data-name="합치기 26" style="fill:#fff">
+            <path d="M11163.004 14477.503h-6.07l1.138-1.707.21-.314-.244-.287a6.502 6.502 0 0 1-1.538-4.196c0-3.584 2.918-6.5 6.504-6.5a6.506 6.506 0 0 1 6.498 6.5c0 3.586-2.915 6.504-6.498 6.504z" style="stroke:none" transform="translate(-11157.002 -14465.002)"/>
+            <path d="M11163.004 14477.003c3.308 0 5.998-2.693 5.998-6.004 0-3.309-2.69-6-5.998-6a6.009 6.009 0 0 0-6.004 6c0 1.416.504 2.792 1.42 3.873l.486.575-1.038 1.556h5.136m0 1H11156l1.656-2.484a6.97 6.97 0 0 1-1.656-4.52c0-3.867 3.137-7 7.004-7a6.997 6.997 0 0 1 6.998 7 7.001 7.001 0 0 1-6.998 7.004z" style="fill:#fff;stroke:none" transform="translate(-11157.002 -14465.002)"/>
+        </g>
+        <rect data-name="사각형 1118" width="2" height="2" rx="1" transform="translate(2 5)" style="fill:#ff9731"/>
+        <rect data-name="사각형 1120" width="2" height="2" rx="1" transform="translate(5 5)" style="fill:#ff9731"/>
+        <rect data-name="사각형 1121" width="2" height="2" rx="1" transform="translate(8 5)" style="fill:#ff9731"/>
+    </g>
+</svg>

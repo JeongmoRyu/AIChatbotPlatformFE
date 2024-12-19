@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 interface BackdropProps {
   isShow: boolean;
   className?: string;
-  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 function Backdrop(props: BackdropProps) {

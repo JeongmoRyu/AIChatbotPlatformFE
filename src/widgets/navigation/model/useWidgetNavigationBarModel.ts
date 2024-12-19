@@ -1,4 +1,6 @@
+import { userAuthority as useUserAuthority } from '@/shared/store/onpromise';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 
 interface Menu {
   label: string;
@@ -7,9 +9,14 @@ interface Menu {
 
 const useWidgetNavigationBarModel = () => {
   const [menuList, setMenuList] = useState<Menu[]>([]);
+  const userAuthority = useRecoilValue(useUserAuthority);
 
   useEffect(() => {
-    fetchMenuList().then((list) => setMenuList(list));
+    // fetchMenuList().then((list) => setMenuList(list));
+    fetchMenuList().then((list) => {
+      const adjustedList = userAuthority === '' ? list.filter((item) => item.label !== 'Embedding Ranker') : list;
+      setMenuList(adjustedList);
+    });
   }, []);
 
   return { menuList };
@@ -22,27 +29,27 @@ const fetchMenuList = async () => {
   // const data = await response.json();
   const list = [
     {
-      label: '홈',
+      label: 'menu:홈',
       to: '/home',
     },
     {
-      label: 'AI와의 대화',
+      label: 'menu:AI와의_대화',
       to: '/ai-chat',
     },
     {
-      label: '챗플레이',
+      label: 'menu:챗플레이',
       to: '/chat-play',
     },
     {
-      label: '챗허브',
+      label: 'menu:챗허브',
       to: '/chat-hub',
     },
     {
       label: 'Embedding Ranker',
-      to: '/embedding-ranker',
+      to: '/embedding-history',
     },
     {
-      label: 'LLM 템플릿',
+      label: 'menu:LLM_템플릿',
       to: '/llm-template',
     },
   ];

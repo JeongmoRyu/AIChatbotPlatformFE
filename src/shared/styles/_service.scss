@@ -1,0 +1,300 @@
+
+/** form **/
+.form-control {
+    @apply block w-full rounded-md h-input px-5 py-0 bg-white border border-input-border text-base text-default transition placeholder-blur
+   
+    focus:border-input-focus focus:ring-0 
+    disabled:bg-set-bg disabled:border-set-border disabled:text-blur
+    read-only:bg-set-bg read-only:border-set-border
+    invalid:border-input-error invalid:shadow-spread invalid:shadow-input-error/20;
+  }
+  .form-control.btn {
+    @apply w-32 h-10 flex justify-center;
+  }
+  .form-control.api {
+    @apply read-only:bg-input-api read-only:border-input-api text-white;
+  }
+  .form-control.error {
+    @apply border-input-error shadow-spread shadow-input-error/20;
+  }
+  .txt-error {
+    @apply block mt-2.5 text-sm text-point-dark;
+  }
+  .txt-success {
+    @apply block mt-2.5 text-sm text-primary-dark;
+  }
+  .txt-error:empty {
+    @apply mt-0;
+  }
+  .form-control.multi {
+    @apply py-4 resize-none
+
+   
+  }
+  .form-control.cal {
+    @apply pr-12 bg-[url(@/shared/assets/images/icons/ico_calendar.svg)] bg-no-repeat bg-[right_1.25rem_center] bg-[length:1rem];
+  }
+  /* select */
+  /*.form-control.selectbox {
+    @apply text-blur pr-10 bg-select bg-white border bg-select-position bg-select-size border-input-border appearance-none
+    focus:text-default focus:border-input-border focus:shadow-md focus:shadow-sh-dark/25
+    disabled:bg-set-bg disabled:border-set-border disabled:text-blur disabled:opacity-100;
+  }
+  select option:hover {
+    @apply bg-primary-default;
+  }*/
+  .selectbox {
+    @apply relative shadow-none transition;
+  }
+  .selectbox select {
+    @apply hidden;
+  }
+  
+  .form-check-label {
+    @apply bg-transparent;
+  }
+  
+// radio checkbox
+.form-btn {
+  @apply flex content-center relative bg-transparent;
+
+  input[type='checkbox'] {
+    @apply absolute opacity-0 w-0 h-0 pointer-events-none; // input 숨김
+  }
+
+  input[type='checkbox'] + label {
+    @apply relative inline-flex bg-transparent text-inherit text-light whitespace-nowrap cursor-pointer items-center min-h-24 pl-6 rounded leading-24;
+
+    // 가짜 체크박스
+    &:before {
+      @apply block absolute w-6 h-6 bg-white border border-bd-default-form rounded; 
+      top: 50%; /* 수직 중앙 정렬 */
+      left: 0; /* label 내부의 왼쪽 */
+      transform: translateY(-50%); /* 수직 중앙 정렬 */
+      content: ''; /* 체크박스 외형 추가 */
+      transition: all 0.2s ease-in-out;
+    }
+
+    // 체크 아이콘
+    &:after {
+      @apply absolute w-3.5 h-3.5 bg-[url(@/shared/assets/images/icons/ico_check.svg)] bg-center bg-no-repeat;
+      top: 50%; /* 수직 중앙 정렬 */
+      left: 50%; /* 수평 중앙 정렬 */
+      transform: translate(-50%, -50%); /* 완전 중앙 정렬 */
+      content: '';
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  input[type='checkbox']:checked + label:before {
+    @apply bg-primary-darkblue border-primary-darkblue; /* 선택된 상태 */
+  }
+
+  input[type='checkbox']:checked + label:after {
+    @apply visible opacity-100; /* 체크 아이콘 보이기 */
+  }
+
+  input[type='checkbox']:disabled + label:before {
+    @apply bg-form-disabled border-bd-disabled; /* 비활성화 상태 */
+  }
+
+  input[type='checkbox']:checked:disabled + label:before {
+    @apply bg-set-border border-set-border;
+  }
+
+  input[type='checkbox']:checked:disabled + label:after {
+    @apply bg-[url(@/shared/assets/images/icons/ico_check_disabled.svg)];
+  }
+}
+
+
+ 
+  
+  /* checkbox button type */
+  .input.btn-type {
+    @apply flex w-full;
+  }
+//   .input.btn-type:not(:first-child) {
+//     @apply laptop:mt-2;
+//   }
+  .input.btn-type .form-btn {
+    @apply flex-1;
+  }
+  .input.btn-type .form-btn + .form-btn {
+    @apply ml-0;
+  }
+  .input.btn-type .form-btn input[type='checkbox'] + label {
+    @apply items-center w-full h-md pl-12 border border-set-border border-l-0 rounded-none transition
+   
+  }
+  .input.btn-type .form-btn input[type='checkbox'] + label:hover {
+    @apply bg-normal-check;
+  }
+  .input.btn-type:first-child > .form-btn:first-child input[type='checkbox'] + label {
+    @apply border-l rounded-tl-md rounded-bl-md;
+  }
+  .input.btn-type:last-child > .form-btn:last-child input[type='checkbox'] + label {
+    @apply rounded-tr-md rounded-br-md;
+  }
+//   .input.btn-type > .form-btn:first-child input[type='checkbox'] + label {
+//     @apply laptop:border-l laptop:rounded-tl-md laptop:rounded-bl-md;
+//   }
+//   .input.btn-type > .form-btn:last-child input[type='checkbox'] + label {
+//     @apply laptop:rounded-tr-md laptop:rounded-br-md;
+//   }
+  .input.btn-type .form-btn input[type='checkbox'] + label:before {
+    @apply top-4 left-4 w-5 h-5 border-[#E2E9EF] rounded-full
+   
+  }
+  .input.btn-type .form-btn input[type='checkbox'] + label:after {
+    @apply absolute top-[1.375rem] left-[1.375rem] w-2 h-2 bg-[url(@/shared/assets/images/icons/ico_check.svg)] bg-center bg-100%
+   
+  }
+  
+  .input.btn-type .form-btn input[type='checkbox']:checked + label {
+    @apply bg-normal-check;
+  }
+  
+  /* toggle */
+  .toggle-btn {
+    @apply inline-flex;
+  }
+  .toggle-btn input[type='checkbox'] + label {
+    @apply flex relative w-10 h-6 bg-toggle-default rounded-xl transition duration-300 cursor-pointer;
+  }
+  .toggle-btn input[type='checkbox'] + label:after {
+    @apply absolute inset-y-1/2 left-0.5 content-blank w-5 h-5 bg-white/100 rounded-full transition duration-500 -translate-y-1/2;
+  }
+  .toggle-btn input[type='checkbox']:disabled + label {
+    @apply bg-toggle-disabled cursor-default;
+  }
+  .toggle-btn input[type='checkbox']:disabled + label:after {
+    @apply opacity-30;
+  }
+  .toggle-btn input[type='checkbox']:checked + label {
+    @apply bg-primary-darkblue;
+  }
+  .toggle-btn input[type='checkbox']:checked:disabled + label {
+    @apply bg-toggle-disabled;
+  }
+  .toggle-btn input[type='checkbox']:checked + label:after {
+    @apply left-[1.15rem];
+  }
+  
+  /** contents **/
+  /* search area */
+  .search-area {
+    @apply flex flex-wrap justify-center mt-8 mb-12 p-4 bg-box-default border border-bd-default-card rounded-xl;
+  }
+  .form-group > * {
+    @apply rounded-none
+
+  }
+  .form-group > :first-child {
+    @apply rounded-tl-md rounded-bl-md;
+  }
+  .form-group > :last-child {
+    @apply rounded-tr-md rounded-br-md;
+  }
+  .form-group > :not(:first-child) {
+    @apply -ml-px;
+  }
+  .btn-group {
+    @apply flex;
+  }
+  
+  /* auto complete */
+  .auto-complete-wrap > li {
+    @apply relative;
+  }
+  .auto-complete-wrap li:not(first-of-type) {
+    @apply mt-5;
+  }
+  .auto-complete-wrap .form-area {
+    @apply relative;
+  }
+  .form-area .form-control {
+    @apply pr-16
+    focus:border-input-border
+    read-only:bg-white read-only:border-input-border;
+  }
+  .form-area .btn-del {
+    @apply absolute top-0 right-0 w-12 h-12 bg-[url(@/shared/assets/images/icons/ico_input_del.svg)] bg-no-repeat bg-center bg-[length:0.625rem];
+  }
+  .auto-complete-wrap .auto-complete {
+    @apply absolute top-full z-50 w-full max-h-52 overflow-y-auto border border-set-border rounded-md shadow-md shadow-sh-dark/10;
+  }
+  .auto-complete-wrap .select-val {
+    @apply flex flex-wrap content-center w-full h-input px-5 bg-white truncate transition
+    hover:bg-primary-darkblue hover:text-white;
+  }
+  
+  /* tableChatplay */
+  .tableChatplay {
+    @apply w-full ;
+    // &.statistics {
+    //   th {
+    //     @apply h-8 px-4 text-xs text-left;
+    //   }
+    //   td {
+    //     @apply h-8 px-4 text-xs text-left;
+    //   }
+    // }
+    // &.account-withdraw {
+    //   th {
+    //     @apply text-left px-7;
+    //   }
+    //   td {
+    //     @apply text-left px-7;
+    //   }
+    // }
+  }
+  .tableChatplay thead {
+    @apply  border-y  border-bd-default-line;
+  }
+  .tableChatplay th {
+    @apply h-10 bg-box-default font-medium align-middle text-light;
+  }
+  .tableChatplay td {
+    @apply h-16 px-2.5 align-middle text-center;
+  }
+  .tableChatplay tbody tr {
+    @apply border-b border-bd-default-line;
+  }
+  .tableChatplay .form-btn {
+    @apply justify-center;
+  }
+
+
+.wf-form li + li {
+  @apply mt-8;
+}
+.wf-form .title {
+  @apply relative mb-2.5 text-sm;
+}
+.wf-form .marketing-title {
+  @apply relative ;
+}
+
+.example-title {
+  @apply text-sm font-bold flex items-center h-7;
+}
+
+/* 연동 테스트 popup */
+.form-control.dashed {
+  @apply h-lg border-dashed text-center;
+}
+.wf-form .title span {
+  @apply absolute top-0 right-0 text-point-dark;
+}
+.wf-form fieldset {
+  @apply pb-8 border-b border-normal-border;
+}
+.wf-form fieldset:last-child {
+  @apply border-none;
+}
+.wf-form fieldset + fieldset {
+  @apply pt-8;
+}

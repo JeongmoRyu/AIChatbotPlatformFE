@@ -1,6 +1,6 @@
 import Modal from '@/shared/components/modal/view/Modal';
 import useModalFileUploadViewModal from '../viewModal/useModalFileUploadViewModal';
-import ico_upload from '../../assets/images/icons/ico_upload.svg';
+import ico_upload from '@/shared/assets/images/icons/ico_upload.svg';
 
 interface Props {
   isShow: boolean;

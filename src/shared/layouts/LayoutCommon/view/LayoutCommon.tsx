@@ -55,8 +55,8 @@ const LayoutWrapContainer = tw.div`
 `;
 
 const ContentContainer = tw.div`
-  flex-1
   w-full
+  h-full
   overflow-y-auto
   flex
   flex-col

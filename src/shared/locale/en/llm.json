@@ -1,0 +1,212 @@
+{
+"다양한_예제_템플릿을_자유롭게_활용해보세요": "Feel free to use various example templates.",
+"발신_목적과_핵심_내용을_입력하면_완성된_이메일을_작성해드립니다": "Enter the purpose and content of the email, we will write a complete email.",
+"뉴스_기사_작성": "News Article Writing",
+"홍보_주제_언어_포함할_내용을_입력하면_보도자료나_뉴스_기사를_작성해드립니다":"Enter the topic, and content, and we will write a press release or news article.",
+"홍보_문구_작성": "Promotional Text Writing",
+"제품_정보_홍보_키워드_등을_입력하면_홍보_문구를_작성해드립니다": "Enter product information, promotion keywords, etc., and we will write promotional text.",
+"영상_스크립트_작성": "Generating Video Script",
+"영상_주제와_포함할_내용을_입력하면_영상_스크립트를_작성해드립니다":"Enter the video topic and content to include, and we will write a video script.",
+"문서_전체를_복사하여_붙여넣어주세요_핵심_내용을_요약해드립니다":"Copy and paste the entire document, and we will summarize the key content.",
+"내용을_입력하면_교정_교열을_포함한_문서_첨삭을_해드립니다":"Enter the content, and we will proofread the document including correction.",
+"한국어_텍스트를_입력하면_영문으로_번역해드립니다":"Enter Korean text, and we will translate it into English.",
+"문서를_입력하고_분석_방향을_제시하면_분석한_내용을_제공합니다":"Enter the document and provide the analyzed content by suggesting the analysis direction.",
+"프로그래밍_언어를_선택하고_코딩_목적을_입력하면_코드를_작성해드립니다":"Select a programming language and enter the coding purpose, and we will write the code.",
+
+"내용":"Content",
+
+  "생성_하기": "Generate",
+  "복사": "Copy",
+  "생성중": "Generating...",
+  "빠른_생성": "Quick Sampler",
+  "파일_다운로드": "  Download File",
+  "자":"characters",
+  "다시_생성": "Regenerate",
+  "생성_하기_버튼을_눌러주세요": "Press the generate button!",
+  "지우기": "Clear",
+  
+  "보도_자료_및_뉴스_기사_작성": "News Article Writing.",
+  "원하는_홍보_주제를_입력하고_기사에_반드시_포함할_내용을_입력하세요": " Enter the desired promotion topic and the content that must be included in the article.",
+  "홍보_주제": " Promotion Topic",
+  "홍보_주제를_입력해주세요": " Please enter the promotion topic.",
+  "포함할_내용": " Content to Include",
+  "포함할_내용을_입력해주세요": " Please enter the content to include.",
+  "기사_제목": " Article Title",
+  "기사_내용": " Article Content",
+  "문서_내용을_입력하면_교정_교열을_포함한_문서_첨삭을_해드립니다": "Enter the content, and we will proofread the document including correction.",
+
+
+
+  
+  "이메일_작성": "Generating Emails",
+    "원하는_이메일_작성_유형을_선택하고_핵심_내용을_입력해주세요": "Please select the type of e-mail you want, and enter your core content.",
+    "이메일_유형": "Email type",
+    "발신": "Sending",
+    "회신": "Replying",
+  
+    "발신_목적": "Email Purposes",
+    "사업_제안": "Business Proposal",
+    "세일즈": "Sales",
+    "미팅_신청": "Meeting Request",
+    "미팅_일정_조정": "Meeting Rescheduling",
+    "업무_지원요청": "Support inquiry",
+    "업무_진행상황_공유": "Work Status Review",
+    "직접입력": "etc..",
+    "톤앤_매너": "Tone & Manner",
+    "공손하게": "Politely",
+    "친근하게": "Friendly",
+    "강경하게": "Strongly",
+    "간단명료하게": "Concisely",
+    "언어": "Language",
+    "한국어": "Korean",
+    "영어": "English",
+    "중국어": "Chinese",
+    "일본어": "Japanese",
+    "핵심_내용": "Key points",
+
+    "메일에_담고_싶은_핵심_내용을_입력하세요": "Please write the key content you want to include in the email.",
+   "발신_내용": "Email content",
+
+   "내용이_클립보드에_복사되었습니다": "Contents has been copied to the clipboard.",
+   "클립보드_복사에_실패했습니다": "Clipboard copy failed.",
+   "복사할_내용이_없습니다": "There is nothing to copy.",
+
+   
+   
+  
+    "수신_이메일_내용": "Incoming email content",
+    "이메일_원문_내용을_입력하세요": "Please enter the original content of the email.",
+    "수신_내용_요약": "Summary",
+    "회신_제목": "Reply title",
+    "회신_내용": "Reply details",
+
+    "회의록_작성": "Generating Meeting Minutes",
+  "회의록_초안을_등록하고_내용_요약과_주요_결정사항을_정리해보세요": "You can summarize the minutes by entering the meeting content. ",
+  "회의록_초안": "Draft of the Minutes",
+
+  "작성하신_회의록_초안을_입력해주세요": "Please write the draft of the minutes you've created.",
+
+  "요약_길이": "Summary Length",
+  "주요_결정사항_길이": "Length of Key Decisions",
+  "자_이내": "Length",
+  "불릿으로_생성하기": "with Bullets",
+
+  "요약": "Summary",
+  "한_영_번역": "Ko-En Translation",
+"한국어_텍스트를_입력하고_영어로_번역해보세요": "Enter Korean text and translate it into English.",
+"내용을_입력하세요": "Please enter the content.",
+ 
+
+ 
+
+ 
+
+  "회의_날짜": " Conference Date",
+  "회의_제목": " Conference Title",
+  "회의_참석자": " Attendees",
+  "회의_목적": " Purpose of the Meeting",
+  "회의_아젠다": " Agenda",
+  "미팅_노트": " Meeting Notes",
+
+  "길이": " Length",
+  "숫자를_입력해_주세요": " Please enter a number.",
+
+  "제목을_입력해_주세요": "  Please enter a title.",
+  "회의_참석자를_입력해주세요": "  Please enter the attendees.",
+  "회의_목적을_입력해주세요": " Please enter the purpose of the meeting.",
+  "회의_아젠다를_입력해주세요": "   Please enter the agenda.",
+
+  "테이블_생성": "Create Table",
+  "원하는_내용을_입력하여_테이블을_생성할_수_있습니다": " You can create a table by entering the desired content.",
+  "테이블_내용": "Table Content",
+  "테이블_항목": "Table Items",
+  "생성된_테이블": "Created Table",
+
+  "테이블_내용을_입력해주세요": " Please enter the table content.",
+
+  "코드_작성": "Code Writing",
+  "작성하고자_하는_언어를_선택하여_원하는_코드의_내용을_입력하세요": "Select the language you want to write and enter the content of the desired code.",
+  "언어_선택": "Select Language",
+  "작성_내용": "Content",
+  "코드_결과물": "Code Result",
+  "내용을_작성해_주세요": " Please write the content.",
+
+ 
+
+
+
+  "홍보_문구_생성": "Generating Promotional Text",
+  "원하는_주제_및_키워드를_입력하세요": "Enter the desired topic and keywords.",
+  "샘플_문구_생성_개수": "Number of Sample Phrases to Generate",
+  "제품_명": "Product Name",
+  "제품_정보": "Product Information",
+  "상세_서비스": "Detailed Service",
+  "회사명": "Company Name",
+  "홍보_키워드": "Promotion Keywords",
+  "타겟_대상": "Target Audience",
+  "홍보_문구": "Promotional Text",
+
+  "1에서_20사이의_숫자를_입력해주세요": "Please enter a number between 1 and 20.",
+  "제품을_입력해주세요": " Please enter the product name.",
+  "제품정보를_입력하세요": " Please enter the product information.",
+  "상세서비스를_입력하세요": " Please enter the detailed service.",
+  "회사명을_입력해주세요": " Please enter the company name.",
+  "홍보_키워드를_입력해주세요": " Please enter the promotion keywords.",
+  "대상_타겟을_입력해주세요": " Please enter the target audience.",
+
+ 
+  "영상_스크립트_제작": "Video Script Production",
+  "원하는_주제를_입력하고_스크립트에_포함할_내용을_입력하세요": "Enter the desired topic and the content to be included in the script.",
+  "영상_주제": "Video Topic",
+  "영상_제목": "Video Title",
+  "영상_내용": "Video Content",
+  "영상_주제를_입력해주세요": " Please enter the video topic.",
+  "포함할_내용을_입력하세요": "  Please enter the content to include.",
+
+
+
+ 
+
+  "문서_핵심_요약": "Document key summary",
+  "요약을_원하는_내용을_입력해주세요": "Please enter the content you want to summarize.",
+  "문서_내용": "Document Content",
+  "제한_항목_선택": "Select Limited Item",
+  "제한_문장_수_입력": "Enter the number of limited sentences",
+  "문서_제목": "Document Title",
+  "문서_요약_내용": "Document Summary",
+  "글자수": "Number of Sentences",
+  "Byte": "Byte",
+  "선택_없음": "None",
+  "문서_내용을_입력하세요": " Please enter the document content.",
+
+  "문서_첨삭": "Document Proofreading",
+  "교정_및_교열을_원하는_내용을_입력하세요": "Enter the content you want to correct and proofread.",
+  "교정_및_교열_내용": "Correction and Proofreading",
+
+  "한국어_타국어_번역": "Ko-En Translation",
+  "번역이_필요한_내용을_입력하고_원하는_번역_언어를_선택하세요": "Please enter Korean text and translate it into English.",
+  "한국어_내용": "Korean Content",
+  "번역_언어_선택": "Select Translation Language",
+  "번역_내용": "Translation Content",
+
+  "한국어_내용을_입력하세요": " Please enter the Korean content.",
+
+  "문서_분석": "Document Analysis",
+  "분석을_원하는_문서의_내용을_입력하고_분석_상세_요청_내용을_입력하세요": "Enter the content of the document you want to analyze and enter the detailed analysis request content.",
+  "분석_상세_요청_내용": "Detailed Analysis Request Content",
+  "분석_내용": "Analysis Content",
+  "분석_상세_요청_내용을_입력하세요": " Please enter the detailed analysis request content.",
+
+  "초코빵예시": " Choco Bread: Q1 Sales (100 units), Q2 Sales (300 units)",
+  "테이블항목예시": "Column 1 Name, Column 2 Name, Column 3 Name... ",
+  "코드예시": "Write a logic to merge multiple Excel files into one.",
+  "홍보_주제_입력": "Enter promotional theme",
+  "홍보에_포함할_내용을_입력하세요": "Please enter the content to include in the promotion."
+
+
+
+
+
+
+  }
+  

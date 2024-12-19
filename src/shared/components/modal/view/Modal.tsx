@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactElement } from 'react';
 import ReactDOM from 'react-dom';
-import amore_close from 'assets/images/image/amore_close.png';
+import amore_close from '@/shared/assets/images/image/amore_close.png';
 
 interface ModalProps {
   isShow: boolean;

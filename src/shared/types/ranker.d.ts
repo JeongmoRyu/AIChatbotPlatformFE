@@ -26,6 +26,7 @@ interface IRankerDetail {
 }
 
 interface HistoryItem {
+  row_number: number;
   id: number;
   name: string;
   time_stamp: string;
@@ -35,9 +36,8 @@ interface HistoryItem {
   is_mine: boolean;
 }
 
-
 interface ICustomModel {
-  name: string; 
+  name: string;
   ensemble: IModelWeight[];
 }
 interface IChunkingSettings {
@@ -54,9 +54,9 @@ interface IModelWeight {
   weight: number;
 }
 
-
 interface QADetailData {
   id: number;
+  row_number: number;
   question: string;
   answer: string;
   doc_id: string;
@@ -68,6 +68,7 @@ interface QAData {
 }
 interface RankingDetailData {
   id: number;
+  row_number: number;
   model_name: string;
   embedding_model_config: string;
   hit_accuracy: number;
@@ -78,4 +79,3 @@ interface RankingData {
   content: RankingDetailData[];
   total_pages: number;
 }
-

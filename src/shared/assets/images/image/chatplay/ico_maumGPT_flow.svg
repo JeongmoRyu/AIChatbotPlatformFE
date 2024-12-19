@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+    <g transform="translate(-1614.999 -471)">
+        <path data-name="사각형 1125" transform="translate(1614.999 471)" style="opacity:.347;fill:none" d="M0 0h48v48H0z"/>
+        <path data-name="패스 3966" d="M11431 14693h25v-2h-25a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h21v-2h-21a4.006 4.006 0 0 0-4 4v9a4.006 4.006 0 0 0 4 4z" transform="translate(-9810 -14181.998)" style="fill:#5b636d"/>
+        <path data-name="패스 3968" d="M11452 14693h-25v-2h25a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-21v-2h21a4.006 4.006 0 0 1 4 4v9a4.006 4.006 0 0 1-4 4z" transform="translate(-9795 -14196.999)" style="fill:#5b636d"/>
+        <g data-name="그룹 1527" transform="translate(-5 -6)">
+            <rect data-name="사각형 1122" width="16" height="12" rx="2" transform="translate(1625 480)" style="stroke-width:2px;stroke:#5b636d;fill:#ccc"/>
+            <g data-name="사각형 1123" transform="translate(1628 483)" style="stroke:#5b636d;fill:#5b636d">
+                <rect width="10" height="2" rx="1" style="stroke:none"/>
+                <rect x=".5" y=".5" width="9" height="1" rx=".5" style="fill:none"/>
+            </g>
+            <g data-name="사각형 1124" transform="translate(1628 487)" style="stroke:#5b636d;fill:#5b636d">
+                <rect width="6" height="2" rx="1" style="stroke:none"/>
+                <rect x=".5" y=".5" width="5" height="1" rx=".5" style="fill:none"/>
+            </g>
+        </g>
+        <g data-name="그룹 1531" transform="translate(14 9)">
+            <rect data-name="사각형 1122" width="16" height="12" rx="2" transform="translate(1625 480)" style="fill:#ddd;stroke-width:2px;stroke:#5b636d"/>
+            <rect data-name="사각형 1123" width="10" height="2" rx="1" transform="translate(1628 483)" style="fill:#5b636d"/>
+            <rect data-name="사각형 1124" width="6" height="2" rx="1" transform="translate(1628 487)" style="fill:#5b636d"/>
+        </g>
+        <g data-name="그룹 1532" transform="translate(-2 24)">
+            <rect data-name="사각형 1122" width="16" height="12" rx="2" transform="translate(1625 480)" style="fill:#fff;stroke-width:2px;stroke:#5b636d"/>
+            <rect data-name="사각형 1123" width="10" height="2" rx="1" transform="translate(1628 483)" style="fill:#5b636d"/>
+            <rect data-name="사각형 1124" width="6" height="2" rx="1" transform="translate(1628 487)" style="fill:#5b636d"/>
+        </g>
+        <circle data-name="타원 140" cx="3" cy="3" r="3" transform="translate(1625 492)" style="fill:#4262ff"/>
+        <circle data-name="타원 141" cx="3" cy="3" r="3" transform="translate(1645 477)" style="fill:#4262ff"/>
+        <g data-name="그룹 1533" transform="translate(8.999 29.999)">
+            <circle data-name="타원 140" cx="6" cy="6" r="6" transform="translate(1640 474.001)" style="fill:#4262ff"/>
+            <path data-name="패스 3964" d="m-9763-14192.2 1.333 2 1.391-2.085 1.276-1.915" transform="translate(11407.001 14672.202)" style="stroke-linecap:round;stroke-linejoin:round;stroke:#fff;stroke-width:1.25px;fill:none"/>
+        </g>
+        <path data-name="패스 3967" d="m-9761-14170 3 3-3 3" transform="translate(11405 14677)" style="stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;stroke:#5b636d;fill:none"/>
+    </g>
+</svg>

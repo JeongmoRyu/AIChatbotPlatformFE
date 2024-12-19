@@ -1,0 +1,39 @@
+{
+    "오류가_발생했습니다": "Error occurred.",
+    "데이터_로드_중_오류가_발생했습니다": "Error occurred while loading data.",
+    "삭제할_데이터를_선택해_주세요": "Please select the data to delete.",
+    "삭제에_성공하였습니다": "Delete successful.",
+    "확인": "Confirm",
+    "취소": "Cancel",
+    "닫기": "Close",
+    "다음": "Next",
+    "바로가기":"Shortcut Button",
+    "인증되지_않은_사용자입니다": "Unauthorized user.",
+    "현재_사용_가능한_데이터가_없습니.": "No available data currently.",
+    "서버로_정상적인_데이터를_전달하지_못했습니다": "Failed to send normal data to the server.",
+    "필수항목을_입력해주세요": "Please input required items.",
+    "정상적으로_등록되었습니다": "Registration successful.",
+    "정상적으로_수정되었습니다": "Modification successful.",
+    "복사가_완료되었습니다": "Copy completed.",
+    "복사에_실패했습니다": "Copy failed.",
+    "건의_검색결과가_있어요":"search results found.",
+    "로그인_정보가_없습니다": "No login information.",
+    "로그인하시면_데이터_등록_정보를_확인할_수_있습니다":"You can check the data registration information by logging in.",
+
+    "정말_삭제하시겠습니까": "Are you sure you want to delete?",
+    "선택된_항목이_없습니다": "No items selected.",
+    "생성된_데이터가_존재하지_않습니다": "No data exists.",
+
+    "마이페이지": "My Page",
+    "로그아웃": "Log Out",
+    "계정관리": "Account Management",
+    "통계": "Statistics",
+    "공통": "Common",
+    "관리자": "Admin"
+    
+
+  
+
+    
+  }
+  

@@ -1,0 +1,12 @@
+.selectbox {
+    @apply relative shadow-none transition;
+  }
+  .selectbox select {
+    @apply hidden;
+  }
+
+
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+  

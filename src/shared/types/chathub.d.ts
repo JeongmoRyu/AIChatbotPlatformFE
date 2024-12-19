@@ -95,7 +95,6 @@ interface CardChatbotType {
   total_count?: number;
 }
 
-
 interface ISliderProps {
   children: React.ReactNode;
   width?: string;
@@ -172,7 +171,7 @@ interface IExtraProps {
   inline?: boolean;
   className?: string;
   children?: React.ReactNode;
-  [key: string]: any;  
+  [key: string]: any;
 }
 
 interface CodeBlockProps {
@@ -275,7 +274,7 @@ interface IChatbotDataItem {
 //   llm: LLMType;
 // }
 
-interface IProAIQuestions {
+interface IChathubQuestions {
   question: string;
 }
 interface SideBarAreaProps {
@@ -359,6 +358,7 @@ interface IDashBoardLog {
   created_at: string;
   diff: number;
   tokens: number;
+  title?: string;
 }
 
 interface FileType {
@@ -389,7 +389,6 @@ interface EngineCodeTypes {
   name: string;
   parameters?: IEngineParameter[];
 }
-
 
 interface CheckListType {
   id: string;
@@ -489,6 +488,31 @@ interface UserListType {
   sex: 'M' | 'F' | null; // 성별
   birth_year: stringOrNull; // 출생년도
   is_admin: boolean; // 어드민 계정 여부
+  is_editor: boolean; // 어드민 계정 여부
   is_super_admin: boolean; // 어드민 계정 여부
-  user_key?: number;
+  user_key: number;
+  // admin?: string;
+}
+
+// 추가 타입
+interface ChatType {
+  chat_id: string;
+  prompt: string;
+  answer: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+interface RoomType {
+  session_id: string;
+  chat_room_id: string;
+  engine: string;
+  title: string;
+  chats: ChatType[];
+  created_at: string;
+  updated_at: string;
+}
+
+interface ChatHistoryType {
+  [key: string]: string | string[] | number;
 }

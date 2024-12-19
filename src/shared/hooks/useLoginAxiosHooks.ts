@@ -16,8 +16,9 @@ export const useLoginAxiosHooks = () => {
   const connectionInfoState = useRecoilValue(useConnectionInfoStore);
 
   const restfulHeader = {
+    // 'Content-Type': 'application/json',
     'Content-Type': 'application/json',
-    // "Access-Control-Allow-Origin": '*',
+    // 'Access-Control-Allow-Origin': '*',
   };
 
   const sendRequestLogin = async (
@@ -28,13 +29,13 @@ export const useLoginAxiosHooks = () => {
     withCredentials?: boolean,
   ): Promise<any> => {
     // const baseURL = import.meta.env.VITE_APP_LOGIN_SERVER_URL;
-    const baseURL = connectionInfoState.restful;
+    const baseURL = connectionInfoState.chathub.restful;
 
     setIsLoading(true);
 
     console.log('sendRequest URL:' + baseURL + url);
-    console.log('restful URL:' + connectionInfoState.restful);
-    console.log('socket URL:' + connectionInfoState.socket);
+    console.log('restful URL:' + connectionInfoState.chathub.restful);
+    console.log('socket URL:' + connectionInfoState.chathub.socket);
 
     const config = { method, url: baseURL + url, data, headers, withCredentials };
     const responseData = await axios(config)

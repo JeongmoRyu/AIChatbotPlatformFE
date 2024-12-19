@@ -1,0 +1,10 @@
+export const LOGIN_PATH = '/login';
+export const LLM_TASK_EMAIL_PATH = '/llm-template/task/email';
+export const LLM_TASK_NEWS_PATH = '/llm-template/task/news';
+export const LLM_TASK_PROMOTION_PATH = '/llm-template/task/promotion';
+export const LLM_TASK_SCRIPT_PATH = '/llm-template/task/script';
+export const LLM_TASK_CORE_SUMMARY_PATH = '/llm-template/task/summary';
+export const LLM_TASK_DOCUMENT_PATH = '/llm-template/task/edit';
+export const LLM_TASK_TRANSLATE_PATH = '/llm-template/task/translate';
+export const LLM_TASK_ANALYSIS_DOC_PATH = '/llm-template/task/analysis';
+export const LLM_TASK_CODE_PATH = '/llm-template/task/code';

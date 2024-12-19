@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { connectionInfoState as useConnectionInfoStore } from '@/shared/store/userinfo';
 import { userLoginState as useUserLoginState } from '@/shared/store/onpromise';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 type HeaderType = {
   'Content-Type'?: string;
@@ -12,7 +12,7 @@ type HeaderType = {
 export const useRestfulCustomAxios = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const connectionInfoState = useRecoilValue(useConnectionInfoStore);
   const userLoginState = useRecoilValue(useUserLoginState);
@@ -32,13 +32,15 @@ export const useRestfulCustomAxios = () => {
     params?: any,
   ): Promise<any> => {
     //const baseURL = import.meta.env.VITE_APP_RESTFUL_URL;
-    const baseURL = connectionInfoState.restful;
+    const baseURL = connectionInfoState.chathub.restful;
     setIsLoading(true);
 
     let config;
 
-    if (method === 'get' || method === 'delete') {
+    if (method === 'get') {
       config = { method, url: baseURL + url, params, headers };
+    } else if (method === 'delete') {
+      config = { method, url: baseURL + url, params, data, headers };
     } else {
       config = { method, url: baseURL + url, data, headers };
     }

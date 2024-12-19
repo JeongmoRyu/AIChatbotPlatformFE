@@ -17,6 +17,12 @@ interface ConnectionInfoProps {
   restful: string;
   socket: string;
 }
+interface ConnectionsInfoInfoProps {
+  chathub: ConnectionInfoProps;
+  chatplay: ConnectionInfoProps;
+  llm: ConnectionInfoProps;
+  aichat: ConnectionInfoProps;
+}
 
 const userInfoState = atom<UserInfoProps>({
   key: 'userInfoState',
@@ -28,11 +34,25 @@ const userInfoState = atom<UserInfoProps>({
   effects_UNSTABLE: [persistAtom],
 });
 
-const connectionInfoState = atom<ConnectionInfoProps>({
+const connectionInfoState = atom<ConnectionsInfoInfoProps>({
   key: 'connectionInfoState',
   default: {
-    restful: '',
-    socket: '',
+    chathub: {
+      restful: '',
+      socket: '',
+    },
+    chatplay: {
+      restful: '',
+      socket: '',
+    },
+    llm: {
+      restful: '',
+      socket: '',
+    },
+    aichat: {
+      restful: '',
+      socket: '',
+    },
   },
   effects_UNSTABLE: [persistAtom],
 });

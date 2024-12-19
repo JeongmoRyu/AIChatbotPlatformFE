@@ -1,0 +1,71 @@
+{
+    "문서를_등록하면_챗봇과_문서에_대해_대화할_수_있습니다": "Registering documents allows you to converse with chatbots and documents.",
+    "신규_문서_등록": "Register New Document",
+    "등록된_문서가_없습니다": "No documents have been registered.",
+
+
+    "문서명": "Document Name",
+    "쳥크사이즈": "Chunk Size",
+    "청크_오버랩": "Chunk Overlap",
+    "등록_수정_일시": "Registration/Modification Date",
+    "임베딩_진행_상황": "Embedding Progress",
+    "관리자에_의해_생성된_모델로_삭제가_불가능합니다":"Deletion is not possible for models created by the administrator.",
+    "완료": "Complete",
+    "진행 중": "In Progress",
+
+    "상세_정보": "details",
+    "등록한_문서를_확인하고_수정할_수_있습니다": "You can check and modify the registered documents.",
+    "검색_결과가_없어요": "No search results found.",
+    "다른_키워드나_기간을_재설정_해보세요": "Try resetting different keywords or periods.",
+
+    "파일_명": "File Name",
+    "파일_크기": "File Size",
+    "파일_다운로드": "Download File",
+
+    "주의_한번_설정한_문서명은_변경할_수_없습니다": "Caution! Once set, the document name cannot be changed.",
+    "문서명을_입력해주세요": "Please enter the document name.",
+    "중복_확인": "Duplicate Check",
+    "신규_문서를_생성중입니다_잠시만_기다려주세요": "Creating a new document. Please wait a moment.",
+    "pdf_문서_파일을_첨부한_후_생성_버튼을_눌러주세요": "Attach a pdf document file and press the create button.",
+
+    "사용_가능한_모델명입니다": "The model name is available.",
+    "중복된_모델명입니다": "Duplicate model name.",
+    
+    "모델명은_단어로_입력할_수_있습니다": "The model name can be entered as a word.",
+    "모델명_중복_확인을_해주세요": "Please check for duplicate model names.",
+    "모델명을_입력해주세요": "Please enter the model name.",
+    "ChunkSize를_입력해주세요": "Please enter the Chunk Size.",
+    "ChunkOverlap을_입력해주세요": "Please enter the Chunk Overlap.",
+    "ChunkSize는_300에서_700_사이의_정수여야_합니다": "ChunkSize must be an integer between 300 and 700.",
+    "ChunkOverlap은_0에서_200_사이의_정수여야_합니다": "ChunkOverlap must be an integer between 0 and 200.",
+    "모델명은_한글_알파벳_숫자_공백만_허용됩니다": "The model name allows only Korean, English, numbers, spaces, and blank spaces.",
+
+    "통합_관리자_페이지에서_계정_등록이_필요하니_고객센터로_문의_부탁_드립니다": "Account registration is required on the integrated administrator page. \n Please contact the customer center.",
+
+
+    "뒤로":"Back",
+    "생성":"Create",
+
+    "파일명": "File Name",
+    "사이즈": "Size",
+    "삭제": "Delete",
+    "각_파일의_최대_사이즈는_30MB_이내이며_5개까지_등록_가능합니다": "The maximum size of each file is 30MB and up to 5 files can be registered.",
+    "등록_가능_파일은_pdf_입니다": "The file that can be registered is .pdf.",
+    "pdf_파일을_끌어와_파일을_업로드해주세요": "Drag and upload the pdf file.",
+
+    "파일_크기는_최대_30MB까지_가능합니다": "The file size can be up to 30MB.",
+    "최대_5개의_파일만_첨부_가능합니다": "Up to 5 files can be attached.",
+    "PDF_파일만_업로드_할_수_있습니다": "Only PDF files can be uploaded.",
+    "이미_동일한_이름의_파일이_첨부되어있습니다": "A file with the same name is already attached.",
+    "파일_첨부는_PC환경에서만_가능합니다_PC에서_시도해주세요": "File attachment is only available on PC. Please try on PC.",
+
+    "파일을_선택해주세요": "Please select a file.",
+    "파일이_업로드되었습니다_임베딩을_기다려_주세요": "The file has been uploaded. Please wait for embedding.",
+    "파일_업로드_중_오류가_발생했습니다": "An error occurred during file upload.",
+
+    "모델이_정상적으로_생성되었습니다": "The model has been successfully created.",
+    "챗봇에서_사용중인_문서입니다":"This is a document in use in the chatbot."
+
+
+
+}

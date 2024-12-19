@@ -2,10 +2,12 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import useWidgetNavigationBarModel from '../model/useWidgetNavigationBarModel';
+import { useTranslation } from 'react-i18next';
 
 const useWidgetNavigationBarViewModel = () => {
   const model = useWidgetNavigationBarModel();
   const { pathname } = useLocation();
+  const { t } = useTranslation(['menu']);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownContainer] = useState(() => document.createElement('div'));
@@ -61,8 +63,8 @@ const useWidgetNavigationBarViewModel = () => {
     const menu = model.menuList.find((menu) => menu.to === pathname);
     if (!pathname || !menu) return '';
     console.log(menu, pathname);
-    return menu ? menu.label : '';
-  }, [pathname, model.menuList]);
+    return menu ? t(menu.label) : '';
+  }, [pathname, model.menuList, t]);
 
   const menuList = useMemo(() => {
     // 현재 페이지를 찾아서 isActive를 true로 설정
@@ -71,9 +73,9 @@ const useWidgetNavigationBarViewModel = () => {
 
     model.menuList.forEach((menu) => {
       if (menu.to === pathname) {
-        list.unshift({ ...menu, isActive: true });
+        list.unshift({ ...menu, label: t(menu.label), isActive: true });
       } else {
-        list.push({ ...menu, isActive: false });
+        list.push({ ...menu, label: t(menu.label), isActive: false });
       }
     });
 
@@ -83,6 +85,7 @@ const useWidgetNavigationBarViewModel = () => {
     () =>
       model.menuList.map((menu) => ({
         ...menu,
+        label: t(menu.label),
         isActive: menu.to === pathname,
       })),
     [model.menuList, pathname],
