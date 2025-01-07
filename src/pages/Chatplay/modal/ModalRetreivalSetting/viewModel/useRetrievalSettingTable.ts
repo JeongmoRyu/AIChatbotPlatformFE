@@ -60,10 +60,15 @@ const useRetrievalSettingTable = ({ fetchListData }: Props) => {
 
   const handleClickAll = () => {
     checkList.includes('all') ? setCheckList([]) : setCheckList(['all']);
-    if (checkList.length === fetchListData.length) {
+
+    const usedList = fetchListData.filter((item) => item.used_by_chatbot === true);
+
+    if (checkList.length === fetchListData.length - usedList.length) {
       setCheckList([]);
     } else {
-      setCheckList(fetchListData.map((item) => Number(item.retriever_id)));
+      setCheckList(
+        fetchListData.filter((item) => item.used_by_chatbot !== true).map((item) => Number(item.retriever_id)),
+      );
     }
   };
 

@@ -5,10 +5,13 @@ import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 
 import { showNotification } from '@/shared/utils/common-helper';
+import useCopyToClipboard from '@/pages/LLMTempltes/hooks/useCopyToClipboard';
 
 const CodeBlock = ({ language, code }: { language: string; code: string }) => {
+  const copyToClipboard = useCopyToClipboard();
   const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text);
+    // navigator.clipboard.writeText(text);
+    copyToClipboard(text);
     showNotification('코드가 복사되었습니다.', 'success');
   };
 

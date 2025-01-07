@@ -35,7 +35,10 @@ const usePageAccountViewModel = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState<string>('');
   const [isCloseButton, setIsCloseButton] = useState<boolean>(false);
-  const [IDCheck, setIDCheck] = useState<boolean>(false);
+  const [IDCheck, setIDCheck] = useState<boolean>(true);
+  const [ValueCheck, setValueCheck] = useState<boolean>(false);
+  const [NameCheck, setNameCheck] = useState<boolean>(true);
+  const [usernameCheck, setUsernameCheck] = useState<boolean>(true);
   const [isTooltipVisible, setIsTooltipVisible] = useState<boolean>(false);
 
   // Excelfile
@@ -47,19 +50,34 @@ const usePageAccountViewModel = () => {
   };
 
   const handleSaveApi = async () => {
-    if (!userDetailData?.username) {
-      setModalMessage('아이디는 필수값입니다.');
-      setIsModalOpen(true);
-      return;
-    }
-    if (!userDetailData?.user_key && !IDCheck) {
-      setModalMessage('아이디 중복체크는 필수입니다.');
-      setIsModalOpen(true);
-      return;
-    }
-    if (!userDetailData?.name) {
-      setModalMessage(`이름은 필수입니다.`);
-      setIsModalOpen(true);
+    if (!ValueCheck || !IDCheck || !userDetailData?.username || !userDetailData?.name) {
+      console.log(userDetailData);
+      console.log(ValueCheck);
+      console.log(IDCheck);
+      console.log(usernameCheck);
+      console.log(NameCheck);
+      if (!userDetailData?.name) {
+        setNameCheck(false);
+        setModalMessage(`이름은 필수입니다.`);
+        setIsModalOpen(true);
+      }
+      if (!userDetailData?.username) {
+        setUsernameCheck(false);
+        setModalMessage('아이디는 필수값입니다.');
+        setIsModalOpen(true);
+      }
+      if (!userDetailData?.user_key && !IDCheck) {
+        setIDCheck(false);
+        setValueCheck(false);
+        setModalMessage('아이디 중복체크는 필수입니다.');
+        setIsModalOpen(true);
+      }
+      if (!userDetailData?.user_key && !ValueCheck) {
+        setIDCheck(false);
+        setValueCheck(false);
+        setModalMessage('아이디 중복체크는 필수입니다.');
+        setIsModalOpen(true);
+      }
       return;
     }
     const method = userDetailData?.user_key ? 'put' : 'post';
@@ -102,15 +120,25 @@ const usePageAccountViewModel = () => {
 
   const handleValueChange = (type: string, value: any) => {
     if (userDetailData !== null) {
+      if (type === 'username' || type === 'password') {
+        const isValid = /^[a-zA-Z0-9]*$/.test(value.toString());
+        if (!isValid) {
+          showNotification('영어 대소문자와 숫자만 입력 가능합니다.', 'error');
+          return;
+        }
+      }
       setUserDetailData((prev) => {
         if (!prev) return null;
         return { ...prev, [type]: value };
       });
     }
-    console.log(userDetailData);
   };
 
   const handleCreateModalOpen = () => {
+    setNameCheck(true);
+    setUsernameCheck(true);
+    setIDCheck(true);
+
     setUserDetailData(DEFAULT_USER_DATA);
     setIsCreate(true);
     setIsCloseButton(false);
@@ -120,6 +148,11 @@ const usePageAccountViewModel = () => {
     setIsModalVisible(false);
   };
   const handleOpenRevise = (item: UserListType) => {
+    setNameCheck(true);
+    setUsernameCheck(true);
+    setIDCheck(true);
+    setValueCheck(true);
+
     setUserDetailData(item);
     setIsCreate(false);
     setIsCloseButton(false);
@@ -172,6 +205,9 @@ const usePageAccountViewModel = () => {
 
   const loadMemberData = useCallback(async () => {
     try {
+      if (findValue !== '') {
+        setCurrentPage(1);
+      }
       const response = await getMemberData(currentPage - 1);
       const { content, totalPages, totalMember } = response;
       setUserList(content);
@@ -224,19 +260,23 @@ const usePageAccountViewModel = () => {
   };
 
   useEffect(() => {
-    setIDCheck(false);
+    if (isCreate && isModalVisible) {
+      setValueCheck(false);
+    }
   }, [userDetailData?.username]);
 
   const checkMemberAccount = async (email: string) => {
     const response = await sendRequest(`/login/account/chkdup/?email=${email}`, 'get', undefined, undefined, undefined);
     if (response && response.data) {
+      setValueCheck(true);
       console.log(response);
       const data = response.data;
       console.log(data);
       if (data.code === 'EA03') {
         console.log('EA03');
-        setModalMessage(data.message);
+        setModalMessage('사용가능한 계정입니다.');
         setIDCheck(true);
+        setUsernameCheck(true);
         setIsModalOpen(true);
       } else {
         console.log('EA02');
@@ -283,6 +323,7 @@ const usePageAccountViewModel = () => {
         setIsModalOpen(true);
         loadMemberData();
         setCurrentPage(1);
+        setSelectedUsers([]);
       } else {
         setModalMessage(response.data.message);
         setIsModalOpen(true);
@@ -437,6 +478,8 @@ const usePageAccountViewModel = () => {
     exportToExcel,
     excelFileUpload,
     handleFileChange,
+    NameCheck,
+    usernameCheck,
   };
 };
 

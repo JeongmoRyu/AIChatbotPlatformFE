@@ -10,16 +10,14 @@ const PageChatplay = () => {
   const { socket, ChatPlayChatHistoryState, sendMessage } = useChatplayModel();
 
   return (
-    // <div className="flex flex-row h-[calc(100vh)]">
-    //   <div className="flex flex-col justify-between flex-grow bg-box-default">
     <div className="flex h-full gpt">
       <div className="flex flex-col justify-between flex-grow h-full bg-box-default">
-        <ChatPlayNameSelect />
+        <ChatPlayNameSelect socket={socket} />
         {/* <ChatPlayUI/> */}
         <ChatPlayUI isHidden={ChatPlayChatHistoryState.history.length > 0} />
         <ChatPlayChatUI isShow={ChatPlayChatHistoryState.history.length > 0} />
         {/* Input Area */}
-        <PromptBox sendMessage={sendMessage} />
+        <PromptBox sendMessage={sendMessage} socket={socket} />
       </div>
 
       {/* 설정 및 테스트로그 파이프라인 */}

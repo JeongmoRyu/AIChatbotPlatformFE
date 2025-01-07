@@ -71,7 +71,7 @@ export const EngineParameterInputChatPlay: React.FC<EngineParameterInputProps> =
                     }
                   />
                 </div>
-                {selectedEngineInfo[key]?.name} ({selectedEngineInfo[key]?.range?.from} ~
+                {selectedEngineInfo[key]?.name} ({selectedEngineInfo[key]?.range?.from} ~&nbsp;
                 {selectedEngineInfo[key]?.range?.to})
                 {selectedEngineInfo[key]?.required && <span className="ml-1 text-red-500">*</span>}
                 <Controller

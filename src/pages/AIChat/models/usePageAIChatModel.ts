@@ -144,18 +144,18 @@ async function fetchLLMModelList(): Promise<ILLMModel[]> {
       category: 'maum',
       categoryLabel: '기본 모델',
     },
-    {
-      id: 'gpt4',
-      name: 'Chat GPT 4',
-      category: 'third-party',
-      categoryLabel: '외부 모델',
-    },
-    {
-      id: 'gpt4-mini',
-      name: 'Chat GPT 4 mini',
-      category: 'third-party',
-      categoryLabel: '외부 모델',
-    },
+    // {
+    //   id: 'gpt4',
+    //   name: 'Chat GPT 4',
+    //   category: 'third-party',
+    //   categoryLabel: '외부 모델',
+    // },
+    // {
+    //   id: 'gpt4-mini',
+    //   name: 'Chat GPT 4 mini',
+    //   category: 'third-party',
+    //   categoryLabel: '외부 모델',
+    // },
   ];
 }
 
@@ -179,7 +179,7 @@ async function fetchSampleQuestionsKO(): Promise<ISampleQuestionGroup[]> {
       type: 'single',
       questions: [
         {
-          title: 'Knowledge',
+          title: 'Writing',
           question: `다음 내용을 포함하는 보고서를 작성해 주세요.
 (1) 2024년 가을 과일 가격을 표로 정리해주세요.
 (2) 사과 가격 3000원, 배 가격 4000원, 감 가격 2000원
@@ -191,7 +191,7 @@ async function fetchSampleQuestionsKO(): Promise<ISampleQuestionGroup[]> {
       type: 'single',
       questions: [
         {
-          title: 'Knowledge',
+          title: 'Translation',
           question: `아래 문장을 한국어로 번역해주세요.
 Making language models bigger does not inherently make them better at following a user's intent. For example, large language models can generate outputs that are untruthful, toxic, or simply not helpful to the user. In other words, these models are not aligned with their users.`,
         },
@@ -220,7 +220,7 @@ async function fetchSampleQuestionsEN(): Promise<ISampleQuestionGroup[]> {
       type: 'single',
       questions: [
         {
-          title: 'Knowledge',
+          title: 'Writing',
           question: `Write a report that includes the following:
 (1) Summarize the fall 2024 fruit prices in a table.
 (2) Apple price 3000 won, Pear price 4000 won, Persimmon price 2000 won.
@@ -232,7 +232,7 @@ async function fetchSampleQuestionsEN(): Promise<ISampleQuestionGroup[]> {
       type: 'single',
       questions: [
         {
-          title: 'Knowledge',
+          title: 'Translation',
           question: `Translate the following sentence into English.
 언어 모델을 더 크게 만드는 것이 본질적으로 사용자의 의도를 더 잘 따르게 만들지는 않습니다. 예를 들어, 대형 언어 모델은 거짓된, 유해한 또는 단순히 사용자에게 도움이 되지 않는 출력을 생성할 수 있습니다. 다시 말해, 이러한 모델은 사용자의 요구와 일치하지 않습니다.`,
         },

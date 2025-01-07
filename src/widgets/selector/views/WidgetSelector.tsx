@@ -17,7 +17,7 @@ const WidgetSelector = ({
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
 }) => {
-  const { t } = useTranslation(['aiChat']);
+  const { t, i18n } = useTranslation(['aiChat']);
 
   const {
     selectedItemName,
@@ -35,13 +35,28 @@ const WidgetSelector = ({
 
   return (
     <div className="flex justify-center items-center gap-2.5 w-full h-auto font-medium text-[#444444] text-lg">
-      <WidgetSelectorButton
-        isDropdownOpen={isDropdownOpen}
-        buttonRef={buttonRef}
-        toggleDropdown={toggleDropdown}
-        currentLabel={selectedItemName}
-      />
-      {t('aiChat:와_대화해_보세요')}
+      {i18n.language === 'ko' && (
+        <>
+          <WidgetSelectorButton
+            isDropdownOpen={isDropdownOpen}
+            buttonRef={buttonRef}
+            toggleDropdown={toggleDropdown}
+            currentLabel={selectedItemName}
+          />
+          {t('aiChat:와_대화해_보세요')}
+        </>
+      )}
+      {i18n.language === 'en' && (
+        <>
+          {t('aiChat:와_대화해_보세요')}
+          <WidgetSelectorButton
+            isDropdownOpen={isDropdownOpen}
+            buttonRef={buttonRef}
+            toggleDropdown={toggleDropdown}
+            currentLabel={selectedItemName}
+          />
+        </>
+      )}
       {createPortal(
         <AnimatePresence>
           {isDropdownOpen && (

@@ -10,6 +10,8 @@ import {
   isMakingQuestions as useIsMakingQuestions,
   chatbotIdState as useChatbotIdState,
   userAuthority as useUserAuthority,
+  isLoadingState as useIsLoadingState,
+  abortControllerState as useAbortControllerState,
 } from '@/shared/store/onpromise';
 import { showNotification } from '@/shared/utils/common-helper';
 import { useRestfulCustomAxios } from '@/shared/hooks/useRestfulCustomAxios';
@@ -34,7 +36,7 @@ const usePageChatUIViewModel = () => {
   const sequenceQuestionsList = useRecoilValue(sequenceQuestionState);
   const resetSequenceQuestions = useResetRecoilState(sequenceQuestionState);
   // const resetGptChatHistroyState = useResetRecoilState(useGptChatHistoryStore);
-  const { requestAnswerToMCL } = useSendPromptData();
+  const { requestAnswerToMCL, stopStream } = useSendPromptData();
   const { getSequenceQuestions } = useGetSequenceQuestions();
 
   const navigate = useNavigate();
@@ -42,6 +44,9 @@ const usePageChatUIViewModel = () => {
   const chatbotIdState = useRecoilValue(useChatbotIdState);
   const chatbotImage = `${connectionInfoState.chathub.restful}/chatbotinfo/image/${chatbotIdState}`;
   const userAuthority = useRecoilValue(useUserAuthority);
+  const resetIsLoadingState = useResetRecoilState(useIsLoadingState);
+  const resetRoomStatusState = useResetRecoilState(useRoomStatusState);
+  const abortController = useRecoilValue(useAbortControllerState);
 
   useEffect(() => {
     resetSequenceQuestions();
@@ -49,9 +54,17 @@ const usePageChatUIViewModel = () => {
       console.log('*** Unmount Reset ***');
       // resetGptChatHistroyState();
       // mvvn으로 변동 후 error 발생하여 주석처리함
+
+      console.log(abortController);
+      if (abortController && abortController !== null) {
+        stopStream();
+        resetIsLoadingState();
+        resetRoomStatusState();
+      }
+      // stopStream();
       resetChathubChatTimelineState();
     };
-  }, []);
+  }, [abortController]);
 
   useEffect(() => {
     if (gptChatHistoryState && gptChatHistoryState.history.length > 0) {
@@ -67,6 +80,8 @@ const usePageChatUIViewModel = () => {
     const nowTime: number = new Date().getTime();
 
     requestAnswerToMCL(question, roomInfoState.roomId, nowTime);
+
+    // requestAnswerToMCL(question, roomInfoState.roomId, nowTime);
 
     setGptChatHistoryState((prev) => {
       // const userMessagesCount = prev.history.filter((item) => item.role === 'user').length;
@@ -159,7 +174,6 @@ const usePageChatUIViewModel = () => {
         setLogData(response.data.data);
       } else {
         showNotification(response.data.message, 'error');
-        navigate('/login');
       }
     } else {
       showNotification('채팅 로그 획득에 오류가 발생하였습니다', 'error');

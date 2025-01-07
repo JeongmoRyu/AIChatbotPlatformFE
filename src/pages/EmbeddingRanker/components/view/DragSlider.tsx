@@ -28,7 +28,7 @@ export default function DragSlider({ label, smallText, min, max, value, onChange
             value={value}
             onChange={handleSliderChange}
             className="slider"
-            step={50}
+            step={10}
             ref={sliderRef}
           />
           <span ref={spot1Ref} className={`spot ${isActive[0] ? 'active' : ''}`}></span>

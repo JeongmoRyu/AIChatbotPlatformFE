@@ -254,6 +254,12 @@ const isChatbotImageRefresh = atom<boolean>({
   default: false,
 });
 
+// abort
+const abortControllerState = atom<AbortController | null>({
+  key: 'abortControllerState',
+  default: null,
+});
+
 export {
   gptChatHistoryStreamState,
   gptChatHistoryState,
@@ -285,4 +291,5 @@ export {
   SemanticChunkingBPType,
   SemanticChunkingEmbedding,
   EREngineSelectList,
+  abortControllerState,
 };

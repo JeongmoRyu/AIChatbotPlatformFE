@@ -1,7 +1,7 @@
 {
     "문서를_등록하면_챗봇과_문서에_대해_대화할_수_있습니다": "Registering documents allows you to converse with chatbots and documents.",
     "신규_문서_등록": "Register New Document",
-    "등록된_문서가_없습니다": "No documents have been registered.",
+    "등록된_문서가_없습니다": "No documents registered.",
 
 
     "문서명": "Document Name",
@@ -14,7 +14,7 @@
     "진행 중": "In Progress",
 
     "상세_정보": "details",
-    "등록한_문서를_확인하고_수정할_수_있습니다": "You can check and modify the registered documents.",
+    "등록한_문서를_확인하고_수정할_수_있습니다": "You can view and edit the registered documents.",
     "검색_결과가_없어요": "No search results found.",
     "다른_키워드나_기간을_재설정_해보세요": "Try resetting different keywords or periods.",
 
@@ -22,16 +22,16 @@
     "파일_크기": "File Size",
     "파일_다운로드": "Download File",
 
-    "주의_한번_설정한_문서명은_변경할_수_없습니다": "Caution! Once set, the document name cannot be changed.",
-    "문서명을_입력해주세요": "Please enter the document name.",
+    "주의_한번_설정한_문서명은_변경할_수_없습니다": "Warning! You cannot change document name in the future.",
+    "문서명을_입력해주세요": "Please enter a document name",
     "중복_확인": "Duplicate Check",
     "신규_문서를_생성중입니다_잠시만_기다려주세요": "Creating a new document. Please wait a moment.",
-    "pdf_문서_파일을_첨부한_후_생성_버튼을_눌러주세요": "Attach a pdf document file and press the create button.",
+    "pdf_문서_파일을_첨부한_후_생성_버튼을_눌러주세요": "Attach a PDF document file and click the generate button.",
 
-    "사용_가능한_모델명입니다": "The model name is available.",
-    "중복된_모델명입니다": "Duplicate model name.",
+    "사용_가능한_모델명입니다": "The document name is available.",
+    "중복된_모델명입니다": "The same model name already exists.",
     
-    "모델명은_단어로_입력할_수_있습니다": "The model name can be entered as a word.",
+    "모델명은_단어로_입력할_수_있습니다": "The document name can consist of words.",
     "모델명_중복_확인을_해주세요": "Please check for duplicate model names.",
     "모델명을_입력해주세요": "Please enter the model name.",
     "ChunkSize를_입력해주세요": "Please enter the Chunk Size.",
@@ -49,9 +49,9 @@
     "파일명": "File Name",
     "사이즈": "Size",
     "삭제": "Delete",
-    "각_파일의_최대_사이즈는_30MB_이내이며_5개까지_등록_가능합니다": "The maximum size of each file is 30MB and up to 5 files can be registered.",
-    "등록_가능_파일은_pdf_입니다": "The file that can be registered is .pdf.",
-    "pdf_파일을_끌어와_파일을_업로드해주세요": "Drag and upload the pdf file.",
+    "각_파일의_최대_사이즈는_30MB_이내이며_5개까지_등록_가능합니다": "The maximum file size for each file is 30MB, and up to 5 files can be registered.",
+    "등록_가능_파일은_pdf_입니다": "The supported file format is .pdf.",
+    "pdf_파일을_끌어와_파일을_업로드해주세요": "Drag and drop a PDF file to upload.",
 
     "파일_크기는_최대_30MB까지_가능합니다": "The file size can be up to 30MB.",
     "최대_5개의_파일만_첨부_가능합니다": "Up to 5 files can be attached.",

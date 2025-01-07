@@ -51,10 +51,10 @@ const LayoutWrapContainer = tw.div`
   flex-col
   w-full
   h-screen
-  select-none
 `;
-
+// select-none
 const ContentContainer = tw.div`
+ flex-1
   w-full
   h-full
   overflow-y-auto

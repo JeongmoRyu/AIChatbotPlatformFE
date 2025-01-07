@@ -86,6 +86,7 @@ interface ChatPlayHistoryType {
   role: string;
   content: string;
   retriever?: IRetrieverSource[];
+  socket?: any;
 }
 
 interface ChatPlayModalProps {
@@ -117,6 +118,7 @@ interface fetchRetreivalListDataProps {
   chunk_overlap: number;
   status: string;
   updated_at: string;
+  used_by_chatbot: boolean;
 }
 
 interface ChatPlay_SOCKET_DATA {
@@ -201,6 +203,7 @@ interface ChatPlayNameSelectBoxProps {
   error?: boolean;
   reset?: boolean;
   style?: CSSProperties;
+  socket?: any;
 }
 
 interface IRagEngineList {

@@ -11,7 +11,7 @@ import GarbageCan from '@/shared/assets/images/image/chatplay/ico_delete.png';
 import Check from '@/shared/assets/images/image/chatplay/ico_check_on.png';
 
 const ChatPlayNameSelectBox = (props: ChatPlayNameSelectBoxProps) => {
-  const { t } = useTranslation('chatPlay');
+  const { t } = useTranslation('chatplay');
 
   const {
     selectedValue,
@@ -32,6 +32,7 @@ const ChatPlayNameSelectBox = (props: ChatPlayNameSelectBoxProps) => {
     defaultValue: props.defaultValue,
     error: props.error,
     placeholder: props.placeholder,
+    socket: props.socket,
   });
 
   return (
@@ -80,7 +81,7 @@ const ChatPlayNameSelectBox = (props: ChatPlayNameSelectBoxProps) => {
           type="button"
           key="create_option"
           data-value="create_option"
-          data-label="생성하기"
+          data-label={t('chatplay:생성하기')}
           name={props.btnName}
           onClick={handleOnChangeSelect}
           className="!text-primary-darkblue hover:!text-white hover:!bg-primary-darkblue !px-7"

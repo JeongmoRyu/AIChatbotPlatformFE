@@ -33,7 +33,7 @@ export default PageHome;
 
 export const Container = tw.div`
   w-full
-  h-full
+  h-100%
   flex
   flex-col
   gap-[5rem]
@@ -42,4 +42,5 @@ export const Container = tw.div`
   max-w-default
   xl:max-w-xl
   xxl:max-w-xxl
+  pb-[10rem]
 `;

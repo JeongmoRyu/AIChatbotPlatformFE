@@ -8,12 +8,14 @@ import {
   userLoginState as useUserLoginState,
   chatbotIdState as useChatbotIdState,
   sequenceQuestionState,
+  abortControllerState as useAbortControllerState,
   // chatbotDiffAdmnin as useChatbotDiffAdmnin,
   roomStatusState as useRoomStatusState,
 } from '@/shared/store/onpromise';
 import { showNotification } from '@/shared/utils/common-helper';
 import { connectionInfoState as useConnectionInfoStore } from '@/shared/store/userinfo';
 import useGetSequenceQuestions from './useGetSequenceQuestions';
+// import { useRef } from 'react';
 // import { LOGIN } from 'data/routers';
 
 type HeaderType = {
@@ -33,32 +35,46 @@ function useSendPromptData() {
   const nowTime: number = new Date().getTime();
   const { getSequenceQuestions } = useGetSequenceQuestions();
   const setSequenceQuestionsList = useSetRecoilState<IChathubQuestions[]>(sequenceQuestionState);
+  // const abortControllerRef = useRef<AbortController | null>(null);
+  const [abortController, setAbortController] = useRecoilState(useAbortControllerState);
 
   // // stopStream 함수 추가
-  // const stopStream = () => {
-  //   console.log('stopStream');
-  //   console.log(abortControllerRef.current);
-  //   if (abortControllerRef.current) {
-  //     console.log('Stopping stream...');
-  //     abortControllerRef.current.abort();
-  //     abortControllerRef.current = null;
-  //     setRoomStatusState((prev) => ({
-  //       ...prev,
-  //       chatUiState: 'FINISH',
-  //       state: 'QUESTION',
-  //     }));
-  //     setGptChatHistoryStreamStore('');
-  //   }
-  // };
+  const stopStream = () => {
+    console.log('stopStream');
+    // console.log(abortControllerRef.current);
+    if (abortController) {
+      console.log('Stopping stream...');
+      abortController.abort();
+      setAbortController(null);
+      // abortControllerRef.current = null;
+      setRoomStatusState((prev) => ({
+        ...prev,
+        chatUiState: 'FINISH',
+        state: 'QUESTION',
+      }));
+      setGptChatHistoryStreamStore('');
+    } else {
+      console.log('No active AbortController to stop');
+    }
+  };
+
   const requestAnswerToMCL = async (userChatData: string, room_id: number, seq_num: number) => {
-    setRoomInfoState((prev) => ({ ...prev, roomId: room_id }));
     setSequenceQuestionsList([]);
+    if (abortController) {
+      abortController.abort();
+      console.log('Previous AbortController aborted.');
+    }
+    const newAbortController = new AbortController();
+    setAbortController(newAbortController);
+    console.log('New AbortController created:', newAbortController);
+    setRoomInfoState((prev) => ({ ...prev, roomId: room_id }));
     console.log('***requestAnswerToMCL***', userChatData);
     if (userChatData !== '') {
       const response = await sendRequestPromptData(
         `/chat/${chatbotIdState}/${room_id}?room_id=${roomInfoState.socketId}`,
         'post',
         undefined,
+        newAbortController,
         [
           {
             role: 'user',
@@ -107,19 +123,16 @@ function useSendPromptData() {
     url: string,
     method: 'post' | 'get' | 'put' | 'patch' | 'delete' = 'post',
     headers: HeaderType = restfulHeader,
+    abortController: AbortController,
     data?: any,
   ): Promise<any> => {
     const baseURL = connectionInfoState.chathub.restful;
-    // if (abortControllerRef.current) {
-    //   abortControllerRef.current.abort();
-    // }
-    // abortControllerRef.current = new AbortController();
     const requestOptions = {
       method: method,
       headers: headers,
       body: JSON.stringify(data),
       responseType: 'stream',
-      // signal: abortControllerRef.current.signal,
+      signal: abortController.signal,
     };
 
     const fetchWithTimeout = (url: string, options: RequestInit, timeout: number = 180000): Promise<Response> => {
@@ -173,15 +186,18 @@ function useSendPromptData() {
         }
       })
       .catch((err) => {
-        // if (err.name === 'AbortError') {
-        //   console.log('Request was aborted');
-        // } else {
-        //   console.error('Error:', err);
-        // }
+        if (err.name === 'AbortError') {
+          setAbortController(null);
+          // abortControllerRef.current = null;
+          console.log('Request was aborted');
+        } else {
+          console.error('Error:', err);
+        }
         console.log(err.message);
         return null;
       })
       .finally(() => {
+        setAbortController(null);
         // abortControllerRef.current = null;
         setRoomStatusState((prev) => ({
           ...prev,
@@ -204,14 +220,20 @@ function useSendPromptData() {
     if (NowPath === TargetPath && roomInfoState.roomId && roomInfoState.roomId !== 0) {
       setRoomStatusState((prev) => ({ ...prev, chatUiState: 'ING' }));
       addMessageToHistory('user', chatData, nowTime);
+
+      // addMessageToHistory('user', chatData, nowTime);
     } else {
       if (NowPath !== TargetPath) {
         console.log('새로운 대화방 자동 생성');
         navigate(`/chatroom/${chatbotIdState}`);
-        await createNewChatRoom(chatData);
+        createNewChatRoom(chatData);
+
+        // await createNewChatRoom(chatData);
       } else {
         setRoomStatusState((prev) => ({ ...prev, chatUiState: 'ING' }));
         addMessageToHistory('user', chatData, nowTime);
+
+        // addMessageToHistory('user', chatData, nowTime);
       }
     }
   };
@@ -226,8 +248,9 @@ function useSendPromptData() {
     }));
     setRoomStatusState((prev) => ({ ...prev, state: 'QUESTION' }));
     setRoomInfoState((prev) => ({ ...prev, sequence: seq_num }));
-
     requestAnswerToMCL(content, roomInfoState.roomId, seq_num);
+
+    // requestAnswerToMCL(content, roomInfoState.roomId, seq_num);
   };
 
   const createNewChatRoom = async (chat: string) => {
@@ -268,7 +291,7 @@ function useSendPromptData() {
           }));
           setTimeout(() => {
             requestAnswerToMCL(chat, data.id, nowTime);
-          }, 0);
+          }, 300);
           // requestAnswerToMCL(chat, data.id, nowTime);
         }
       } else {
@@ -280,12 +303,29 @@ function useSendPromptData() {
       return;
     }
   };
+  // useEffect(() => {
+  //   console.log('Component mounted, abortControllerRef:', abortControllerRef.current);
+  //   return () => {
+  //     console.log('Component unmounted, abortControllerRef:', abortControllerRef.current);
+  //     if (abortControllerRef.current) {
+  //       stopStream();
+  //     }
+  //   };
+  // }, []);
+  // const abortRequest = () => {
+  //   if (abortControllerRef.current) {
+  //     console.log('Aborting request from external function');
+  //     abortControllerRef.current.abort();
+  //     abortControllerRef.current = null;
+  //   }
+  // };
 
   return {
     checkChatUiState,
     createNewChatRoom,
     requestAnswerToMCL,
-    // stopStream
+    stopStream,
+    // abortRequest
   };
 }
 

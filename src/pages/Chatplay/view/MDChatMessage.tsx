@@ -4,6 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import remarkGfm from 'remark-gfm';
+import { useTranslation } from 'react-i18next';
 
 import {
   ChatPlayChatHistoryState as useChatPlayChatHistoryStore,
@@ -14,14 +15,14 @@ import { showNotification } from '@/shared/utils/common-helper';
 import useOutsideClick from '../viewModel/useOutsideClick';
 
 const components = {
-  h1: ({ ...props }) => <h1 className="mt-2 mb-4 font-bold text-2xl" {...props} />,
-  h2: ({ ...props }) => <h2 className="mt-2 mb-2 font-bold text-xl" {...props} />,
-  h3: ({ ...props }) => <h3 className="mt-2 mb-2 font-bold text-lg" {...props} />,
+  h1: ({ ...props }) => <h1 className="mt-2 mb-4 text-2xl font-bold" {...props} />,
+  h2: ({ ...props }) => <h2 className="mt-2 mb-2 text-xl font-bold" {...props} />,
+  h3: ({ ...props }) => <h3 className="mt-2 mb-2 text-lg font-bold" {...props} />,
   h4: ({ ...props }) => <h4 className="mt-2 mb-2 font-bold text-md" {...props} />,
-  h5: ({ ...props }) => <h5 className="mt-2 mb-2 font-bold text-sm" {...props} />,
-  h6: ({ ...props }) => <h6 className="mt-2 mb-2 font-bold text-xs" {...props} />,
-  table: ({ ...props }) => <table className="border-collapse border border-black w-full" {...props} />,
-  th: ({ ...props }) => <th className="bg-yellow-300 px-3 py-2 border border-black font-bold text-black" {...props} />,
+  h5: ({ ...props }) => <h5 className="mt-2 mb-2 text-sm font-bold" {...props} />,
+  h6: ({ ...props }) => <h6 className="mt-2 mb-2 text-xs font-bold" {...props} />,
+  table: ({ ...props }) => <table className="w-full border border-collapse border-black" {...props} />,
+  th: ({ ...props }) => <th className="px-3 py-2 font-bold text-black bg-yellow-300 border border-black" {...props} />,
   td: ({ ...props }) => <td className="px-3 py-2 border border-black" {...props} />,
   li: ({ ...props }) => <li className="ml-8" {...props} />,
 };
@@ -32,6 +33,8 @@ interface MDChatMessageProps {
 }
 
 const MDChatMessage = ({ index, text }: MDChatMessageProps) => {
+  const { t } = useTranslation(['llm']);
+
   const roomInfo = useRecoilValue(useRoomInfoState);
   const [textValue, setTextValue] = useState(text);
   const [isEditable, setIsEditable] = useState(false);
@@ -39,9 +42,40 @@ const MDChatMessage = ({ index, text }: MDChatMessageProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const setChatPlayChatHistoryState = useSetRecoilState(useChatPlayChatHistoryStore);
 
-  const handleCopy = useCallback((text: string) => {
-    navigator.clipboard.writeText(text);
-    showNotification('코드가 복사되었습니다', 'success');
+  const fallbackCopyToClipboard = (text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      showNotification(t('llm:내용이_클립보드에_복사되었습니다'), 'success');
+    } catch (err) {
+      console.error(t('llm:클립보드_복사에_실패했습니다'), err);
+      showNotification(t('llm:복사할_내용이_없습니다'), 'error');
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  };
+
+  const handleCopy = useCallback(async (text: string) => {
+    if (!text) {
+      showNotification(t('llm:복사할_내용이_없습니다'), 'error');
+      return;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showNotification(t('llm:내용이_클립보드에_복사되었습니다'), 'success');
+      } catch (err) {
+        console.error(t('llm:클립보드_복사에_실패했습니다'), err);
+        showNotification(t('llm:복사할_내용이_없습니다'), 'error');
+      }
+    } else {
+      console.warn('Using fallback for clipboard copy.');
+      fallbackCopyToClipboard(text);
+    }
   }, []);
 
   const renderMarkdown = (markdownLines: string[]) => (
@@ -55,7 +89,7 @@ const MDChatMessage = ({ index, text }: MDChatMessageProps) => {
   const renderCodeBlock = (codeBlock: string[]) => (
     <div key={`code-${codeBlock.join('\n')}`} className="my-4 rounded-md">
       <div
-        className="flex justify-between bg-black px-3 py-2 font-bold text-white"
+        className="flex justify-between px-3 py-2 font-bold text-white bg-black"
         style={{ borderRadius: '10px 10px 0 0' }}
       >
         <div>{codeBlock[0].toUpperCase()}</div>
@@ -67,7 +101,7 @@ const MDChatMessage = ({ index, text }: MDChatMessageProps) => {
             viewBox="0 0 24 24"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="mr-1 w-4 h-4"
+            className="w-4 h-4 mr-1"
             height="1em"
             width="1em"
             xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +199,7 @@ const MDChatMessage = ({ index, text }: MDChatMessageProps) => {
           value={textValue}
           onClick={(e) => e.stopPropagation()}
           onChange={handleContentChange}
-          className="p-2 border-none focus:ring-0 w-full h-auto focus:outline-none resize-none"
+          className="w-full h-auto p-2 border-none resize-none focus:ring-0 focus:outline-none"
         />
       ) : (
         elements

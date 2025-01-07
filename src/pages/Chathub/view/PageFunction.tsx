@@ -37,6 +37,9 @@ const PageFunction = () => {
     connectionInfoState,
     testMessage,
     testResultMessage,
+    CheckFunctionUsesMessage,
+    isChecking,
+    handleModalUseCheck,
   } = usePageFunctionViewModel();
   const location = useLocation();
   const isCopyPage = location.state?.isCopy || false;
@@ -62,8 +65,8 @@ const PageFunction = () => {
               <button className="btn_type white" onClick={() => handleModalVisible('test')}>
                 Test 해보기
               </button>
-              <button className="btn_type red" onClick={() => handleModalVisible('delete')}>
-                Delete
+              <button className="btn_type red" onClick={!isChecking ? handleModalUseCheck : undefined}>
+                {isChecking ? 'ing...' : 'Delete'}
               </button>
               <button className="btn_type blue" onClick={() => handleFunctionCopy(functionsDetail)}>
                 Copy
@@ -211,6 +214,22 @@ const PageFunction = () => {
         </div>
         <div className="file_list_box">
           <p className="txt_center text-[#fe4336]">{functionsDetail.name} Function을 지우시겠습니까?</p>
+        </div>
+      </Modal>
+
+      <Modal
+        isShow={isModalVisible.check}
+        title={`Deny ${functionsDetail.name} Delete`}
+        width={400}
+        onClose={() => handleModalClose('check')}
+        okButtonText="OK"
+        okButtonClick={() => handleModalClose('check')}
+      >
+        <div className="text-center mb-2 px-[10px] break-keep">
+          <p>{functionsDetail.name}</p>
+        </div>
+        <div className="file_list_box">
+          <p className="txt_center text-[#fe4336]">{CheckFunctionUsesMessage}</p>
         </div>
       </Modal>
 

@@ -1,5 +1,3 @@
-// @/shared/lib/data.ts
-
 export const headerData = {
   subTitle: 'On-premise LLM 플랫폼',
   title: (
@@ -46,7 +44,7 @@ export const solutionData: SolutionDataItem[] = [
   {
     title: 'Embedding Ranker',
     description: '한번에 여러가지 LLM  모델 성능을 시험하고 정답률을 비교할 수 있습니다.',
-    to: '/embedding-ranker',
+    to: '/embedding-history',
   },
 ];
 
@@ -97,10 +95,31 @@ export const templateData = {
   ] as TemplateDataItem[],
 };
 
-
 export const CONNECTING_INFO: { [key: string]: { restful: string; socket: string } } = {
   localhost: {
-    restful: 'http://localhost:9993',
-    socket: 'http://localhost:9994',
+    restful: 'http://localhost:9983',
+    socket: 'http://localhost:9984',
   },
 };
+
+export const CONNECTING_INFO_CHAT_PLAY: { [key: string]: { restful: string; socket: string } } = {
+  localhost: {
+    restful: 'http://localhost:9983',
+    socket: 'http://localhost:9984',
+  },
+};
+
+export const CONNECTING_INFO_LLM: { [key: string]: { restful: string; socket: string } } = {
+  localhost: {
+    restful: 'http://localhost:9983',
+    socket: 'http://localhost:9984',
+  },
+};
+export const CONNECTING_INFO_AICHAT: { [key: string]: { restful: string; socket: string } } = {
+  localhost: {
+    restful: 'http://localhost:9983',
+    socket: 'http://localhost:9984',
+  },
+};
+
+export const RAG_EMBEDDING_TYPE = [{ value: 1, id: 'bm25', labelText: 'BM25', isChecked: true }];

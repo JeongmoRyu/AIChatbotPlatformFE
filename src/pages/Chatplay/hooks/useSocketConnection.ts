@@ -52,7 +52,7 @@ const useSocketConnection = () => {
 
     if (connectedSocket) {
       console.log('*** ChatPlay Connected Socket ***');
-      console.log(connectedSocket);
+      console.log('connectedSocket', connectedSocket);
       setSocket(connectedSocket);
     } else {
       console.log('Socket Connection is failed!!');

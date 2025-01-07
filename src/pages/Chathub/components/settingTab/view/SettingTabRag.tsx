@@ -140,7 +140,7 @@ export default function SettingTabRag({
   return (
     <>
       <EditToggle
-        title="RAG 사용 Option"
+        title="RAG 사용 DashboardHeader"
         id="rag_use_yn"
         value={data.use_yn}
         onChange={(val) => onChange('rag', 'use_yn', val)}

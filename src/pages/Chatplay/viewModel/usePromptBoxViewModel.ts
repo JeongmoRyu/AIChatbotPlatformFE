@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { debounce } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import useSendPromptData from '../viewModel/useSendPromptData';
 
@@ -12,7 +13,15 @@ import {
 } from '@/shared/store/chatplay';
 import { userLoginState as useUserLoginStore } from '@/shared/store/onpromise';
 
-const usePromptBoxViewModel = (sendMessage: (data: ChatPlayHistoryType | null) => void) => {
+const usePromptBoxViewModel = ({
+  sendMessage,
+  socket,
+}: {
+  sendMessage: (data: ChatPlayHistoryType | null) => void;
+  socket: ChatPlayHistoryType;
+}) => {
+  const { t, i18n } = useTranslation('chatplay');
+
   const { handleSendChatData, requestText, setRequestText, containerStyle, setContainerStyle, checkUserChatData } =
     useSendPromptData(sendMessage);
 
@@ -43,11 +52,11 @@ const usePromptBoxViewModel = (sendMessage: (data: ChatPlayHistoryType | null) =
 
   const checkValidation = () => {
     if (isChatDisabled) {
-      debouncedNotification('챗봇을 먼저 생성해주세요.');
+      debouncedNotification(i18n.language === 'ko' ? '챗봇을 먼저 생성해주세요.' : 'Please create a chatbot first.');
       return false;
     }
     if (!userLoginState.accessToken) {
-      showNotification('로그인이 필요한 서비스입니다', 'error');
+      showNotification(t('chatplay:로그인이_필요한_서비스입니다'), 'error');
       return false;
     }
 
@@ -113,12 +122,12 @@ const usePromptBoxViewModel = (sendMessage: (data: ChatPlayHistoryType | null) =
 
   const handleOnClickEdit = () => {
     if (isEditable) {
-      setRoomInfoState((prev) => ({
+      setRoomInfoState((prev: any) => ({
         ...prev,
         state: 'UNEDITABLE',
       }));
     } else {
-      setRoomInfoState((prev) => ({
+      setRoomInfoState((prev: any) => ({
         ...prev,
         state: 'EDITABLE',
       }));
@@ -131,15 +140,15 @@ const usePromptBoxViewModel = (sendMessage: (data: ChatPlayHistoryType | null) =
 
     if (!name) return;
 
-    if (checkUserEmail(userLoginState.email)) {
-      showNotification('챗봇 타입을 변경할 권한이 없습니다.', 'error');
-    } else {
-      setRoomInfoState((prev) => ({
-        ...prev,
-        state: name === 'Single' ? 'UNEDITABLE' : prev.state,
-        gptTurnType: name,
-      }));
-    }
+    // if (checkUserEmail(userLoginState.email)) {
+    //   showNotification(t('chatplay:챗봇을_먼저_생성해주세요'), 'error');
+    // } else {
+    setRoomInfoState((prev: any) => ({
+      ...prev,
+      state: name === 'Single' ? 'UNEDITABLE' : prev.state,
+      gptTurnType: name,
+    }));
+    // }
   };
 
   const handleChatMode = () => {
@@ -156,7 +165,7 @@ const usePromptBoxViewModel = (sendMessage: (data: ChatPlayHistoryType | null) =
       content: requestText,
     };
     console.log('chatData', chatData);
-    setChatPlayChatHistoryState((prev) => ({
+    setChatPlayChatHistoryState((prev: any) => ({
       ...prev,
       history: [...prev.history, chatData],
     }));
@@ -169,19 +178,30 @@ const usePromptBoxViewModel = (sendMessage: (data: ChatPlayHistoryType | null) =
     }
   };
 
-  const checkUserEmail = (email: string): boolean => {
-    const arrEmail = email.split('@');
-    if (arrEmail && arrEmail.length > 1) {
-      if (arrEmail[1] === 'skmagic.com') return true;
+  const handleReconnectSocket = () => {
+    if (!socket) {
+      console.error('Socket instance does not exist.');
+      return;
     }
-    return false;
+
+    if ((socket as any).connected) {
+      console.log('Socket is already connected.');
+      return;
+    }
+
+    console.log('Reconnecting socket...');
+    (socket as any).connect();
   };
 
-  const handleSendMessage = (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleSendMessage = async (
+    e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => {
     if (isLoading) return;
 
+    await handleReconnectSocket();
+
     if (!roomInfoState.checkId || roomInfoState.checkId === 'create_option') {
-      showNotification('챗봇을 먼저 생성해주세요', 'error');
+      showNotification(t('chatplay:챗봇을_먼저_생성해주세요'), 'error');
 
       return;
     }

@@ -51,12 +51,14 @@ const useModalRetreivalSettingViewModel = () => {
   const resetTotalCount = useResetRecoilState(listTotalCount);
   const resetModalType = useResetRecoilState(useModalType);
   const resetIsShowModal = useResetRecoilState(useIsShowModal);
+  const resetCurrentPage = useResetRecoilState(pageIndex);
 
   const { limit = 10 } = getListParams;
 
   // 초기 목록 불러오기
   useEffect(() => {
     console.log('isRagModelCreating', isRagModelCreating);
+    console.log('currentPage', currentPage);
     if (!isRagModelCreating) {
       getRagListData(currentPage);
     }
@@ -105,7 +107,7 @@ const useModalRetreivalSettingViewModel = () => {
 
   const closeModal = () => {
     setIsShowBackdrop(false);
-
+    resetCurrentPage();
     setIsShowModal({ isShow: false, name: 'register' });
   };
 

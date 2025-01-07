@@ -8,6 +8,7 @@ import { useRestfulCustomAxios } from '@/shared/hooks/useRestfulCustomAxios';
 import { useFetchFileUpload } from '@/shared/hooks/useFetchFileUpload';
 import useLLMFNCallEngineSelect from '@/shared/hooks/useLLMFNCallEngineSelect';
 import useGetEngineDatas from '@/shared/hooks/useGetEngineData';
+import useCopyToClipboard from '@/pages/LLMTempltes/hooks/useCopyToClipboard';
 
 const usePageChatBuilderViewModel = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const usePageChatBuilderViewModel = () => {
   const llmFnCallEngineAPi = useLLMFNCallEngineSelect();
   const allEngineApi = useGetEngineDatas();
   const { elasticList, llmEngineList, ragEngineList } = allEngineApi.allEngineList;
+  const copyToClipboard = useCopyToClipboard();
 
   const [data, setData] = useState<IChatbotDataItem>({
     id: 0,
@@ -598,8 +600,11 @@ AI 컨설턴트가 고객의 질문의 의도를 좀 더 명확하게 파악할 
   };
 
   const handleChatbotCopy = useCallback((copydata: any) => {
-    navigator.clipboard
-      .writeText(copydata)
+    if (!copydata) {
+      showNotification('복사할 데이터가 없습니다.', 'error');
+      return;
+    }
+    copyToClipboard(copydata)
       .then(() => {
         showNotification('챗봇 데이터가 클립보드에 복사되었습니다.', 'success');
         copydata.name = copydata.name + '-copy';

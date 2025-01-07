@@ -11,9 +11,12 @@ const useWidgetNavigationBarModel = () => {
   const [menuList, setMenuList] = useState<Menu[]>([]);
   const userAuthority = useRecoilValue(useUserAuthority);
 
+  let pathname = window.location.pathname;
+  if (!pathname.startsWith('/llm-template')) pathname = '';
+
   useEffect(() => {
     // fetchMenuList().then((list) => setMenuList(list));
-    fetchMenuList().then((list) => {
+    fetchMenuList(pathname).then((list) => {
       const adjustedList = userAuthority === '' ? list.filter((item) => item.label !== 'Embedding Ranker') : list;
       setMenuList(adjustedList);
     });
@@ -24,7 +27,7 @@ const useWidgetNavigationBarModel = () => {
 
 export default useWidgetNavigationBarModel;
 
-const fetchMenuList = async () => {
+const fetchMenuList = async (taskName?: string) => {
   // const response = await fetch('http://localhost:3000/menus');
   // const data = await response.json();
   const list = [
@@ -50,7 +53,7 @@ const fetchMenuList = async () => {
     },
     {
       label: 'menu:LLM_템플릿',
-      to: '/llm-template',
+      to: taskName ? `${taskName}` : '/llm-template',
     },
   ];
   return list;

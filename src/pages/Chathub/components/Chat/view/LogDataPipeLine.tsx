@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { showNotification } from '@/shared/utils/common-helper';
 import ico_copy from '@/shared/assets/images/icons/ico_copy_16.svg';
+import useCopyToClipboard from '@/pages/LLMTempltes/hooks/useCopyToClipboard';
 
 type PipeLineProps = {
   logData: IDashBoardLogs;
@@ -9,10 +10,14 @@ type PipeLineProps = {
 
 const LogDataPipeLine = ({ logData }: PipeLineProps) => {
   const [totalTokens, setTotalTokens] = useState<number>(0);
+  const copyToClipboard = useCopyToClipboard();
 
-  const copyToClipboard = useCallback((log: string) => {
-    navigator.clipboard
-      .writeText(log)
+  const handleCopyToClipboard = useCallback((log: string) => {
+    if (!log) {
+      showNotification('복사할 로그가 없습니다.', 'error');
+      return;
+    }
+    copyToClipboard(log)
       .then(() => {
         showNotification('로그가 클립보드에 복사되었습니다.', 'success');
       })
@@ -47,7 +52,7 @@ const LogDataPipeLine = ({ logData }: PipeLineProps) => {
                 <em>{item.title}</em> ({item.diff / 1000}초
                 {item.tokens && item.tokens !== -1 && `/ tokens: ${item.tokens}`})
               </p>
-              <button type="button" id={`copyButton_${index}`} onClick={() => copyToClipboard(item.log)}>
+              <button type="button" id={`copyButton_${index}`} onClick={() => handleCopyToClipboard(item.log)}>
                 copy <img src={ico_copy} alt="복사하기" />
               </button>
             </div>

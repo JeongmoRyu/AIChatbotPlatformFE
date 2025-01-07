@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useTranslation } from 'react-i18next';
 
 import useFetchChatplay from '../hooks/useFetchChatplay';
 import useOutsideClick from './useOutsideClick';
@@ -7,7 +8,16 @@ import useOutsideClick from './useOutsideClick';
 import useChatPlayNameSelectViewModel from './useChatPlayNameSelectViewModel';
 import { showNotification } from '@/shared/utils/common-helper';
 
-import { chatbotDataChatPlay, roomInfoStateChatplay as useRoomInfoState } from '@/shared/store/chatplay';
+import {
+  chatbotDataChatPlay,
+  ChatPlayChatHistoryState,
+  roomInfoStateChatplay as useRoomInfoState,
+  ChatPlayChatHistoryState as useChatPlayChatHistoryStore,
+  ChatPlayChatHistoryStreamState as useChatPlayChatHistoryStreamStore,
+  ChatPlayChatTimelineState as useChatPlayChatTimelineStore,
+  chatPlayTabInfoState,
+  isChatLoading,
+} from '@/shared/store/chatplay';
 
 interface isSelectOpen {
   selectHide: string;
@@ -19,7 +29,10 @@ const useChatPlayNameSelectBoxViewModel = ({
   error,
   placeholder,
   defaultValue,
+  socket,
 }: ChatPlayNameSelectBoxProps) => {
+  const { t } = useTranslation(['chatplay']);
+
   const { getChatbotData, deleteChatbot } = useFetchChatplay(); //쳇봇 목록 가져오기
   const { handleOnClickChatbot } = useChatPlayNameSelectViewModel();
 
@@ -39,6 +52,13 @@ const useChatPlayNameSelectBoxViewModel = ({
   const [isShowLocalModal, setIsShowLocalModal] = useState<boolean>(false);
   const [deleteChatbotId, setDeleteChatbotId] = useState<number | null>(null);
 
+  const chatPlayChatHistoryState = useRecoilValue(ChatPlayChatHistoryState);
+  const resetChatPlayChatHistoryState = useResetRecoilState(useChatPlayChatHistoryStore);
+  const resetChatPlayChatTimelineState = useResetRecoilState(useChatPlayChatTimelineStore);
+  const resetChatPlayChatHistoryStreamState = useResetRecoilState(useChatPlayChatHistoryStreamStore);
+  const resetTabInfoState = useResetRecoilState(chatPlayTabInfoState);
+  const setIsLoading = useSetRecoilState<boolean>(isChatLoading);
+
   useOutsideClick(selectboxRef, () => {
     setIsSelectOpen({ selectHide: 'select-hide', selectedBtnState: '' });
     setSelectboxClass(boxClassName);
@@ -57,11 +77,23 @@ const useChatPlayNameSelectBoxViewModel = ({
   const handleOnChangeSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     const currentLabel = e.currentTarget.dataset.label;
 
-    if (currentLabel === '생성하기') {
+    const text = e.currentTarget.innerText;
+    const secondWord = text.split('\n')[1];
+
+    const selecterID = chatbotList.find((item) => item.name === secondWord)?.chatbot_id;
+
+    if (currentLabel === '생성하기' || currentLabel === 'Create') {
       setRoomInfoState({
         ...roomInfoState,
         checkId: 'create_option',
       });
+    } else if (chatPlayChatHistoryState.history.length > 0 && Number(selectedValue) === selecterID) {
+      socket && socket.disconnect();
+      setIsLoading(false);
+      resetChatPlayChatHistoryState();
+      resetChatPlayChatTimelineState();
+      resetChatPlayChatHistoryStreamState();
+      resetTabInfoState();
     } else {
       handleOnClickChatbot && handleOnClickChatbot(e);
     }
@@ -115,7 +147,7 @@ const useChatPlayNameSelectBoxViewModel = ({
       const success = await deleteChatbot(deleteChatbotId);
       if (success) {
         // 성공 시 UI 상태 업데이트
-        showNotification('챗봇이 삭제되었습니다.', 'success');
+        showNotification(t('chatplay:챗봇이_삭제되었습니다'), 'success');
         getChatbotData && getChatbotData();
 
         if (chatbotList.length === 1) {
@@ -128,7 +160,7 @@ const useChatPlayNameSelectBoxViewModel = ({
         }
       }
     } catch (error) {
-      showNotification('챗봇 삭제에 실패했습니다.', 'error');
+      showNotification(t('chatplay:챗봇_삭제에_실패했습니다'), 'error');
       console.error('UI handling error during chatbot deletion:', error);
     }
   };

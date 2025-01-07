@@ -84,6 +84,7 @@ const fetchRetreivalListData = atom<fetchRetreivalListDataProps[]>({
       chunk_overlap: 0,
       status: '',
       updated_at: '',
+      used_by_chatbot: false,
     },
   ],
 });

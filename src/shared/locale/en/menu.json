@@ -1,16 +1,16 @@
 {
     "홈": "Home",
-    "AI와의_대화": "AI Chat",
-    "챗플레이":"Chatplay",
-    "쳇허브":"ChatHub",  
+    "AI와의_대화": "Conversation with AI",
+    "챗플레이":"Chat Play",
+    "쳇허브":"Chat Hub",  
     "LLM_템플릿":"LLM Template",
 
      "On_premise_LLM_플랫폼":"On-premise LLM Platform",
     "MAUM_AI의_LLM_솔루션":"MAUM.AI LLM Solution",
 
-    "다양한_LLM_모델과_대화해보세요":"Try various LLM models.",
-    "쉽고_빠르게_문서를_모델에_학습시키고_해당_문서에_대한_대화를_나눌_수_있습니다":"Easily and quickly train documents to the model and have a conversation about the document.",
-    "Input_데이터와_Output_설정을_조정하여_정교한_커스텀챗봇을_만들_수_있습니다":"You can create a sophisticated custom chatbot by adjusting the Input data and Output settings.",
-    "한번에_여러가지_LLM_모델_성능을_시험하고_정답률을_비교할_수_있습니다":"You can test the performance of various LLM models at once and compare the accuracy."
+    "다양한_LLM_모델과_대화해보세요":"Interact with various LLM models.",
+    "쉽고_빠르게_문서를_모델에_학습시키고_해당_문서에_대한_대화를_나눌_수_있습니다":"Easily and quickly train models with your documents and have conversations based on the content.",
+    "Input_데이터와_Output_설정을_조정하여_정교한_커스텀챗봇을_만들_수_있습니다":"Customize input data and output settings to build precise, tailored chatbots.",
+    "한번에_여러가지_LLM_모델_성능을_시험하고_정답률을_비교할_수_있습니다":"Test multiple LLM models simultaneously and compare their performance and accuracy."
 
 }

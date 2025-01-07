@@ -20,21 +20,6 @@ const useCopyToClipboard = () => {
     }
   };
 
-  // const copyToClipboard = async (text: string) => {
-  //   if (!text) {
-  //     showNotification(t('llm:복사할_내용이_없습니다'), 'error');
-  //     return;
-  //   }
-
-  //   try {
-  //     await navigator.clipboard.writeText(text);
-  //     showNotification(t('llm:내용이_클립보드에_복사되었습니다'), 'success');
-  //   } catch (err) {
-  //     console.error(t('llm:클립보드_복사에_실패했습니다'), err);
-  //     showNotification(t('llm:복사할_내용이_없습니다'), 'error');
-  //   }
-  // };
-
   const copyToClipboard = async (text: string) => {
     if (!text) {
       showNotification(t('llm:복사할_내용이_없습니다'), 'error');

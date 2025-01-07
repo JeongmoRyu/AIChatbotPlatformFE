@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import useFetchChatplay from '../hooks/useFetchChatplay';
 import useGetEngineDatasChatPlay from '../hooks/useGetEngineDatasChatPlay';
 import useFetchRag from '../modal/ModalRetreivalSetting/model/useFetchRag';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { useTranslation } from 'react-i18next';
 import { UseFormWatch, UseFormReset, UseFormSetValue } from 'react-hook-form';
 
@@ -24,6 +24,7 @@ import {
 } from '@/shared/store/rag';
 import { userLoginState as useUserLoginStore } from '@/shared/store/onpromise';
 import { SOCKET_EVENT } from '@/shared/lib/chatplayOptions';
+import { pageIndex } from '@/shared/store/page-data';
 
 interface IFormValues {
   name: string;
@@ -76,6 +77,8 @@ const useChatPlayPipelineFlowViewModel = ({ watch, reset, setValue, socket }: IE
   const [isRagModelCreating, setIsRagModelCreating] = useRecoilState(gptIsRagModelCreating);
   const setIsModelSaveLoading = useSetRecoilState(gptIsModelSaveLoading);
   const setCheckDuplicate = useSetRecoilState<boolean>(checkDuplicateState);
+
+  const resetCurrentPage = useResetRecoilState(pageIndex);
 
   const [clickStates, setClickStates] = useState({
     promptClick: true,
@@ -297,7 +300,7 @@ const useChatPlayPipelineFlowViewModel = ({ watch, reset, setValue, socket }: IE
 
   const handleOpenRagList = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
+    resetCurrentPage();
     setSelectedRetrievalModal((prev) => ({
       ...prev,
       isShow: true,

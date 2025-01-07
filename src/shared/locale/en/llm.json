@@ -1,10 +1,10 @@
 {
-"다양한_예제_템플릿을_자유롭게_활용해보세요": "Feel free to use various example templates.",
+"다양한_예제_템플릿을_자유롭게_활용해보세요": "Leverage a various example templates with ease.",
 "발신_목적과_핵심_내용을_입력하면_완성된_이메일을_작성해드립니다": "Enter the purpose and content of the email, we will write a complete email.",
 "뉴스_기사_작성": "News Article Writing",
 "홍보_주제_언어_포함할_내용을_입력하면_보도자료나_뉴스_기사를_작성해드립니다":"Enter the topic, and content, and we will write a press release or news article.",
 "홍보_문구_작성": "Promotional Text Writing",
-"제품_정보_홍보_키워드_등을_입력하면_홍보_문구를_작성해드립니다": "Enter product information, promotion keywords, etc., and we will write promotional text.",
+"제품_정보_홍보_키워드_등을_입력하면_홍보_문구를_작성해드립니다": "Enter product information and promotional keywords, then the AI will generate a complete promotional content.",
 "영상_스크립트_작성": "Generating Video Script",
 "영상_주제와_포함할_내용을_입력하면_영상_스크립트를_작성해드립니다":"Enter the video topic and content to include, and we will write a video script.",
 "문서_전체를_복사하여_붙여넣어주세요_핵심_내용을_요약해드립니다":"Copy and paste the entire document, and we will summarize the key content.",
@@ -18,15 +18,15 @@
   "생성_하기": "Generate",
   "복사": "Copy",
   "생성중": "Generating...",
-  "빠른_생성": "Quick Sampler",
+  "빠른_생성": "Quick Generation",
   "파일_다운로드": "  Download File",
   "자":"characters",
   "다시_생성": "Regenerate",
   "생성_하기_버튼을_눌러주세요": "Press the generate button!",
   "지우기": "Clear",
   
-  "보도_자료_및_뉴스_기사_작성": "News Article Writing.",
-  "원하는_홍보_주제를_입력하고_기사에_반드시_포함할_내용을_입력하세요": " Enter the desired promotion topic and the content that must be included in the article.",
+  "보도_자료_및_뉴스_기사_작성": "Press Release and News Article Writing",
+  "원하는_홍보_주제를_입력하고_기사에_반드시_포함할_내용을_입력하세요": "Provide a promotional topic, language, and key details, and AI will craft press releases or news articles.",
   "홍보_주제": " Promotion Topic",
   "홍보_주제를_입력해주세요": " Please enter the promotion topic.",
   "포함할_내용": " Content to Include",
@@ -39,7 +39,7 @@
 
   
   "이메일_작성": "Generating Emails",
-    "원하는_이메일_작성_유형을_선택하고_핵심_내용을_입력해주세요": "Please select the type of e-mail you want, and enter your core content.",
+    "원하는_이메일_작성_유형을_선택하고_핵심_내용을_입력해주세요": "Select the desired email type and enter the key points.",
     "이메일_유형": "Email type",
     "발신": "Sending",
     "회신": "Replying",
@@ -49,9 +49,9 @@
     "세일즈": "Sales",
     "미팅_신청": "Meeting Request",
     "미팅_일정_조정": "Meeting Rescheduling",
-    "업무_지원요청": "Support inquiry",
+    "업무_지원요청": "Support Inquiry",
     "업무_진행상황_공유": "Work Status Review",
-    "직접입력": "etc..",
+    "직접입력": "Write Manually",
     "톤앤_매너": "Tone & Manner",
     "공손하게": "Politely",
     "친근하게": "Friendly",
@@ -62,7 +62,7 @@
     "영어": "English",
     "중국어": "Chinese",
     "일본어": "Japanese",
-    "핵심_내용": "Key points",
+    "핵심_내용": "Key Points",
 
     "메일에_담고_싶은_핵심_내용을_입력하세요": "Please write the key content you want to include in the email.",
    "발신_내용": "Email content",
@@ -93,7 +93,7 @@
 
   "요약": "Summary",
   "한_영_번역": "Ko-En Translation",
-"한국어_텍스트를_입력하고_영어로_번역해보세요": "Enter Korean text and translate it into English.",
+"한국어_텍스트를_입력하고_영어로_번역해보세요": "Enter Korean text to translate into English, and English to Korean.",
 "내용을_입력하세요": "Please enter the content.",
  
 
@@ -125,17 +125,17 @@
   "테이블_내용을_입력해주세요": " Please enter the table content.",
 
   "코드_작성": "Code Writing",
-  "작성하고자_하는_언어를_선택하여_원하는_코드의_내용을_입력하세요": "Select the language you want to write and enter the content of the desired code.",
+  "작성하고자_하는_언어를_선택하여_원하는_코드의_내용을_입력하세요": "Select a programming language and specify your coding objective, and the AI will generate the code for you.",
   "언어_선택": "Select Language",
   "작성_내용": "Content",
-  "코드_결과물": "Code Result",
+  "코드_결과물": "Code Output",
   "내용을_작성해_주세요": " Please write the content.",
 
  
 
 
 
-  "홍보_문구_생성": "Generating Promotional Text",
+  "홍보_문구_생성": "Promotional Copywriting",
   "원하는_주제_및_키워드를_입력하세요": "Enter the desired topic and keywords.",
   "샘플_문구_생성_개수": "Number of Sample Phrases to Generate",
   "제품_명": "Product Name",
@@ -155,8 +155,8 @@
   "대상_타겟을_입력해주세요": " Please enter the target audience.",
 
  
-  "영상_스크립트_제작": "Video Script Production",
-  "원하는_주제를_입력하고_스크립트에_포함할_내용을_입력하세요": "Enter the desired topic and the content to be included in the script.",
+  "영상_스크립트_제작": "Video Script Writing",
+  "원하는_주제를_입력하고_스크립트에_포함할_내용을_입력하세요": "Provide a topic and details to include, and the AI will craft a video script for you.",
   "영상_주제": "Video Topic",
   "영상_제목": "Video Title",
   "영상_내용": "Video Content",
@@ -167,8 +167,8 @@
 
  
 
-  "문서_핵심_요약": "Document key summary",
-  "요약을_원하는_내용을_입력해주세요": "Please enter the content you want to summarize.",
+  "문서_핵심_요약": "Document Summary",
+  "요약을_원하는_내용을_입력해주세요": "Copy and paste the entire document, and the AI will summarize the key points.",
   "문서_내용": "Document Content",
   "제한_항목_선택": "Select Limited Item",
   "제한_문장_수_입력": "Enter the number of limited sentences",
@@ -179,12 +179,12 @@
   "선택_없음": "None",
   "문서_내용을_입력하세요": " Please enter the document content.",
 
-  "문서_첨삭": "Document Proofreading",
-  "교정_및_교열을_원하는_내용을_입력하세요": "Enter the content you want to correct and proofread.",
+  "문서_첨삭": "Document Editing",
+  "교정_및_교열을_원하는_내용을_입력하세요": "Enter the content of the document for corrections and proofreading, and the AI will provide revised version.",
   "교정_및_교열_내용": "Correction and Proofreading",
 
-  "한국어_타국어_번역": "Ko-En Translation",
-  "번역이_필요한_내용을_입력하고_원하는_번역_언어를_선택하세요": "Please enter Korean text and translate it into English.",
+  "한국어_타국어_번역": "Korean-to-English Translation",
+  "번역이_필요한_내용을_입력하고_원하는_번역_언어를_선택하세요": "Enter Korean text, and the AI will translate it into English. And English to Korean.",
   "한국어_내용": "Korean Content",
   "번역_언어_선택": "Select Translation Language",
   "번역_내용": "Translation Content",
@@ -192,9 +192,9 @@
   "한국어_내용을_입력하세요": " Please enter the Korean content.",
 
   "문서_분석": "Document Analysis",
-  "분석을_원하는_문서의_내용을_입력하고_분석_상세_요청_내용을_입력하세요": "Enter the content of the document you want to analyze and enter the detailed analysis request content.",
-  "분석_상세_요청_내용": "Detailed Analysis Request Content",
-  "분석_내용": "Analysis Content",
+  "분석을_원하는_문서의_내용을_입력하고_분석_상세_요청_내용을_입력하세요": "Provide a document and details about its analysis for the AI to review.",
+  "분석_상세_요청_내용": "Method of Analysis",
+  "분석_내용": "Analysis Result",
   "분석_상세_요청_내용을_입력하세요": " Please enter the detailed analysis request content.",
 
   "초코빵예시": " Choco Bread: Q1 Sales (100 units), Q2 Sales (300 units)",

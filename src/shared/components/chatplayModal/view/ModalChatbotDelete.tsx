@@ -1,6 +1,7 @@
 import { ModalHeader } from '@/shared/components/ModalComp/view/ModalHeader';
 import { ModalBody } from '@/shared/components/ModalComp/view/ModalBody';
 import { ModalFooter } from '@/shared/components/ModalComp/view/ModalFooter';
+import { useTranslation } from 'react-i18next';
 
 interface ModalDeleteProps {
   id?: string | undefined;
@@ -11,20 +12,22 @@ interface ModalDeleteProps {
 }
 
 function ModalChatbotDelete({ onClose, onDelete }: ModalDeleteProps) {
+  const { t } = useTranslation(['chatplay', 'button']);
+
   return (
     <div className={` p-10`}>
       <ModalHeader>
-        <h2 className="m-auto text-base font-bold ">{'챗봇 삭제'}</h2>
+        <h2 className="m-auto text-base font-bold ">{t('chatplay:챗봇_삭제')}</h2>
       </ModalHeader>
       <ModalBody className="grid grid-cols-12 gap-4 galp-y-3">
         <div className="col-span-12 font-normal text-center">
-          <p>{'파일과 설정값이 영구 삭제됩니다'}</p>
-          <p>{'정말로 삭제하시겠어요'}</p>
+          <p>{t('chatplay:파일과_설정값이_영구_삭제됩니다')}</p>
+          <p>{t('chatplay:정말로_삭제하시겠어요')}</p>
         </div>
       </ModalBody>
       <ModalFooter className="!justify-center">
         <button name="cancel" type="button" onClick={onClose} className="mr-2 btn secondary border-set-border">
-          {'취소'}
+          {t('button:취소')}
         </button>
         <button
           name="create"
@@ -35,7 +38,7 @@ function ModalChatbotDelete({ onClose, onDelete }: ModalDeleteProps) {
             onClose();
           }}
         >
-          {'확인'}
+          {t('button:확인')}
         </button>
       </ModalFooter>
     </div>

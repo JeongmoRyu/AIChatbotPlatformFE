@@ -45,8 +45,6 @@ export const useRestfulCustomAxios = () => {
       config = { method, url: baseURL + url, data, headers };
     }
 
-    // console.log(config);
-
     const responseData = axios(config)
       .then((responseData) => {
         return responseData;

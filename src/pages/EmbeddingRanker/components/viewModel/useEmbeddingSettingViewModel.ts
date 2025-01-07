@@ -26,7 +26,7 @@ const useEmbeddingSettingViewModel = ({ onChange, data_id, setIsModalVisible }: 
     }
   };
   const min = 100;
-  const max = 4000;
+  const max = 500;
   // const currValue = 2100;
   type AccordionKeys = 'chunkSettings' | 'retrieverSettings' | 'rpf' | 'fileList' | 'embeddingList';
   const [openAccordion, setOpenAccordion] = useState({

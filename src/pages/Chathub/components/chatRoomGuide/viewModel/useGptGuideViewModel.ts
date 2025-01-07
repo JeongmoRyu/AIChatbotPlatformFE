@@ -25,9 +25,14 @@ const useGPTGuideViewModel = () => {
     navigate(`/chatroom/${chatbotIdState}`);
     resetGptChatHistoryStore();
     resetSequenceQuestions();
-    if (question !== '') {
-      createNewChatRoom(question);
-    }
+    setTimeout(() => {
+      if (question !== '') {
+        createNewChatRoom(question);
+      }
+    }, 300);
+    // if (question !== '') {
+    //   createNewChatRoom(question);
+    // }
   };
 
   return { GuideInfo, connectionInfoState, handleSelectCardQuestion, isMakingQuestions };

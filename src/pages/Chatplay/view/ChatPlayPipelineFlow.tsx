@@ -187,7 +187,7 @@ function ChatPlayPipelineFlow({ socket }: { socket: any }) {
                     register={{ ...register('llm_workflow_id') }}
                     id="llm_workflow_id"
                     typeList={llmEngineList}
-                    // placeholder={t('엔진을_선택해주세요') as string}
+                    placeholder={t('엔진을_선택해주세요') as string}
                     defaultValue={selectedChatbot?.llm_workflow_id}
                     defaultLabel={currentLLMLabel}
                     boxClassName="w-60"
@@ -257,7 +257,7 @@ function ChatPlayPipelineFlow({ socket }: { socket: any }) {
               }`}
               disabled={checkDisabled()}
             >
-              {t('chatplay:저장하기')}
+              {t('chatplay:대화_저장')}
             </button>
           </div>
         </form>

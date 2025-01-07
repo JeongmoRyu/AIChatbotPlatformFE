@@ -43,8 +43,8 @@ const usePageEmbeddingRankerViewModel = () => {
       chunking_settings: {
         use_semantic_chunk: false,
         use_fixed_chunk: true,
-        fixed_chunk_size: 2100,
-        fixed_chunk_overlap: 2000,
+        fixed_chunk_size: 300,
+        fixed_chunk_overlap: 250,
         semantic_chunk_bp_type: 'percentile',
         semantic_chunk_embedding: 'text-embedding-ada-002',
       },
@@ -432,14 +432,14 @@ const usePageEmbeddingRankerViewModel = () => {
 
   const chunkSize = settingData.jsonData.chunking_settings.fixed_chunk_size;
   const overlapSize = settingData.jsonData.chunking_settings.fixed_chunk_overlap;
-  if (chunkSize <= overlapSize && overlapSize >= 150) {
+  if (chunkSize <= overlapSize && overlapSize >= 110) {
     setSettingData((prev) => ({
       ...prev,
       jsonData: {
         ...prev.jsonData,
         chunking_settings: {
           ...prev.jsonData.chunking_settings,
-          fixed_chunk_overlap: chunkSize - 100,
+          fixed_chunk_overlap: chunkSize - 10,
         },
       },
     }));

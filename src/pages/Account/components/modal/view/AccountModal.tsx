@@ -12,6 +12,8 @@ interface AccountModalProps {
   isCreate?: boolean;
   onSelectChange: (value: string) => void;
   IDCheck?: boolean;
+  NameCheck?: boolean;
+  UsernameCheck?: boolean;
   handleIDCheck: () => void;
 }
 
@@ -24,6 +26,8 @@ const AccountModal: React.FC<AccountModalProps> = ({
   isCreate,
   onSelectChange,
   IDCheck,
+  NameCheck,
+  UsernameCheck,
   handleIDCheck,
 }) => {
   const getSelectValue = (data: UserListType) => {
@@ -57,7 +61,7 @@ const AccountModal: React.FC<AccountModalProps> = ({
                 type="text"
                 value={data.username}
                 onChange={(e) => onChange('username', e.target.value)}
-                className={`w-full p-2 border rounded ${!IDCheck || !data.username ? 'border-[#ff4d4d]' : ''}`}
+                className={`w-full p-2 border rounded ${!IDCheck || !UsernameCheck ? 'border-[#ff4d4d]' : ''}`}
                 placeholder="ID를 입력해주세요"
               />
               <button
@@ -67,11 +71,11 @@ const AccountModal: React.FC<AccountModalProps> = ({
                 중복체크
               </button>
             </div>
-            {!IDCheck && !data.username ? (
+            {!IDCheck && !UsernameCheck ? (
               <p className="text-[#ff4d4d] text-sm mt-1">ID 중복체크를 해주세요.</p>
             ) : !IDCheck ? (
               <p className="text-[#ff4d4d] text-sm mt-1">ID 중복체크를 해주세요.</p>
-            ) : !data.username ? (
+            ) : !UsernameCheck ? (
               <p className="text-[#ff4d4d] text-sm mt-1">ID는 필수값입니다.</p>
             ) : null}{' '}
           </div>
@@ -127,10 +131,10 @@ const AccountModal: React.FC<AccountModalProps> = ({
             value={data.name}
             onChange={(e) => onChange('name', e.target.value)}
             // className="w-full p-2 border rounded"
-            className={`w-full p-2 border rounded ${!data.name ? 'border-[#ff4d4d]' : ''}`}
+            className={`w-full p-2 border rounded ${!NameCheck ? 'border-[#ff4d4d]' : ''}`}
             placeholder="이름을 입력해주세요"
           />
-          {!data.name ? <p className="text-[#ff4d4d] text-sm mt-1">이름은 필수값입니다.</p> : null}{' '}
+          {!NameCheck ? <p className="text-[#ff4d4d] text-sm mt-1">이름은 필수값입니다.</p> : null}{' '}
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">*권한</label>

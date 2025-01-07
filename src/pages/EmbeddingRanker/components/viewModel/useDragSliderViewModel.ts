@@ -37,6 +37,21 @@ const useDragSliderViewModel = ({ min, max, value, onChange, isDisabled }: Props
                 : percentage;
       sliderRef.current.style.background = `linear-gradient(to right, #4262FF ${bgLeftPercentage}%, #d0d9e3 ${percentage}%)`;
     }
+    // if (sliderRef.current) {
+    //   // 1 ~ 10 = percentage+2 / 10 ~ 30 = percentage+1
+    //   // 70 ~ 80 = percentage-1 / 80 ~ 100 = percentage-3
+    //   const bgLeftPercentage =
+    //     percentage <= 10
+    //       ? percentage + 2
+    //       : percentage <= 30
+    //         ? percentage + 1
+    //         : percentage >= 80
+    //           ? percentage - 3
+    //           : percentage >= 70
+    //             ? percentage - 1
+    //             : percentage;
+    //   sliderRef.current.style.background = `linear-gradient(to right, #4262FF ${bgLeftPercentage}%, #d0d9e3 ${percentage}%)`;
+    // }
 
     if (valueLabelRef.current) {
       valueLabelRef.current.style.left = `calc(${percentage}% + (${8 - percentage * 0.15}px))`;

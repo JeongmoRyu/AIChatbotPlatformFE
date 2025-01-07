@@ -34,7 +34,7 @@ const Select = (props: SelectProps) => {
   } = useSelectViewModel(props);
 
   return (
-    <div ref={selectboxRef} className={`selectbox ${selectboxClass}`}>
+    <div ref={selectboxRef} className={`selectbox ${selectboxClass} ${props.boxClassName}`}>
       <select {...props.register} id={props.id} name={props.name} defaultValue={selectedValue}>
         {props.placeholder && <option value="">{props.placeholder}</option>}
         {props.typeList &&
@@ -51,12 +51,12 @@ const Select = (props: SelectProps) => {
         type="button"
         name={props.name}
         disabled={props.disabled}
-        className={`select-selected ${selectedBtnState}  ${props.disabled ? '!cursor-not-allowed' : 'cursor-pointer'}`}
+        className={`select-selected ${selectedBtnState} ${props.disabled ? '!cursor-not-allowed' : 'cursor-pointer'} ${props.buttonClassName}`}
         onClick={handleSelectList}
       >
         {selectedLabel}
       </button>
-      <div className={`select-items ${isSelectHide}`}>
+      <div className={`select-items overflow-x-hidden ${isSelectHide}`}>
         {props.placeholder && (
           <button
             type="button"
@@ -78,7 +78,7 @@ const Select = (props: SelectProps) => {
                 data-label={item.label}
                 name={props.btnName}
                 onClick={handleOnChangeSelect}
-                className="hover:!bg-primary-darkblue"
+                className={`hover:!bg-primary-darkblue ${props.buttonClassName}`}
               >
                 {item.label}
               </button>

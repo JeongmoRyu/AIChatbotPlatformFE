@@ -42,6 +42,7 @@ import PageLLMTaskLayout from '@/pages/LLMTempltes/layout/view/PageLLMTaskLayout
 import TaskEmail from '@/pages/LLMTempltes/components/taskEmail/view/TaskEmail';
 import PageAccount from '@/pages/Account/view/PageAccount';
 import PageMyPage from '@/pages/Account/view/PageMyPage';
+import PageStatistics from '@/pages/Account/view/PageStatistics';
 
 const AnimatedOutlet = () => {
   const location = useLocation();
@@ -133,6 +134,10 @@ const routes = createRoutesFromElements(
       <Route path="embedding-history" element={<PageEmbeddingHistory />} />
       <Route path="mypage" element={<PageMyPage />} />
       <Route path="account" element={<PageAccount />} />
+      <Route path="statistics" element={<PageStatistics />} />
+      {/*<Route path="statistics" element={<PageStatistics />}>
+        <Route path=":menu" element={<></>} />
+      </Route>*/}
       <Route path="llm-template" element={<PageLLMTemplates />} />
       <Route path="llm-template/task" element={<PageLLMTaskLayout />}>
         <Route path="email" element={<TaskEmail />} />

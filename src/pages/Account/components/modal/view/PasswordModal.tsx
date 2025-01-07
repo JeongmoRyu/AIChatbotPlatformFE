@@ -2,6 +2,7 @@ import Modal from '@/shared/components/modal/view/Modal';
 import React, { useEffect, useState } from 'react';
 import ico_baneye from '@/shared/assets/images/icons/ico_baneye.svg';
 import ico_eye from '@/shared/assets/images/icons/ico_eye.svg';
+import { showNotification } from '@/shared/utils/common-helper';
 interface PasswordModalProps {
   isShow: boolean;
   onClose: () => void;
@@ -80,7 +81,15 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ isShow, onClose, onSubmit
               <input
                 type={showNewPassword ? 'text' : 'password'}
                 value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const isValid = /^[a-zA-Z0-9]*$/.test(value);
+                  if (isValid) {
+                    setNewPassword(value);
+                  } else {
+                    showNotification('영어 대소문자와 숫자만 입력 가능합니다.', 'error');
+                  }
+                }}
                 className={`w-full p-2 border rounded ${error ? 'border-red-500' : ''}`}
                 placeholder="8-12자"
               />
@@ -108,7 +117,15 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ isShow, onClose, onSubmit
               <input
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const isValid = /^[a-zA-Z0-9]*$/.test(value);
+                  if (isValid) {
+                    setConfirmPassword(value);
+                  } else {
+                    showNotification('영어 대소문자와 숫자만 입력 가능합니다.', 'error');
+                  }
+                }}
                 className={`w-full p-2 border rounded ${error ? 'border-red-500' : ''}`}
                 placeholder="8-12자"
               />

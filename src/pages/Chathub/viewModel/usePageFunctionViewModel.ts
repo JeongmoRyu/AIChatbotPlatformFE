@@ -15,8 +15,9 @@ import {
   DEFAULT_VALUE,
   DefaultFunctionsValueType,
 } from '../model/usePageFunctionModel';
+import useCopyToClipboard from '@/pages/LLMTempltes/hooks/useCopyToClipboard';
 
-type ModalType = 'library' | 'delete' | 'test';
+type ModalType = 'library' | 'delete' | 'test' | 'check';
 
 const usePageFunctionViewModel = () => {
   const { sendRequest } = useRestfulCustomAxios();
@@ -38,9 +39,13 @@ const usePageFunctionViewModel = () => {
     library: false,
     delete: false,
     test: false,
+    check: false,
   });
   const [testMessage, setTestMessage] = useState('');
   const [testResultMessage, setTestResultMessage] = useState('');
+  const [CheckFunctionUsesMessage, setCheckFunctionUsesMessage] = useState('');
+  const [isChecking, setIsChecking] = useState<boolean>(false);
+  const copyToClipboard = useCopyToClipboard();
 
   const getLibrary = async () => {
     setIsLoadingState(true);
@@ -239,10 +244,23 @@ const usePageFunctionViewModel = () => {
 
   const handleFunctionChange = (key: string, value: string | number | null) => {
     if (key === 'name' && value) {
-      setFunctionsDetail((prev) => ({
-        ...prev,
-        name: value.toString().replace(/[^a-zA-Z0-9-_]/g, ''),
-      }));
+      const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(value.toString());
+      if (isKorean) {
+        showNotification('한글이 입력되었습니다. 영문으로 입력해주세요.', 'error');
+        setFunctionsDetail((prev) => ({
+          ...prev,
+          name: '',
+        }));
+      } else {
+        setFunctionsDetail((prev) => ({
+          ...prev,
+          name: value.toString().replace(/[^a-zA-Z0-9-_]/g, ''),
+        }));
+      }
+      // setFunctionsDetail((prev) => ({
+      //   ...prev,
+      //   name: value.toString().replace(/[^a-zA-Z0-9-_]/g, ''),
+      // }));
     } else if (key === 'pre_info_type') {
       const tempList = libraryAllList.map((item) =>
         item.id === value ? { ...item, isChecked: !item.isChecked } : item,
@@ -286,6 +304,35 @@ const usePageFunctionViewModel = () => {
     }
   };
 
+  const handleModalUseCheck = async () => {
+    setIsChecking(true);
+    const FunctionUses = await getFunctionCheckUses();
+    if (FunctionUses !== undefined && FunctionUses) {
+      handleModalVisible('check');
+    } else {
+      handleModalVisible('delete');
+    }
+  };
+
+  const getFunctionCheckUses = async () => {
+    const response = await sendRequest(`/function/check/inuse/${functionId}`, 'get', undefined, undefined, undefined);
+    if (response && response.data) {
+      const data = response.data;
+      if (data.code === 'EF03') {
+        setCheckFunctionUsesMessage(data.message);
+        setIsChecking(false);
+        return true;
+      } else {
+        setCheckFunctionUsesMessage(data.message);
+        setIsChecking(false);
+        return false;
+      }
+    } else {
+      showNotification('서버로부터 정상적인 Function 정보를 받지 못했습니다.', 'error');
+      setIsChecking(false);
+    }
+  };
+
   const handleFunctionDeleteAPI = async () => {
     if (!functionId) {
       return false;
@@ -324,8 +371,11 @@ const usePageFunctionViewModel = () => {
   const handleChangeImage = (imageFile: FileType) => setSettingImage([imageFile]);
 
   const handleFunctionCopy = useCallback((copydata: any) => {
-    navigator.clipboard
-      .writeText(copydata)
+    if (!copydata) {
+      showNotification('복사할 데이터가 없습니다.', 'error');
+      return;
+    }
+    copyToClipboard(copydata)
       .then(() => {
         showNotification('Function 데이터가 클립보드에 복사되었습니다.', 'success');
         copydata.name = copydata.name + '-copy';
@@ -363,6 +413,9 @@ const usePageFunctionViewModel = () => {
     connectionInfoState,
     testMessage,
     testResultMessage,
+    CheckFunctionUsesMessage,
+    isChecking,
+    handleModalUseCheck,
   };
 };
 

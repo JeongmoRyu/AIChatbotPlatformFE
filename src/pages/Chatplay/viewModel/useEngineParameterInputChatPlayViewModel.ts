@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { showNotification } from '@/shared/utils/common-helper';
+import { useTranslation } from 'react-i18next';
 
 const useEngineParameterInputChatPlayViewModel = ({
   engineParams,
@@ -9,6 +10,7 @@ const useEngineParameterInputChatPlayViewModel = ({
   watch,
   // getValue,
 }: EngineParameterInputPropsViewModel) => {
+  const { t } = useTranslation('chatplay');
   const llmEngineIdValue = watch('llm_workflow_id');
 
   const handleInputChange = (
@@ -38,7 +40,11 @@ const useEngineParameterInputChatPlayViewModel = ({
       setValue(fieldName, Number(newValue.trim()));
     } else {
       showNotification(
-        `${engineInfo[key].range?.from} ~ ${engineInfo[key].range?.to} 사이의 숫자를 입력하세요. 소수점 ${decimalPlaces}자리까지 허용됩니다.`,
+        t('inputRangeError', {
+          from: engineInfo[key].range?.from,
+          to: engineInfo[key].range?.to,
+          decimalPlaces: decimalPlaces,
+        }),
         'error',
       );
       return;

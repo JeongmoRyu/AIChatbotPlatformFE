@@ -1,7 +1,7 @@
 // ======================================
 // Imports
 // ======================================
-import 'github-markdown-css/github-markdown.css';
+// import 'github-markdown-css/github-markdown.css';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
@@ -99,22 +99,53 @@ const AssistantMessage = ({
   const [isCopied, setIsCopied] = useState(false);
   const [isThrottled, setIsThrottled] = useState(false);
 
+  const fallbackCopyToClipboard = (text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+      setIsCopied(false);
+    } catch (err) {
+      setIsCopied(false);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  };
+
   const handleCopy = () => {
     if (isThrottled) return;
+
     setIsThrottled(true);
-    navigator.clipboard
-      .writeText(conversation.content)
-      .then(() => {
-        setIsCopied(true);
-        setTimeout(() => {
-          setIsCopied(false);
+
+    // 클립보드 API 지원 여부 확인
+    if (navigator.clipboard && window.isSecureContext) {
+      // HTTPS 환경에서 클립보드 API 사용
+      navigator.clipboard
+        .writeText(conversation.content)
+        .then(() => {
+          setIsCopied(true);
+          setTimeout(() => {
+            setIsCopied(false);
+            setIsThrottled(false);
+          }, 2000);
+        })
+        .catch((err) => {
+          console.error('Failed to copy content using clipboard API: ', err);
+          // 클립보드 API 실패 시 fallbackCopyToClipboard 사용
+          fallbackCopyToClipboard(conversation.content);
           setIsThrottled(false);
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error('Failed to copy content: ', err);
+        });
+    } else {
+      // HTTP 환경에서 fallback 사용
+      console.warn('Clipboard API not available, using fallback');
+      fallbackCopyToClipboard(conversation.content);
+      setTimeout(() => {
+        setIsCopied(false);
         setIsThrottled(false);
-      });
+      }, 2000);
+    }
   };
 
   const [dotCount, setDotCount] = useState(1);

@@ -41,17 +41,21 @@ const PageAccount = () => {
     exportToExcel,
     excelFileUpload,
     handleFileChange,
+    NameCheck,
+    usernameCheck,
   } = usePageAccountViewModel();
 
   const userListLayout = () => {
+    if (userList.length === 0) {
+      return (
+        <tr>
+          <td colSpan={7} className="text-center">
+            데이터가 없습니다.
+          </td>
+        </tr>
+      );
+    }
     let users: UserListType[] = [];
-    // if (userAuthority === 'admin') {
-    //   users = userList.filter((item) => !item.is_super_admin);
-    // } else if (userAuthority === 'editor') {
-    //   users = userList.filter((item) => !item.is_super_admin && !item.is_admin);
-    // } else {
-    //   users = userList;
-    // }
     users = userList;
 
     return users.map((item, index) => {
@@ -81,7 +85,7 @@ const PageAccount = () => {
           <td className="cell_admin">
             <label htmlFor={id}>
               {/* {item.super_admin ? 'Admin' : item.admin ? 'Editor' : '-'} */}
-              {item.is_super_admin ? 'Admin' : item.is_admin ? 'Admin' : item.is_editor ? 'Editor' : '-'}
+              {item.is_super_admin ? 'Admin' : item.is_admin ? 'Admin' : item.is_editor ? 'Editor' : 'User'}
             </label>
           </td>
           <td className="cell_date">
@@ -240,6 +244,8 @@ const PageAccount = () => {
             onSubmit={handleSaveApi}
             onSelectChange={handleRoleChange}
             IDCheck={IDCheck}
+            NameCheck={NameCheck}
+            UsernameCheck={usernameCheck}
             handleIDCheck={handleIDCheck}
           ></AccountModal>
         </div>
