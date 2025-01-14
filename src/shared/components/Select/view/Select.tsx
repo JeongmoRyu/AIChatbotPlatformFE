@@ -70,6 +70,7 @@ const Select = (props: SelectProps) => {
         )}
         {props.typeList &&
           props.typeList.map((item: any) => {
+            if (item.label === selectedLabel) return null;
             return (
               <button
                 type="button"

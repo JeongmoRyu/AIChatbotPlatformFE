@@ -9,8 +9,16 @@ const PageChatBuilder = () => {
   const location = useLocation();
   const chatbotId = location.state?.id || null;
   const isCopyPage = location.state?.isCopy || false;
-  const { handleBack, handleChatbotCopy, data, handleSave, onValueChange, handleChangeImage, setValueCheck } =
-    usePageChatBuilderViewModel();
+  const {
+    handleBack,
+    handleChatbotCopy,
+    data,
+    isSaving,
+    handleClickSave,
+    onValueChange,
+    handleChangeImage,
+    setValueCheck,
+  } = usePageChatBuilderViewModel();
 
   return (
     <div className="page_builder">
@@ -33,9 +41,16 @@ const PageChatBuilder = () => {
               Copy
             </button>
           )}
-          <button className="btn_type blue" onClick={handleSave}>
-            <img src={ico_check_16} alt="save" />
-            {chatbotId ? 'Edit' : 'Save'}
+          <button className={`btn_type ${isSaving ? 'black' : 'blue'}`} onClick={handleClickSave} disabled={isSaving}>
+            {/* <button className={`btn_type ${isSaving ? 'gray' : 'blue'}`} onClick={handleSave} disabled={isSaving}> */}
+            {isSaving ? (
+              'Saving...'
+            ) : (
+              <>
+                <img src={ico_check_16} alt="save" />
+                {chatbotId ? 'Edit' : 'Save'}
+              </>
+            )}
           </button>
         </div>
       </div>

@@ -61,6 +61,15 @@ const useWidgetNavigationBarViewModel = () => {
 
   const currentMenuName = useMemo(() => {
     const menu = model.menuList.find((menu) => menu.to === pathname);
+    if (pathname === '/embedding-leaderboard' || pathname === '/embedding-ranker') {
+      return 'Embedding Ranker';
+    }
+    if (pathname.startsWith('/chatroom') || pathname === '/chatbuilder' || pathname === '/function') {
+      return '챗허브';
+    }
+    if (pathname.startsWith('/llm-template')) {
+      return 'LLM 템플릿';
+    }
     if (!pathname || !menu) return '';
     console.log(menu, pathname);
     return menu ? t(menu.label) : '';

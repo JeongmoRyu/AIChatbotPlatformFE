@@ -8,11 +8,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useSetRecoilState } from 'recoil';
-import {
-  searchEndDate as useSearchEndDateStore,
-  searchStartDate as useSearchStartDateStore,
-} from '@/shared/store/statistics.ts';
 
 const styles = `
   .selected_date {
@@ -28,9 +23,14 @@ const styles = `
 
 const dateFormat = 'yyyy-MM-dd';
 
-const DatePickerWithRange = ({ className }: HTMLAttributes<HTMLDivElement>) => {
-  const setSearchStartDate = useSetRecoilState<string>(useSearchStartDateStore);
-  const setSearchEndDate = useSetRecoilState<string>(useSearchEndDateStore);
+interface DatePickerWithRangeProps {
+  className?: HTMLAttributes<HTMLDivElement>;
+  onChangeStartDate: (startDate: string) => void;
+  onChangeEndDate: (endDate: string) => void;
+}
+
+const DatePickerWithRange = (props: DatePickerWithRangeProps) => {
+  const { className, onChangeStartDate, onChangeEndDate } = props;
 
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
@@ -38,13 +38,27 @@ const DatePickerWithRange = ({ className }: HTMLAttributes<HTMLDivElement>) => {
   });
 
   useEffect(() => {
-    if (!date || !date.from || !date.to) return;
+    if (!date) {
+      onChangeStartDate('');
+      onChangeEndDate('');
+      return;
+    }
+
+    if (!date.from) {
+      onChangeStartDate('');
+      return;
+    }
+
+    if (!date.to) {
+      onChangeEndDate('');
+      return;
+    }
 
     const startDate = format(date.from, dateFormat);
     const endDate = format(date.to, dateFormat);
 
-    setSearchStartDate(startDate);
-    setSearchEndDate(endDate);
+    onChangeStartDate(startDate);
+    onChangeEndDate(endDate);
   }, [date]);
 
   return (

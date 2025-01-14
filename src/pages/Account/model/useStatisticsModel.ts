@@ -42,6 +42,32 @@ export const searchDateTypeList: searchDateTypeProps[] = [
   },
 ];
 
+export const barChartInputColors = ['#90DEE9', '#CBEC7B', '#C8D8DA', '#F8AAA9', '#FFD67C'];
+export const barChartOutputColors = ['#51C3D0', '#A2CD37', '#97A8AA', '#F85F5D', '#F6AB3A'];
+export const lineChartTotalColors = [
+  '#F6AB3A',
+  '#F85F5D',
+  '#97A8AA',
+  '#A2CD37',
+  '#51C3D0',
+  '#FFD67C',
+  '#F8AAA9',
+  '#C8D8DA',
+  '#CBEC7B',
+  '#90DEE9',
+
+  // '#d82626',
+  // '#d89126',
+  // '#b5d826',
+  // '#49d826',
+  // '#26d86d',
+  // '#26d8d8',
+  // '#266dd8',
+  // '#4926d8',
+  // '#b526d8',
+  // '#d82691',
+];
+
 export const initYAxisOptions = () => {
   return {
     tickLine: false,
@@ -111,4 +137,18 @@ export const labelFormatter = (searchDateType: searchDateTypeProps) => (label: s
     if (!label.includes('-')) return '';
     return format(new Date(label), 'yyyy-MM-dd / EEE요일', { locale: ko });
   }
+};
+
+export const cloeYAxis = (count: number) => {
+  setTimeout(() => {
+    const yAxisGroup = document.querySelectorAll('.recharts-yAxis')[count - 1];
+    if (!yAxisGroup) return;
+
+    const clonedGroup = yAxisGroup.cloneNode(true);
+    const containerSvg = document.getElementById(`clonedSvg_${count}`);
+    if (!containerSvg) return;
+
+    containerSvg.innerHTML = '';
+    containerSvg?.appendChild(clonedGroup);
+  }, 1000);
 };

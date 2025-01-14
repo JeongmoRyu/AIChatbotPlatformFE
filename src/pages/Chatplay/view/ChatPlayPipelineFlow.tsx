@@ -141,7 +141,7 @@ function ChatPlayPipelineFlow({ socket }: { socket: any }) {
                       onClick={(e) => {
                         handleEngineChange(e, 'retriever_id');
                       }}
-                      error={errors.hasOwnProperty('retriever_id') ? true : false}
+                      error={errors.hasOwnProperty('retriever_id')}
                     />
                   </div>
                   <div className="flex items-center justify-between ">
@@ -194,7 +194,7 @@ function ChatPlayPipelineFlow({ socket }: { socket: any }) {
                     onClick={(e) => {
                       handleEngineChange(e, 'llm_workflow_id');
                     }}
-                    error={errors.hasOwnProperty('llm_workflow_id') ? true : false}
+                    error={errors.hasOwnProperty('llm_workflow_id')}
                   />
                 </div>
                 {selectedLLMEngine && (

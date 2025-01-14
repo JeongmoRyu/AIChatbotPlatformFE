@@ -20,7 +20,7 @@ const useWidgetNavigationBarModel = () => {
       const adjustedList = userAuthority === '' ? list.filter((item) => item.label !== 'Embedding Ranker') : list;
       setMenuList(adjustedList);
     });
-  }, []);
+  }, [pathname]);
 
   return { menuList };
 };
@@ -30,6 +30,7 @@ export default useWidgetNavigationBarModel;
 const fetchMenuList = async (taskName?: string) => {
   // const response = await fetch('http://localhost:3000/menus');
   // const data = await response.json();
+
   const list = [
     {
       label: 'menu:홈',

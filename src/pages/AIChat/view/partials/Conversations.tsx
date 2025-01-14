@@ -188,7 +188,7 @@ const AssistantMessage = ({
             <span>Llama3 MAAL Hummingbird</span>
             <span className={cn('text-[#888888] font-normal')}>&middot; {statusText}</span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-row items-center h-8 gap-3 max-w-48 ">
             <UIRefreshButton
               disabled={!llmDone}
               onClick={() => {
@@ -197,13 +197,14 @@ const AssistantMessage = ({
                   return prev.slice(0, index);
                 });
               }}
+              className="w-20"
             >
               <IconRefreshDouble />
 
               <span className="flex items-center text-xs flex-nowrap text-nowrap">{t('button:새로고침')}</span>
             </UIRefreshButton>
             <UICopyButton
-              className={cn(isThrottled && 'cursor-not-allowed opacity-50')}
+              className={cn(isThrottled && 'cursor-not-allowed opacity-50 h-full ')}
               disabled={!llmDone || isThrottled}
               onClick={handleCopy}
             >
@@ -261,7 +262,7 @@ const UIRefreshButton = tw.button`
 `;
 
 const UICopyButton = tw.button`
-  w-[1.875rem] aspect-square p-1
+  w-[1.875rem] h-[1.875rem] aspect-square p-1
   rounded-md border border-[#DDDDDD]
   disabled:opacity-50 disabled:cursor-not-allowed
 `;

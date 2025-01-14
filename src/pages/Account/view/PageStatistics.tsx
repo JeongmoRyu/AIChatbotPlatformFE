@@ -20,13 +20,15 @@ const PageStatistics = () => {
     return () => resetActiveStatisticsTab();
   }, []);
 
+  const handleOnClick = (startDate: string, endDate: string) => handleFetchData(startDate, endDate);
+
   return (
     <div className="w-full h-full relative flex justify-center items-center">
       <StatisticsWrap>
         <StatisticsTitle />
         <StatisticsTab />
         <Dashboard>
-          <DashboardHeader onClick={handleFetchData} />
+          <DashboardHeader onClick={(startDate: string, endDate: string) => handleOnClick(startDate, endDate)} />
           <DashboardBody responseData={responseData} />
         </Dashboard>
       </StatisticsWrap>
@@ -52,7 +54,7 @@ export const StatisticsWrap = tw.div`
 
 export const Dashboard = tw.div`
   w-full
-  h-full
+  h-auto
   flex
   flex-col
   gap-10

@@ -46,7 +46,7 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+          'flex aspect-video justify-center text-xs relative overflow-x-auto', // 가로 스크롤 설정
           className,
         )}
         {...props}
@@ -265,18 +265,18 @@ const ChartLegendContent = React.forwardRef<
     return null;
   }
 
-  // console.log('payload:', payload);
-
   return (
     <div
-      style={
-        {
-          // transform: translateZ(0),
-          // position: 'relative',
-          // width: '100%',
-          // overflowX: 'auto',
-        }
-      }
+      style={{
+        position: 'absolute', // 범례를 절대 위치로 설정
+        top: 0, // 상단에 위치
+        right: 0, // 우측에 위치
+        backgroundColor: 'white', // 배경색을 흰색으로 설정
+        zIndex: 10, // z-index를 10으로 설정하여 다른 요소 위에 표시
+        padding: '0.5rem', // 패딩 설정
+        borderRadius: '0.25rem', // 테두리 반경 설정
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', // 그림자 설정
+      }}
     >
       <div
         ref={ref}
@@ -290,7 +290,7 @@ const ChartLegendContent = React.forwardRef<
             <div
               key={item.value || index}
               className={cn(
-                'flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground text-[.875rem]',
+                'flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground text-[.625rem]',
               )}
             >
               {itemConfig?.icon && !hideIcon && itemConfig?.label ? (
@@ -303,9 +303,7 @@ const ChartLegendContent = React.forwardRef<
                   }}
                 />
               )}
-              {/*{item.value}*/}
               {itemConfig?.label}
-              {/*{itemConfig?.label || item.value}*/}
             </div>
           ) : (
             <Fragment key={item.value || index}></Fragment>

@@ -1,7 +1,9 @@
 import React from 'react';
 // import React, { useState } from 'react';
 import Modal from '@/shared/components/modal/view/Modal';
+import { useRecoilValue } from 'recoil';
 // import NotiModal from './NotiModal';
+import { userAuthority as useUserAuthority } from '@/shared/store/onpromise';
 
 interface AccountModalProps {
   isShow: boolean;
@@ -44,6 +46,7 @@ const AccountModal: React.FC<AccountModalProps> = ({
   //   if (data.editor) return 'Editor';
   //   return 'User';
   // };
+  const userAuthority = useRecoilValue(useUserAuthority);
 
   return (
     <Modal isShow={isShow} onClose={onClose} width={500}>
@@ -145,7 +148,8 @@ const AccountModal: React.FC<AccountModalProps> = ({
           >
             <option value="User">User (일반 사용자)</option>
             <option value="Editor">Editor (기본 관리자)</option>
-            <option value="Admin">Admin (관리자)</option>
+            {userAuthority !== 'editor' && <option value="Admin">Admin (관리자)</option>}
+
             {/* <option value="SuperAdmin">Super Admin (관리자)</option>           */}
             {/* <option value="User">User (일반 사용자)</option>
             <option value="Editor">Editor (기본 관리자)</option>

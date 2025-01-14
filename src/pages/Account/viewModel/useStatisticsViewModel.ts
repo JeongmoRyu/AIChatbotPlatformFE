@@ -69,16 +69,7 @@ export const useStatisticsViewModel = () => {
   }, [activeStatisticsTab]);
 
   useEffect(() => {
-    if (searchDateType.value === 'PERIOD') {
-      setResponseData((prev: any) => ({
-        ...prev,
-        llmApiRequest: { ...responseDataFormat },
-        llmToken: { ...responseDataFormat },
-        embedApiRequest: { ...responseDataFormat },
-        embedToken: { ...responseDataFormat },
-      }));
-      return;
-    }
+    if (searchDateType.value === 'PERIOD') return;
 
     console.log('searchDateType ::', searchDateType);
 
@@ -136,6 +127,9 @@ export const useStatisticsViewModel = () => {
   const handleResponseData = useCallback(
     (response: any) => {
       const data = response.data.data;
+
+      // console.log(sortChartData('bar', data.llm_stats.tokens.chart_stats, searchDateType.value));
+
       setResponseData((prev: any) => ({
         ...prev,
         llmApiRequest: {
@@ -179,10 +173,9 @@ export const useStatisticsViewModel = () => {
     return result;
   };
 
-  const sortChartData = (type: string, data: any, searchDateTypeValue: searchDateValueTypes): any => {
-    // console.log('sortChartData');
-    // console.log(data);
+  // const getRandomValue = () => Math.floor(Math.random() * 20000) + 1000;
 
+  const sortChartData = (type: string, data: any, searchDateTypeValue: searchDateValueTypes): any => {
     return Array.from({ length: data[0].data.length }, (_, i) => {
       return data.reduce((acc: any, item: any) => {
         const model = item.model.replaceAll(' ', '_');
@@ -190,13 +183,18 @@ export const useStatisticsViewModel = () => {
 
         acc.xLabel = searchDateTypeValue === 'DAY' ? item.data[i].hour.toString() : item.data[i].date;
 
+        // TODO 랜덤함수 삭제
         if (type === 'bar') {
           acc[keys[0]] = item.data[i].input;
           acc[keys[1]] = item.data[i].output;
+
+          // acc[keys[0]] = item.data[i].input || getRandomValue();
+          // acc[keys[1]] = item.data[i].output || getRandomValue();
         }
 
         if (type === 'line') {
           acc[keys[2]] = item.data[i].total;
+          // acc[keys[2]] = item.data[i].total || i % 2 === 0 ? getRandomValue() : getRandomValue();
         }
 
         return acc;
@@ -205,11 +203,7 @@ export const useStatisticsViewModel = () => {
   };
 
   const sortTableData = (type: string, data: any) => {
-    // console.log('sortTableData');
-    // console.log(data);
-
     let result: any = [];
-    // debugger;
     data.forEach((item: any) => {
       const model = item.model.replaceAll(' ', '_').toLocaleUpperCase();
 
@@ -235,24 +229,27 @@ export const useStatisticsViewModel = () => {
     return result;
   };
 
-  const handleFetchData = useCallback(() => {
-    if (
-      searchDateType.value !== 'PERIOD' &&
-      searchStartDateRef.current !== searchStartDate &&
-      searchEndDateRef.current !== searchEndDate
-    ) {
-      return;
-    }
+  const handleFetchData = useCallback(
+    (startDate?: string, endDate?: string) => {
+      if (
+        searchDateType.value !== 'PERIOD' &&
+        searchStartDateRef.current !== searchStartDate &&
+        searchEndDateRef.current !== searchEndDate
+      ) {
+        return;
+      }
 
-    paramRef.current = {
-      type: searchDateType.value,
-      from_date: searchStartDate,
-      to_date: searchEndDate,
-    };
+      paramRef.current = {
+        type: searchDateType.value,
+        from_date: startDate || searchStartDate,
+        to_date: endDate || searchEndDate,
+      };
 
-    setIsFetching(true);
-    // fetchData(params);
-  }, [searchDateType, searchStartDate, searchEndDate]);
+      setIsFetching(true);
+      // fetchData(params);
+    },
+    [searchDateType, searchStartDate, searchEndDate],
+  );
 
   const fetchData = async () => {
     const url = `/statistics/${uriInfoRef.current}`;

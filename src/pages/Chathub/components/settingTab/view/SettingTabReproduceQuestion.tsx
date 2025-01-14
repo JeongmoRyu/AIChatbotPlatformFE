@@ -28,7 +28,7 @@ export default function SettingTabReproduceQuestion({
   return (
     <>
       <EditToggle
-        title="RQ 사용 DashboardHeader"
+        title="RQ 사용"
         id="rq_use_yn"
         value={data.use_yn}
         onChange={(val) => onChange('reproduce_question', 'use_yn', val)}

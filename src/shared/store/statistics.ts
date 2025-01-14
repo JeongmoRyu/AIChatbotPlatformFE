@@ -21,6 +21,8 @@ const searchDateType = atom<searchDateTypeProps>({
   default: {
     label: '오늘',
     value: 'DAY',
+    // label: '이번주',
+    // value: 'WEEK',
   },
 });
 

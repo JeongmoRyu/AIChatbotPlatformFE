@@ -14,6 +14,7 @@ const usePageChatBuilderViewModel = () => {
   const navigate = useNavigate();
   const { sendRequest } = useRestfulCustomAxios();
   const setIsLoadingState = useSetRecoilState(useIsLoadingState);
+  const [isSaving, setIsSaving] = useState(false);
   const location = useLocation();
   const chatbotId = location.state?.id || null;
   const llmFnCallEngineAPi = useLLMFNCallEngineSelect();
@@ -571,8 +572,15 @@ AI 컨설턴트가 고객의 질문의 의도를 좀 더 명확하게 파악할 
 
   const handleChangeImage = (imageFile: FileType) => setSettingImage([imageFile]);
 
+  const handleClickSave = () => {
+    setIsSaving(true);
+    setTimeout(() => {}, 100);
+    handleSave();
+  };
+
   const handleSave = async () => {
     try {
+      console.log('isSaving (before):', isSaving);
       setIsLoadingState(true);
       let img_file_id: any = undefined;
       if (settingImage.length > 0) {
@@ -589,13 +597,15 @@ AI 컨설턴트가 고객의 질문의 의도를 좀 더 명확하게 파악할 
             await postSettingDetail({ ...data, img_file_id });
           });
       } else {
-        postSettingDetail(data);
+        await postSettingDetail(data);
       }
-
-      setIsLoadingState(false);
       console.log('서버로 데이터 전송 완료');
     } catch (error) {
       console.error('데이터 전송 중 오류 발생:', error);
+    } finally {
+      setIsLoadingState(false);
+      // setIsSaving(false);
+      setTimeout(() => setIsSaving(false), 300);
     }
   };
 
@@ -639,10 +649,12 @@ AI 컨설턴트가 고객의 질문의 의도를 좀 더 명확하게 파악할 
     handleBack,
     handleChatbotCopy,
     data,
-    handleSave,
+    // handleSave,
     onValueChange,
     handleChangeImage,
     setValueCheck,
+    isSaving,
+    handleClickSave,
   };
 };
 
