@@ -11,7 +11,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { FadeLoader } from 'react-spinners';
 import {
   lineChartTotalColors,
-  cloeYAxis,
+  cloneYAxis,
   initXAxisOptions,
   initYAxisOptions,
   labelFormatter,
@@ -49,7 +49,7 @@ const LinearLineChart = (props: LinearLineChartProps) => {
 
   useEffect(() => {
     if (!isOverflowY) return;
-    cloeYAxis(count);
+    cloneYAxis(count);
   }, [data, isOverflowY]);
 
   const createLinearLine = () =>
@@ -117,10 +117,9 @@ const LinearLineChart = (props: LinearLineChartProps) => {
                     tickMargin={8}
                     tickFormatter={XAxisOptions[searchDateType.value].tickFormatter}
                     interval={XAxisOptions[searchDateType.value].interval}
-                    padding={{ left: 20, right: 20 }}
+                    padding={{ left: 28, right: 20 }}
                     fontSize={10}
                   />
-
                   <ChartTooltip
                     cursor={{
                       stroke: 'red',
@@ -146,7 +145,7 @@ const LinearLineChart = (props: LinearLineChartProps) => {
                 </LineChart>
               </ChartContainer>
             )}
-            {isOverflowY && (
+            {isOverflowY && !isFetching && (
               <div className="fixed top-0 left-0 w-[42px] h-[330px] bg-white z-50">
                 <svg id={`clonedSvg_${count}`} width="42" height="330" viewBox="0 0 42 330" fill="#FFFFFF" />
               </div>

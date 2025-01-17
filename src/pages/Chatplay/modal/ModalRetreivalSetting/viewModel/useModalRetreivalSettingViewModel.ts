@@ -19,6 +19,7 @@ import useFetchRag from '../model/useFetchRag';
 interface isShowModal {
   isShow: boolean;
   name: string;
+  message: string;
 }
 
 const useModalRetreivalSettingViewModel = () => {
@@ -39,6 +40,7 @@ const useModalRetreivalSettingViewModel = () => {
   const [isShowModal, setIsShowModal] = useState<isShowModal>({
     isShow: false,
     name: '',
+    message: '',
   });
 
   const refContent = useRef<HTMLDivElement>(null);
@@ -57,8 +59,6 @@ const useModalRetreivalSettingViewModel = () => {
 
   // 초기 목록 불러오기
   useEffect(() => {
-    console.log('isRagModelCreating', isRagModelCreating);
-    console.log('currentPage', currentPage);
     if (!isRagModelCreating) {
       getRagListData(currentPage);
     }
@@ -93,22 +93,25 @@ const useModalRetreivalSettingViewModel = () => {
     getRagListData(currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    console.log('currentPage', currentPage);
-  }, [currentPage]);
-
   const handleRegisterModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsShowBackdrop(true);
 
-    setIsShowModal({ isShow: true, name: 'register' });
+    setIsShowModal({ isShow: true, name: 'register', message: '' });
     getCheckCreating();
   };
 
-  const closeModal = () => {
+  const closeModal = (modalMsg?: string | React.MouseEvent<HTMLButtonElement>) => {
+    console.log('nextModalMsg', modalMsg);
+
     setIsShowBackdrop(false);
     resetCurrentPage();
-    setIsShowModal({ isShow: false, name: 'register' });
+
+    if (typeof modalMsg === 'string') {
+      setIsShowModal({ isShow: true, name: 'duplicate', message: modalMsg });
+    } else {
+      setIsShowModal({ isShow: false, name: 'register', message: '' });
+    }
   };
 
   const handleDeleteModal = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -116,7 +119,7 @@ const useModalRetreivalSettingViewModel = () => {
 
     setIsShowBackdrop(true);
 
-    setIsShowModal({ isShow: true, name: 'delete' });
+    setIsShowModal({ isShow: true, name: 'delete', message: '' });
   };
 
   return {

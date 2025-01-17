@@ -38,7 +38,7 @@ interface FormDataSaveRagParams {
 }
 
 interface DeleteParams {
-  handleClose: () => void;
+  handleClose: (e?: string) => void;
   // fetchAPIListData: () => void;
 }
 
@@ -68,7 +68,7 @@ const useFetchRag = () => {
 
       if (response && response.data.code === 'F000') {
         const data = response.data.data;
-        console.log('fetchAPIListData creating', data);
+        // console.log('fetchAPIListData creating', data);
         setFetchDetailData(data);
         setListCount(data.length);
       }
@@ -88,7 +88,7 @@ const useFetchRag = () => {
 
       if (response && response.data.code === 'F000') {
         const data = response.data.data;
-        console.log('fetchAPIListData creating', data);
+        // console.log('fetchAPIListData creating', data);
         setFetchListData(data.retriever_list);
         setTotalCount(data.total_elements);
       }
@@ -106,7 +106,7 @@ const useFetchRag = () => {
       const response = await sendRequest('/retriever/check/creating', 'GET');
       if (response && response.data) {
         const data = response.data.data;
-        console.log('check creating', data);
+        // console.log('check creating', data);
         setIsRagModelCreating(data);
       }
     } catch (error) {
@@ -242,13 +242,18 @@ const useFetchRag = () => {
     try {
       const response = await sendRequest('/retriever', 'DELETE', {}, checkList);
 
+      getRagListData(1);
+      setCheckList([]);
+      setCurrentPage(1);
+      setIsRagModalChanged(true);
+      getRetrieverList();
+
       if (response && response.data.code === 'F000') {
-        getRagListData(1);
-        setCheckList([]);
-        setCurrentPage(1);
-        setIsRagModalChanged(true);
-        getRetrieverList();
         handleClose();
+      }
+
+      if (response && response.data.code === 'R021') {
+        handleClose(response.data.message);
       }
     } catch (error) {
       console.error(error);

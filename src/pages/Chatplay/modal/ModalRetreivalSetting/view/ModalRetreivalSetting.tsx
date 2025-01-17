@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ModalChatplay } from '@/pages/Chatplay/modal/ModalChatplay/view/ModalChatplay';
@@ -16,6 +16,7 @@ import ModalConfirmDelete from '../../ModalConfirmDelete/view/ModalConfirmDelete
 import ModalChatbotRegister from '../../ModalChatbotRegister/view/ModalChatbotRegister';
 import RetrievlSettingTable from './RetrievlSettingTable';
 import useModalRetreivalSettingViewModel from '../viewModel/useModalRetreivalSettingViewModel';
+import ModalDuplicate from '../../ModalDuplicate/view/ModalDuplicate';
 
 interface ModalRetreivalSettingProps {
   isShow: boolean;
@@ -134,6 +135,9 @@ const ModalRetreivalSetting = ({ isShow, onClose, className }: ModalRetreivalSet
               />
             )}
             {isShowModal.name === 'delete' && <ModalConfirmDelete handleClose={closeModal} />}
+            {isShowModal.name === 'duplicate' && (
+              <ModalDuplicate handleClose={closeModal} message={isShowModal.message} />
+            )}
           </ModalChatplay>
 
           {isShowModal.isShow && <div className={`bg-black/60 w-full h-full absolute top-0 left-0 z-50 `} />}

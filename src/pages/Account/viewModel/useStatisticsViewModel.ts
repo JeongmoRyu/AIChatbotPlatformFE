@@ -128,8 +128,6 @@ export const useStatisticsViewModel = () => {
     (response: any) => {
       const data = response.data.data;
 
-      // console.log(sortChartData('bar', data.llm_stats.tokens.chart_stats, searchDateType.value));
-
       setResponseData((prev: any) => ({
         ...prev,
         llmApiRequest: {
@@ -209,7 +207,7 @@ export const useStatisticsViewModel = () => {
 
       if (type === 'api_request') {
         result.push({
-          model: model,
+          model,
           success: item.data.success,
           failure: item.data.failure,
           total: item.data.total,
@@ -218,7 +216,7 @@ export const useStatisticsViewModel = () => {
 
       if (type === 'tokens') {
         result.push({
-          model: model,
+          model,
           input: item.data.input,
           output: item.data.output,
           total: item.data.total,
@@ -239,10 +237,15 @@ export const useStatisticsViewModel = () => {
         return;
       }
 
+      if (startDate && endDate) {
+        setSearchStartDate(startDate);
+        setSearchEndDate(endDate);
+      }
+
       paramRef.current = {
         type: searchDateType.value,
-        from_date: startDate || searchStartDate,
-        to_date: endDate || searchEndDate,
+        from_date: startDate || '',
+        to_date: endDate || '',
       };
 
       setIsFetching(true);

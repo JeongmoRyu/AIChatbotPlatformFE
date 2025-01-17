@@ -82,13 +82,7 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ isShow, onClose, onSubmit
                 type={showNewPassword ? 'text' : 'password'}
                 value={newPassword}
                 onChange={(e) => {
-                  const value = e.target.value;
-                  const isValid = /^[a-zA-Z0-9]*$/.test(value);
-                  if (isValid) {
-                    setNewPassword(value);
-                  } else {
-                    showNotification('영어 대소문자와 숫자만 입력 가능합니다.', 'error');
-                  }
+                  setNewPassword(e.target.value);
                 }}
                 className={`w-full p-2 border rounded ${error ? 'border-red-500' : ''}`}
                 placeholder="8-12자"
@@ -118,13 +112,7 @@ const PasswordModal: React.FC<PasswordModalProps> = ({ isShow, onClose, onSubmit
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={confirmPassword}
                 onChange={(e) => {
-                  const value = e.target.value;
-                  const isValid = /^[a-zA-Z0-9]*$/.test(value);
-                  if (isValid) {
-                    setConfirmPassword(value);
-                  } else {
-                    showNotification('영어 대소문자와 숫자만 입력 가능합니다.', 'error');
-                  }
+                  setConfirmPassword(e.target.value);
                 }}
                 className={`w-full p-2 border rounded ${error ? 'border-red-500' : ''}`}
                 placeholder="8-12자"

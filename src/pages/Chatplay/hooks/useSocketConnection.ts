@@ -35,11 +35,11 @@ const useSocketConnection = () => {
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isChatLoading);
 
   const connectSocketIo = () => {
+    if (socket && socket.connected) return;
+
     console.log('%c*** ChatPlay Connecting Socket ***', 'color:blue;');
 
     const connectionUrl = `${connectionInfoState.chatplay.socket}`;
-
-    console.log('connectionUrl', connectionUrl);
 
     const connectedSocket = io(connectionUrl, {
       transports: ['websocket'],
@@ -48,11 +48,10 @@ const useSocketConnection = () => {
         user_id: userLoginState.userId,
       },
     });
-    console.log('connectionUrl:', connectionUrl);
 
     if (connectedSocket) {
       console.log('*** ChatPlay Connected Socket ***');
-      console.log('connectedSocket', connectedSocket);
+
       setSocket(connectedSocket);
     } else {
       console.log('Socket Connection is failed!!');

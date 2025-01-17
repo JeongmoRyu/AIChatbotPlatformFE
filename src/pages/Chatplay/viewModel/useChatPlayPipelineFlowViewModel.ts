@@ -319,7 +319,7 @@ const useChatPlayPipelineFlowViewModel = ({ watch, reset, setValue, socket }: IE
   };
 
   const refineEngineConfig = (config: Config): RefinedConfig => {
-    console.log('refineEngineConfig config', config);
+    // console.log('refineEngineConfig config', config);
 
     return Object.entries(config).reduce((result, [key, value]) => {
       result[key as keyof Config] = value.default_value.toString();

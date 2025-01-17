@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, createElement } from 'react';
+import { PropsWithChildren, ReactElement, createElement } from 'react';
 import ReactDOM from 'react-dom';
 
 interface ModalSubProps {
@@ -14,7 +14,8 @@ interface ModalProps {
   centered?: boolean;
   closeBtn?: boolean;
   className?: string;
-  onClose?: (e: React.MouseEvent<HTMLElement>) => void;
+  // onClose?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClose?: () => void;
 }
 
 function ModalHeader(props: ModalSubProps & PropsWithChildren) {

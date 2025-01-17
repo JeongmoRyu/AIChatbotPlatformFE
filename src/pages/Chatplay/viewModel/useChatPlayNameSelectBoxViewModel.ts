@@ -33,7 +33,7 @@ const useChatPlayNameSelectBoxViewModel = ({
 }: ChatPlayNameSelectBoxProps) => {
   const { t } = useTranslation(['chatplay']);
 
-  const { getChatbotData, deleteChatbot } = useFetchChatplay(); //쳇봇 목록 가져오기
+  const { getChatbotData, deleteChatbot } = useFetchChatplay(); //챗봇 목록 가져오기
   const { handleOnClickChatbot } = useChatPlayNameSelectViewModel();
 
   const selectboxRef = useRef<HTMLDivElement>(null);
@@ -147,8 +147,6 @@ const useChatPlayNameSelectBoxViewModel = ({
       const success = await deleteChatbot(deleteChatbotId);
       if (success) {
         // 성공 시 UI 상태 업데이트
-        showNotification(t('chatplay:챗봇이_삭제되었습니다'), 'success');
-        getChatbotData && getChatbotData();
 
         if (chatbotList.length === 1) {
           setRoomInfoState({

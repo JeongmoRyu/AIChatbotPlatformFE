@@ -8,7 +8,7 @@ const PageChatRoom = () => {
   return (
     <div className="flex flex-row w-full h-full">
       {/* content */}
-      <div className="flex flex-col items-center justify-center w-full h-full bg-slate-100 scrollbar-hide overflow-y-auto">
+      <div className="flex flex-col items-center justify-center w-full h-full bg-background scrollbar-hide overflow-y-auto">
         <div className="flex flex-col w-full max-w-[62rem] h-full pb-[50px]">
           <GptGuide />
           <PromptBox />

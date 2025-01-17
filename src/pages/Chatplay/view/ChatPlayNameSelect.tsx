@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import ChatPlayNameSelectBox from './ChatPlayNameSelectBox';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 
 function ChatPlayNameSelect({ socket }: any) {
   const { t, ready } = useTranslation(['chatplay']);

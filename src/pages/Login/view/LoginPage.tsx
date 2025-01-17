@@ -2,12 +2,15 @@ import useLoginPageViewModel from '../viewModel/useLoginPageViewModel';
 
 const LoginPage = () => {
   const { register, handleSubmit, errors, textError, onSubmit } = useLoginPageViewModel();
+  const logoSrc = `/${window.CHATHUB_LOGO || 'images/mStudio_logo.png'}`;
+  // const logoSrc = import.meta.env.VITE_APP_CHATHUB_LOGO || '/images/mStudio_logo.png';
 
   return (
     <div className="flex items-center justify-center h-screen bg-[url('/images/bg_login.png')] bg-no-repeat bg-cover">
       <div className="flex z-10 w-11/12 max-w-[68.75rem] h-5/6 max-h-[37.5rem] bg-white rounded-2xl overflow-auto shadow-lg">
         <div className="float-left w-full h-full">
-          <img src="/images/mStudio_logo.png" alt="logo" className="w-full h-full object-cover" />
+          {/* <img src="/images/mStudio_logo.png" alt="logo" className="w-full h-full object-cover" /> */}
+          <img src={logoSrc} alt="logo" className="w-full h-full object-cover" />
         </div>
 
         <div className="float-left w-full h-full p-[1.25rem] box-border">

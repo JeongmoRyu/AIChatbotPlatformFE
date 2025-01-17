@@ -2,6 +2,10 @@ interface IChatPlayTimelineInfo {
   timeline: IChatPlayTimelineType[];
 }
 
+interface Window {
+  CHATHUB_LOGO?: string;
+}
+
 interface IChatPlayTimelineType {
   [key: string]: string;
 }

@@ -90,7 +90,8 @@ interface ChatPlayHistoryType {
 }
 
 interface ChatPlayModalProps {
-  onClose: (e?: React.MouseEvent<HTMLElement>) => void;
+  // onClose: (e?: React.MouseEvent<HTMLElement>) => void;
+  onClose: () => void;
   className?: string;
   isShowBackdrop?: boolean;
 }

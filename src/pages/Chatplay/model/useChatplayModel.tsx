@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import useSocketConnection from '../hooks/useSocketConnection';
 
@@ -14,9 +14,12 @@ import useFetchChatplay from '../hooks/useFetchChatplay';
 
 const useChatplayModel = () => {
   const { socket, sendMessage, connectSocketIo } = useSocketConnection();
-  // console.log('useChatplayModel');
 
   const { getChatbotData } = useFetchChatplay();
+
+  useEffect(() => {
+    console.log('useChatplayModel socket:', socket);
+  }, [socket]);
 
   const userLoginInfo = useRecoilValue(userLoginState);
 
@@ -26,7 +29,6 @@ const useChatplayModel = () => {
   const setChatbotData = useSetRecoilState(useChatbotData);
 
   const resetRoomInfoState = useResetRecoilState(useRoomInfoState);
-  const roomInfoState = useRecoilValue(useRoomInfoState);
 
   const handleOnClickTopic = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -37,25 +39,16 @@ const useChatplayModel = () => {
   };
 
   useLayoutEffect(() => {
-    if (userLoginInfo.accessToken) {
+    if (userLoginInfo.accessToken && !socket) {
       connectSocketIo();
     }
     return () => {
-      if (socket) {
+      if (socket && !socket.disconnected) {
         resetRoomInfoState();
         socket.disconnect();
       }
     };
   }, []);
-
-  useEffect(() => {
-    if (roomInfoState.checkId === 'create_option') {
-      connectSocketIo();
-    }
-    if (typeof roomInfoState.checkId === 'number' && roomInfoState.checkId !== 0) {
-      connectSocketIo();
-    }
-  }, [roomInfoState.checkId]);
 
   useEffect(() => {
     //처음 로드될 때

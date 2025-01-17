@@ -96,7 +96,7 @@ const fetchSolutionsData = async () => {
         to: '/chat-play',
       },
       {
-        title: 'menu:쳇허브',
+        title: 'menu:챗허브',
         subTitle: 'Chat Hub',
         description: 'menu:Input_데이터와_Output_설정을_조정하여_정교한_커스텀챗봇을_만들_수_있습니다',
         to: '/chat-hub',

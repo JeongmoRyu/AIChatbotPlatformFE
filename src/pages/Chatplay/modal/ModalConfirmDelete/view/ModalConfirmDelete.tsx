@@ -14,7 +14,6 @@ function ModalConfirmDelete({ handleClose }: ModalNoticeProps) {
   const { t } = useTranslation(['common']);
 
   const { checkList, modalNoticeState, handleDeleteModal } = ModalConfirmDeleteViewModel({ handleClose });
-  console.log('checkList', checkList);
 
   return (
     <div className="flex flex-col items-center p-10">

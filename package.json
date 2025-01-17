@@ -56,7 +56,7 @@
     "vite": "^5.4.10"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,html}": [
+    "*.{js,jsx,ts,tsx}": [
       "npx prettier --cache --write",
       "npx eslint --cache --fix --max-warnings=0"
     ]

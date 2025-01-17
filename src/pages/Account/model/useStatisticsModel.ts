@@ -112,7 +112,13 @@ export const initXAxisOptions = (
     PERIOD: {
       tickLine: true,
       tickFormatter: (value: string) => {
-        if (!value.includes('-')) return '';
+        if (!value.includes('-')) {
+          if (value === '0' || parseInt(value) % 3 === 0) {
+            return `${value}시`;
+          } else {
+            return '';
+          }
+        }
 
         let isShow = false;
         const splitLength = data.length < 8 ? 1 : data.length < 12 ? 3 : 5;
@@ -139,16 +145,26 @@ export const labelFormatter = (searchDateType: searchDateTypeProps) => (label: s
   }
 };
 
-export const cloeYAxis = (count: number) => {
+export const cloneYAxis = (count: number): void => {
   setTimeout(() => {
-    const yAxisGroup = document.querySelectorAll('.recharts-yAxis')[count - 1];
-    if (!yAxisGroup) return;
+    const yAxisGroups: NodeListOf<SVGGElement> = document.querySelectorAll('.recharts-yAxis');
+    if (!yAxisGroups.length) return;
+    const tempGroups: SVGGElement[] = [];
 
-    const clonedGroup = yAxisGroup.cloneNode(true);
-    const containerSvg = document.getElementById(`clonedSvg_${count}`);
+    if (yAxisGroups.length > 4) {
+      yAxisGroups.forEach((group: SVGGElement, index: number) => {
+        if (index % 2 === 0) tempGroups.push(group);
+      });
+    } else {
+      tempGroups.push(...yAxisGroups);
+    }
+
+    const yAxisGroup: SVGGElement = tempGroups[count - 1];
+    const clonedGroup: SVGGElement = yAxisGroup.cloneNode(true) as SVGGElement;
+    const containerSvg: HTMLElement | null = document.getElementById(`clonedSvg_${count}`);
     if (!containerSvg) return;
 
     containerSvg.innerHTML = '';
     containerSvg?.appendChild(clonedGroup);
-  }, 1000);
+  }, 750);
 };

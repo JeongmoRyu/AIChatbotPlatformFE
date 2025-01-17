@@ -3,11 +3,11 @@ import { useRecoilValue } from 'recoil';
 import DashboardContent from '@/pages/Account/container/statistics/DashboardContent.tsx';
 import tw from 'tailwind-styled-components';
 import {
+  activeStatisticsTab as useActiveStatisticsTabStore,
   searchDateType as useSearchDateTypeStore,
   searchDateTypeProps,
   searchEndDate as useSearchEndDateStore,
   searchStartDate as useSearchStartDateStore,
-  activeStatisticsTab as useActiveStatisticsTabStore,
 } from '@/shared/store/statistics.ts';
 import { differenceInDays } from 'date-fns';
 import { motion } from 'framer-motion';
@@ -37,8 +37,8 @@ const DashboardBody = (props: DashboardBodyProps) => {
       if (searchDateType.value !== 'PERIOD') return false;
       if (!searchStartDate || !searchEndDate) return false;
 
-      const diff = differenceInDays(new Date(searchEndDate), new Date(searchStartDate));
-      return diff > 30;
+      const diffDays = differenceInDays(new Date(searchEndDate), new Date(searchStartDate));
+      return diffDays > 30;
     };
 
     setIsOverflowY(checkOverflowY());

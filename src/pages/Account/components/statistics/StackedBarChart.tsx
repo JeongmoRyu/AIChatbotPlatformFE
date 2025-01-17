@@ -12,7 +12,7 @@ import { FadeLoader } from 'react-spinners';
 import {
   barChartInputColors,
   barChartOutputColors,
-  cloeYAxis,
+  cloneYAxis,
   initXAxisOptions,
   initYAxisOptions,
   labelFormatter,
@@ -51,7 +51,7 @@ const StackedBarChart = (props: StackedBarChartProps) => {
 
   useEffect(() => {
     if (!isOverflowY) return;
-    cloeYAxis(count);
+    cloneYAxis(count);
   }, [data, isOverflowY]);
 
   const createStackedBar = () => {
@@ -177,7 +177,7 @@ const StackedBarChart = (props: StackedBarChartProps) => {
                 </BarChart>
               </ChartContainer>
             )}
-            {isOverflowY && (
+            {isOverflowY && !isFetching && (
               <div className="fixed top-0 left-0 w-[42px] h-[330px] bg-white z-50">
                 <svg id={`clonedSvg_${count}`} width="42" height="330" viewBox="0 0 42 330" fill="#FFFFFF" />
               </div>
