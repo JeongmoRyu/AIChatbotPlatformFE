@@ -92,7 +92,7 @@ const ResultCard = ({
         style={{
           maxHeight: `${height}rem`,
           minHeight: `${height}rem`,
-          maxWidth: '38rem',
+          // maxWidth: '38rem',
         }}
       >
         {createdSentence ? (

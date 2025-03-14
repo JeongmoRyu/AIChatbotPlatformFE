@@ -164,12 +164,12 @@ const usePromptBoxViewModel = ({
       role: buttonText.toLowerCase(),
       content: requestText,
     };
-    console.log('chatData', chatData);
+    // console.log('chatData', chatData);
     setChatPlayChatHistoryState((prev: any) => ({
       ...prev,
       history: [...prev.history, chatData],
     }));
-    console.log('chatPlayChatHistoryState', chatPlayChatHistoryState);
+    // console.log('chatPlayChatHistoryState', chatPlayChatHistoryState);
     setRequestText('');
     if (buttonText === 'User') {
       setButtonText('Assistant');

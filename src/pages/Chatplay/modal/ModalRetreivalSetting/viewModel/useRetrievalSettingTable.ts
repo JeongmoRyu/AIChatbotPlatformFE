@@ -32,7 +32,7 @@ const useRetrievalSettingTable = ({ fetchListData }: Props) => {
 
   const handleDetailData = (e: React.MouseEvent<HTMLDivElement>, item: any) => {
     e.preventDefault();
-    console.log('item', item);
+    // console.log('item', item);
 
     setSelectedRetrievalDetailModal({ isShow: true, id: item.retriever_id, name: item.model_name });
   };

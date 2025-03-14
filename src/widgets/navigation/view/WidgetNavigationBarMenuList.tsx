@@ -20,21 +20,21 @@ const WidgetNavigationBarMenuList = () => {
     unSortedMenuList,
   } = useWidgetNavigationBarViewModel();
   return (
-    <div className="xl:flex xl:justify-center w-full">
+    <div className="w-full xl:flex xl:justify-center">
       {menuList && menuList.length > 0 && (
         <>
           {/* Desktop 메뉴 */}
-          <ul className="xl:flex gap-5 hidden text-sm">
+          <ul className="hidden gap-5 text-sm xl:flex">
             {unSortedMenuList.map((menu, index) => (
               <li
-                key={`${menu.label}-${index}`}
+                key={`${menu.title}-${index}`}
                 className="p-2.5"
                 style={{
                   fontWeight: menu.isActive ? 'bold' : 'normal',
                   letterSpacing: menu.isActive ? '-0.02em' : '0em',
                 }}
               >
-                <Link to={menu.to}>{menu.label}</Link>
+                <Link to={menu.to}>{menu.title}</Link>
               </li>
             ))}
           </ul>
@@ -73,13 +73,13 @@ const WidgetNavigationBarMenuList = () => {
                   key="dropdown"
                 >
                   {menuList.map((menu, index) => (
-                    <ComboBoxMenuItem $isActive={menu.isActive} key={`combobox-${menu.label}-${index}`}>
+                    <ComboBoxMenuItem $isActive={menu.isActive} key={`combobox-${menu.title}-${index}`}>
                       <Link
                         to={menu.to}
                         className="flex justify-between items-center gap-2 p-[.875rem] w-full h-full"
                         onClick={() => setIsDropdownOpen(false)}
                       >
-                        {menu.label}
+                        {menu.title}
                         {index === 0 && (
                           <motion.svg
                             initial={{ rotate: 0, zIndex: 10 }}
@@ -148,7 +148,7 @@ const ComboBoxMenuItem = tw.li<{ $isActive: boolean }>`
   min-w-[9.375rem]
   h-[3.25rem]
   bg-white
-  hover:text-white
+   hover:font-bold
   hover:bg-gray-700
   translation
   duration-300

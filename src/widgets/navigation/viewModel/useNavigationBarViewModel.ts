@@ -60,6 +60,7 @@ const useWidgetNavigationBarViewModel = () => {
   }, [dropdownContainer]);
 
   const currentMenuName = useMemo(() => {
+    console.log(pathname);
     const menu = model.menuList.find((menu) => menu.to === pathname);
     if (pathname === '/embedding-leaderboard' || pathname === '/embedding-ranker') {
       return 'Embedding Ranker';
@@ -71,20 +72,20 @@ const useWidgetNavigationBarViewModel = () => {
       return 'LLM 템플릿';
     }
     if (!pathname || !menu) return '';
-    console.log(menu, pathname);
-    return menu ? t(menu.label) : '';
+    return t(menu.title);
+    // return menu ? t(menu.title) : '';
   }, [pathname, model.menuList, t]);
 
   const menuList = useMemo(() => {
     // 현재 페이지를 찾아서 isActive를 true로 설정
     // 현재 페이지를 목록의 첫 번째로 이동
-    const list: { to: string; label: string; isActive: boolean }[] = [];
+    const list: { to: string; title: string; isActive: boolean }[] = [];
 
     model.menuList.forEach((menu) => {
       if (menu.to === pathname) {
-        list.unshift({ ...menu, label: t(menu.label), isActive: true });
+        list.unshift({ ...menu, title: t(menu.title), isActive: true });
       } else {
-        list.push({ ...menu, label: t(menu.label), isActive: false });
+        list.push({ ...menu, title: t(menu.title), isActive: false });
       }
     });
 
@@ -94,7 +95,7 @@ const useWidgetNavigationBarViewModel = () => {
     () =>
       model.menuList.map((menu) => ({
         ...menu,
-        label: t(menu.label),
+        title: t(menu.title),
         isActive: menu.to === pathname,
       })),
     [model.menuList, pathname],

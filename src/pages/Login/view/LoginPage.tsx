@@ -17,6 +17,7 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="max-w-[21.875rem] mx-auto">
             <h2 className="mb-[3rem] pt-[5rem] text-3xl font-bold text-primary-darkblue">Login</h2>
             <label htmlFor="username" className="block mt-[1.25rem] pb-[0.375rem] text-lg font-medium">
+              {/* ID <span className="text-[#fe4336]">(사번)</span> */}
               ID
             </label>
             <input
@@ -26,6 +27,7 @@ const LoginPage = () => {
               className="w-full h-[3rem] px-[0.75rem] py-[0.375rem] border border-bgContent rounded-lg bg-white font-md"
             />
             <label htmlFor="password" className="block mt-[1.25rem] pb-[0.375rem] text-lg font-md">
+              {/* Password <span className="text-[#fe4336]">(통합정보시스템 비밀번호)</span> */}
               Password
             </label>
             <input

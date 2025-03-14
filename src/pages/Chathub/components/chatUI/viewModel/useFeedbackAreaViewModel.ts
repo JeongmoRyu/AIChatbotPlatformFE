@@ -1,8 +1,8 @@
 import { useRestfulCustomAxios } from '@/shared/hooks/useRestfulCustomAxios';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { roomInfoState as useRoomInfoState } from '@/shared/store/onpromise';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userLoginState, roomInfoState as useRoomInfoState } from '@/shared/store/onpromise';
 import { showNotification } from '@/shared/utils/common-helper';
 
 const useFeedbackAreaViewModel = ({ index, seq, isOpen, handleFeedbackArea }: FeedbackAreaProps) => {
@@ -11,6 +11,8 @@ const useFeedbackAreaViewModel = ({ index, seq, isOpen, handleFeedbackArea }: Fe
   const feedbackRef = useRef<HTMLTextAreaElement>(null);
   const [roomInfoState] = useRecoilState(useRoomInfoState);
   const navigate = useNavigate();
+  const userState = useRecoilValue(userLoginState);
+  const userName = useMemo(() => userState?.email, [userState]);
 
   useEffect(() => {
     if (isOpen && feedbackRef.current) {
@@ -24,12 +26,12 @@ const useFeedbackAreaViewModel = ({ index, seq, isOpen, handleFeedbackArea }: Fe
   };
 
   const handleSendFeedback = async () => {
-    await postFeedbackContent(roomInfoState.roomId, seq, feedbackContents);
+    await postFeedbackContent(roomInfoState.roomId, seq, feedbackContents, userName);
   };
 
-  const postFeedbackContent = async (chatroom_id: number, seq: number, feedbackContent: string) => {
+  const postFeedbackContent = async (chatroom_id: number, seq: number, feedbackContent: string, userName: string) => {
     const response = await sendRequest(
-      `/chatroom/feedback/${chatroom_id}/${seq}?feedback=${feedbackContent}`,
+      `/chatroom/feedback/${chatroom_id}/${seq}?feedback=${feedbackContent}&user_name=${userName}`,
       'post',
       undefined,
       undefined,

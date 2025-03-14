@@ -38,17 +38,29 @@ const useChatplayModel = () => {
     }
   };
 
+  // useLayoutEffect(() => {
+  //   if (userLoginInfo.accessToken && !socket) {
+  //     connectSocketIo();
+  //   }
+  //   return () => {
+  //     if (socket && !socket.disconnected) {
+  //       resetRoomInfoState();
+  //       socket.disconnect();
+  //     }
+  //   };
+  // }, []);
+
   useLayoutEffect(() => {
-    if (userLoginInfo.accessToken && !socket) {
-      connectSocketIo();
-    }
+    if (!!socket || !userLoginInfo.accessToken) return;
+    connectSocketIo();
+
     return () => {
-      if (socket && !socket.disconnected) {
-        resetRoomInfoState();
-        socket.disconnect();
-      }
+      if (!socket || socket.disconnected) return;
+      console.log('*** ChatPlay Disconnecting Socket ***');
+      resetRoomInfoState();
+      socket.disconnect();
     };
-  }, []);
+  }, [socket, userLoginInfo.accessToken]);
 
   useEffect(() => {
     //처음 로드될 때

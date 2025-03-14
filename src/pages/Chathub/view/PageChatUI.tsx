@@ -12,6 +12,7 @@ import { TailSpin } from 'react-loader-spinner';
 import usePageChatUIViewModel from '../viewModel/usePageChatUIViewModel';
 // import useLayoutChathubViewModel from '@/shared/layouts/LayoutChathub/viewModel/useLayoutChathubViewModel';
 import Sidebar from '@/pages/Chathub/components/Chat/view/Sidebar';
+import ThinkBox from '../components/chatUI/view/ThinkBox';
 
 // type PageChatUIProps = {
 //   handleChatLog: (chatroomId: number, seqNum: string | number | string[]) => Promise<void>;
@@ -99,7 +100,16 @@ const PageChatUI = () => {
                           </div>
                         </div>
                         <div className="flex flex-col w-full">
-                          <ChatMessage text={item.content as string} />
+                          {typeof item.content === 'string' && item.content.includes('<think>') && (
+                            <ThinkBox content={item.content} />
+                          )}
+                          <ChatMessage
+                            text={
+                              typeof item.content === 'string'
+                                ? item.content.replace(/<think>.*?<\/think>/s, '').trim()
+                                : String(item.content)
+                            }
+                          />
                         </div>
                       </div>
                       <div className="mt-2 ml-10">
@@ -120,6 +130,36 @@ const PageChatUI = () => {
                         )}
                       </div>
                     </React.Fragment>
+
+                    // <React.Fragment key={`chatassistant_${index}`}>
+                    //   <div className="flex w-full p-7 rounded-[0.625rem] bg-[#fff] mt-7 text-sm">
+                    //     <div className="h-full w-28">
+                    //       <div className="flex flex-col items-center justify-center">
+                    //         <img className="w-[30px] h-[30px]" src={chatbotImage} alt="Chathub" />
+                    //       </div>
+                    //     </div>
+                    //     <div className="flex flex-col w-full">
+                    //       <ChatMessage text={item.content as string} />
+                    //     </div>
+                    //   </div>
+                    //   <div className="mt-2 ml-10">
+                    //     <div
+                    //       className="flex items-center cursor-pointer w-fit"
+                    //       onClick={() => handleFeedbackArea(index)}
+                    //     >
+                    //       <img src={EnterIcon} alt="enter" className="mr-2" />
+                    //       <div className="text-sm text-bd-darkgray">피드백 남기기</div>
+                    //     </div>
+                    //     {openFeedbackArea[index] && (
+                    //       <FeedbackArea
+                    //         index={index}
+                    //         seq={item.seq as number}
+                    //         isOpen={openFeedbackArea[index]}
+                    //         handleFeedbackArea={handleFeedbackArea}
+                    //       />
+                    //     )}
+                    //   </div>
+                    // </React.Fragment>
                   );
                 }
               })}

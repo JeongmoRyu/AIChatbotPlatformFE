@@ -9,9 +9,13 @@ import { useRecoilValue } from 'recoil';
 
 const TopNav: FC = () => {
   const userLoginState = useRecoilValue(useUserLoginState);
+  const TopLogoNav = `/${window.TOP_LOGO_NAV || '/maal_logo_tag.svg'}`;
   return (
     <TopNavContainer>
-      <TopNavLogo>On-premise LLM</TopNavLogo>
+      <TopNavLogo>
+        <img src={TopLogoNav} alt="toplogo" />
+      </TopNavLogo>
+      {/* <TopNavLogo>On-premise LLM</TopNavLogo> */}
 
       <WidgetNavigationBarMenuList />
 
@@ -43,9 +47,9 @@ const TopNavContainer = tw.nav`
   left-0
   z-30
 `;
-
+// min-w-[11.875rem]
 const TopNavLogo = tw.h1`
-  min-w-[11.875rem]
+  min-w-[8rem]
   font-bold
   text-nowrap
   text-secondary

@@ -4,6 +4,8 @@ interface IChatPlayTimelineInfo {
 
 interface Window {
   CHATHUB_LOGO?: string;
+  TOP_LOGO_NAV?: string;
+  TITLE_IMAGE?: string;
 }
 
 interface IChatPlayTimelineType {
@@ -133,7 +135,7 @@ interface IUSER_LOGIN_INFO {
 interface IChatHistoryInfo {
   history: ChatHistoryType[];
 }
-type TRoomState = 'CREATED' | 'QUESTION';
+type TRoomState = 'CREATED' | 'QUESTION' | 'READY';
 type TchatUiState = 'READY' | 'ING' | 'FINISH';
 
 interface IRoomInfo {
@@ -495,6 +497,7 @@ interface UserListType {
   is_editor: boolean; // 어드민 계정 여부
   is_super_admin: boolean; // 어드민 계정 여부
   user_key: number;
+  organization?: string;
   // admin?: string;
 }
 
@@ -518,5 +521,53 @@ interface RoomType {
 }
 
 interface ChatHistoryType {
-  [key: string]: string | string[] | number;
+  [key: string]: string | string[] | number | ChatSource[];
+}
+
+interface ChatSource {
+  title: string;
+  link: string;
+  content: string;
+}
+
+// New Chat history list
+interface Chatroom {
+  id: number;
+  chatbot_id: number;
+  reg_user_id: string;
+  seq: null | number;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface ChatroomGroup {
+  date_label: string;
+  chatrooms: Chatroom[];
+}
+// ChatroomDateList Props
+interface ChatroomDateListProps {
+  onSelectChatroom: (chatroomId: number) => void;
+  conversations: IChatHistory;
+}
+// New Chat Data
+interface IChatHistory {
+  history: IChatHistoryType[];
+}
+
+interface IChatHistoryType {
+  [key: string]: string | string[] | number | ChatSource[];
+}
+
+interface ChatItem {
+  role: string;
+  content: string;
+  seq?: number;
+  room_id?: number;
+}
+
+// feedback
+interface feedbackContent {
+  room_id: number;
+  seq: number;
 }

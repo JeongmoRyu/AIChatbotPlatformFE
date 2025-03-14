@@ -15,9 +15,8 @@ interface CardComponentProps {
   to?: string;
   type?: CardType;
   iconURL?: string;
-  // imageURL?: string;
+
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
-  redirect?: string;
 }
 
 interface CardListProps {

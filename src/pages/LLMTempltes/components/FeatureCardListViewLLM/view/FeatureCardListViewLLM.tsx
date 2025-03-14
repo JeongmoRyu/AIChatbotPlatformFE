@@ -35,7 +35,6 @@ const FeatureCardListViewLLM = ({
               {...cardData}
               type={type}
               iconURL={cardData.iconURL}
-              redirect={cardData.redirect}
               onClick={handleClickMenu}
             />
           );

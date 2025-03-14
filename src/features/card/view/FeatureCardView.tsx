@@ -32,7 +32,18 @@ const cardStyles = {
   `,
 };
 
-const Card = tw.a<{ $type: CardType }>`
+const Card = tw.div<{ $type: CardType }>`
+  flex
+  flex-col
+  justify-between
+  bg-white
+  border
+  border-line
+  rounded-lg
+  ${({ $type }) => cardStyles[$type]}
+`;
+
+const CardA = tw.a<{ $type: CardType }>`
   flex
   flex-col
   justify-between
@@ -72,26 +83,31 @@ const FeatureCardView: FC<CardComponentProps> = ({
   to,
   iconURL = '',
   onClick,
-  redirect,
 }) => {
   const { t, i18n } = useTranslation(['llm']);
 
-  return (
-    <>
-      <Card $type={type} data-redirect={redirect} onClick={onClick} href={redirect}>
-        <CardContentUI>
-          <CardTitle>
-            {t(title)}
-            {subTitle && i18n.language === 'ko' && <span className="text-lg"> {t(subTitle)}</span>}
-          </CardTitle>
-          <CardDescription $type={type} $llm={iconURL}>
-            {t(description)}
-          </CardDescription>
-          {iconURL && <img src={iconURL} alt={iconURL} className={` w-6 h-6 mt-8`} />}
-        </CardContentUI>
-        {to && <GoToButtonComponent to={to} />}
-      </Card>
-    </>
+  const CommonComp = (
+    <CardContentUI>
+      <CardTitle>
+        {t(title)}
+        {subTitle && i18n.language === 'ko' && <span className="text-lg"> {t(subTitle)}</span>}
+      </CardTitle>
+      <CardDescription $type={type} $llm={iconURL}>
+        {t(description)}
+      </CardDescription>
+      {iconURL && <img src={iconURL} alt={iconURL} className={` w-6 aspect-square `} />}
+    </CardContentUI>
+  );
+
+  return iconURL ? (
+    <CardA $type={type} onClick={onClick} href={to || '#'} data-redirect={to}>
+      {CommonComp}
+    </CardA>
+  ) : (
+    <Card $type={type} onClick={onClick}>
+      {CommonComp}
+      {to && <GoToButtonComponent to={to} />}
+    </Card>
   );
 };
 

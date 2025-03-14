@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 interface IChatWithAIRequestData {
   language: 'ko' | 'en';
   prompt: string;
+  selectedModel?: string;
 }
 
 interface ChatState {
@@ -38,9 +39,9 @@ export const usePageAIChatModel = () => {
   const [sampleQuestions, setSampleQuestions] = useState<ISampleQuestionGroup[]>([]);
   const [conversations, setConversations] = useState<IConversation[]>([]);
   const connectionInfoState = useRecoilValue(useConnectionInfoStore);
-
+  const [socketEndPoint, setSocketEndPoint] = useState<string>(connectionInfoState.aichat.socket);
   // ip로 api 호출시
-  const { socket, reconnect, needReconnect } = useSocket(connectionInfoState.aichat.socket);
+  const { socket, reconnect, needReconnect } = useSocket(socketEndPoint);
   // env 및 docker로 연결하여 ces 용으로 사용하시면 될 것 같습니다.
   // const { socket, reconnect, needReconnect } = useSocket(`http://${import.meta.env.VITE_CHATPLAY_API_DOMAIN}/llm`);
 
@@ -72,7 +73,11 @@ export const usePageAIChatModel = () => {
     (data: IChatWithAIRequestData) => {
       if (!socket) return;
       setChatState((prev) => ({ ...prev, response: '' }));
-      socket.emit('llm_request', { language: data.language, prompt: data.prompt });
+      if (data.selectedModel) {
+        socket.emit('llm_request', { language: data.language, prompt: data.prompt, model: data.selectedModel });
+      } else {
+        socket.emit('llm_request', { language: data.language, prompt: data.prompt });
+      }
     },
     [socket],
   );
@@ -95,6 +100,7 @@ export const usePageAIChatModel = () => {
       socket.off(SOCKET_EVENTS.RESPONSE, onResponse);
       socket.off(SOCKET_EVENTS.RESPONSE_END, onResponseEnd);
       socket.off(SOCKET_EVENTS.ERROR, onError);
+      socket.close();
     };
   }, [socket, startProcessing, appendResponse, finishProcessing, setError]);
 
@@ -132,6 +138,8 @@ export const usePageAIChatModel = () => {
     reconnect: handleReconnect,
     needReconnect,
     isProcessing: chatState.isProcessing,
+    socketEndPoint,
+    setSocketEndPoint,
   };
 };
 
@@ -144,18 +152,18 @@ async function fetchLLMModelList(): Promise<ILLMModel[]> {
       category: 'maum',
       categoryLabel: '기본 모델',
     },
-    // {
-    //   id: 'gpt4',
-    //   name: 'Chat GPT 4',
-    //   category: 'third-party',
-    //   categoryLabel: '외부 모델',
-    // },
-    // {
-    //   id: 'gpt4-mini',
-    //   name: 'Chat GPT 4 mini',
-    //   category: 'third-party',
-    //   categoryLabel: '외부 모델',
-    // },
+    {
+      id: 'gpt-4o',
+      name: 'Chat GPT 4o',
+      category: 'third-party',
+      categoryLabel: '외부 모델',
+    },
+    {
+      id: 'gpt-4o-mini',
+      name: 'Chat GPT 4o mini',
+      category: 'third-party',
+      categoryLabel: '외부 모델',
+    },
   ];
 }
 

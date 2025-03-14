@@ -43,7 +43,7 @@ export const solutionData: SolutionDataItem[] = [
   },
   {
     title: 'Embedding Ranker',
-    description: '한번에 여러가지 LLM  모델 성능을 시험하고 정답률을 비교할 수 있습니다.',
+    description: '다양한 임베딩 모델을 시험하고, 성능 비교를 통해 문서에 최적화된 조합을 찾을 수 있습니다.',
     to: '/embedding-history',
   },
 ];

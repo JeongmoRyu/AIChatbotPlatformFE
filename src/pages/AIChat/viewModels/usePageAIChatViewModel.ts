@@ -3,6 +3,8 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { usePageAIChatModel } from '../models/usePageAIChatModel';
 import Conversations from '../view/partials/Conversations';
 import ConversationSetup from '../view/partials/ConversationSetup';
+import { connectionInfoState as useConnectionInfoStore } from '@/shared/store/userinfo';
+import { useRecoilValue } from 'recoil';
 
 export const usePageAIChatViewModel = () => {
   const {
@@ -17,11 +19,14 @@ export const usePageAIChatViewModel = () => {
     reconnect,
     needReconnect,
     isProcessing,
+    socketEndPoint,
+    setSocketEndPoint,
   } = usePageAIChatModel();
 
   // 현재 선택된 LLM 모델과 질문 상태
   const [selectedModel, setSelectedModel] = useState('hummingbird');
   const [question, setQuestion] = useState('');
+  const connectionInfoState = useRecoilValue(useConnectionInfoStore);
 
   useEffect(() => {
     console.log('isProcessing', isProcessing);
@@ -48,7 +53,16 @@ export const usePageAIChatViewModel = () => {
   const requestLLM = useCallback(
     (prompt: string) => {
       if (!socketConnected) return;
-      emit({ language: 'ko', prompt });
+      const selectedModelData = llmModelList.find((model) => model.id === selectedModel);
+
+      if (selectedModelData) {
+        if (selectedModelData.category === 'maum') {
+          emit({ language: 'ko', prompt });
+        } else {
+          emit({ language: 'ko', prompt, selectedModel });
+        }
+      }
+      // emit({ language: 'ko', prompt });
     },
     [emit, socketConnected],
   );
@@ -74,6 +88,18 @@ export const usePageAIChatViewModel = () => {
       const target = model.category === 'maum' ? list.maum : list['third-party'];
       target.push({ ...model, isActive: model.id === selectedModel });
     });
+
+    const selectedModelData = llmModelList.find((model) => model.id === selectedModel);
+
+    if (selectedModelData) {
+      if (selectedModelData.category === 'maum') {
+        setSocketEndPoint(connectionInfoState.aichat.socket);
+      } else {
+        setSocketEndPoint(`${connectionInfoState.chathub.socket}/llm`);
+      }
+    }
+    console.log(socketEndPoint);
+    reconnect();
     return list;
   }, [llmModelList, selectedModel]);
 

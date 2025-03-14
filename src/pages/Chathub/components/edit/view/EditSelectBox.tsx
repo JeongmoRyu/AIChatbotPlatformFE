@@ -10,7 +10,7 @@ interface Props {
   type: 'memory' | 'endpoint' | '';
   labelText: string;
   name: string;
-  activeValue: number;
+  activeValue: number | null;
   onChange: (value: number, parameters?: IEngineParameter) => void;
   list?: SelectListType[];
   isHalf?: boolean;
@@ -37,6 +37,9 @@ const EditSelectBox = ({ type, labelText, name, activeValue, onChange, list, isH
   }, []);
 
   useEffect(() => {
+    if (activeValue === null) {
+      return;
+    }
     const isActiveValueInList = selectList.some((item) => item.value === activeValue);
     if (!isActiveValueInList && selectList.length > 0) {
       const firstItem = selectList[0];
@@ -52,7 +55,11 @@ const EditSelectBox = ({ type, labelText, name, activeValue, onChange, list, isH
 
       <div className={`select_box ${isOpen ? 'open' : ''}`} ref={selectBoxRef}>
         <button type="button" onClick={onOpen}>
-          {selectList?.find((item) => item.value === activeValue)?.text}
+          {/* {selectList?.find((item) => item.value === activeValue)?.text}
+          <span className="icon">{isOpen ? '닫힘' : '열림'}</span> */}
+          {activeValue === null
+            ? '선택해주세요'
+            : selectList?.find((item) => item.value === activeValue)?.text || '선택해주세요'}
           <span className="icon">{isOpen ? '닫힘' : '열림'}</span>
         </button>
 

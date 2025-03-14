@@ -64,7 +64,10 @@
     "파일_업로드_중_오류가_발생했습니다": "An error occurred during file upload.",
 
     "모델이_정상적으로_생성되었습니다": "The model has been successfully created.",
-    "챗봇에서_사용중인_문서입니다":"This is a document in use in the chatbot."
+    "챗봇에서_사용중인_문서입니다":"This is a document in use in the chatbot.",
+    "임베딩_진행중인_모델은_삭제할_수_없습니다": "The model being embedded cannot be deleted."
+
+
 
 
 

@@ -23,11 +23,13 @@ const Conversations = ({
   setConversations,
   llmDone,
   isProcessing,
+  selectedModel,
 }: {
   conversations: IConversation[];
   setConversations: Dispatch<SetStateAction<IConversation[]>>;
   llmDone: boolean;
   isProcessing: boolean;
+  selectedModel: string;
 }) => {
   const userState = useRecoilValue(userLoginState);
   const conversationLength = useMemo(() => conversations.length, [conversations]);
@@ -42,6 +44,7 @@ const Conversations = ({
           <UserMessage key={index} conversation={conversation} userName={userName} />
         ) : (
           <AssistantMessage
+            model={selectedModel}
             key={index}
             setConversations={setConversations}
             llmDone={llmDone}
@@ -82,12 +85,14 @@ const UserMessage = ({ conversation, userName }: { conversation: IConversation; 
 // AssistantMessage Component
 // ======================================
 const AssistantMessage = ({
+  model,
   llmDone,
   isLast,
   conversation,
   setConversations,
   isProcessing,
 }: {
+  model: string;
   llmDone: boolean;
   isLast: boolean;
   conversation: IConversation;
@@ -185,7 +190,7 @@ const AssistantMessage = ({
       >
         <div className={cn('w-full', 'flex justify-between items-center')}>
           <div className={cn('text-black font-bold text-sm flex items-center gap-1')}>
-            <span>Llama3 MAAL Hummingbird</span>
+            <span>{model}</span>
             <span className={cn('text-[#888888] font-normal')}>&middot; {statusText}</span>
           </div>
           <div className="flex flex-row items-center h-8 gap-3 max-w-48 ">

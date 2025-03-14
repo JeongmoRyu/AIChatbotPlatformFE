@@ -17,7 +17,7 @@ const useEmbeddingSettingViewModel = ({ onChange, data_id, setIsModalVisible }: 
   const SELECT_EMBEDDING_LIST = useEmbeddingRankerCodeSelect('SEMANTIC_CHUNKING_EMBEDDING');
   const navigate = useNavigate();
   const [selectedRrfModels, setSelectedRrfModels] = useState<IModelWeight[]>([]);
-  const [rrfSelectValue, setRrfSelectValue] = useState<number>(0);
+  const [rrfSelectValue, setRrfSelectValue] = useState<number | null>(null);
   const [rrfModelName, setRrfModelName] = useState<string>('');
 
   const handleChange = (type: string, key: string, value: any) => {
@@ -60,7 +60,10 @@ const useEmbeddingSettingViewModel = ({ onChange, data_id, setIsModalVisible }: 
     }
   };
 
-  const handleModelSelect = (value: number, list: SelectListType[]) => {
+  const handleModelSelect = (value: number | null, list: SelectListType[]) => {
+    if (value === null) {
+      return;
+    }
     setRrfSelectValue(value);
     const selectedRrfModel = list.find((model) => model.value === value);
     if (selectedRrfModel && !selectedRrfModels.find((model) => model.model === selectedRrfModel.id)) {

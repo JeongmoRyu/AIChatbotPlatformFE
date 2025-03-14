@@ -1,0 +1,33 @@
+import tw from 'tailwind-styled-components';
+// import StatisticsTitle from '@/pages/Account/view/statistics/StatisticsTitle.tsx';
+// import StatisticsTab from '@/pages/Account/view/statistics/StatisticsTab.tsx';
+import DashboardHeader from '@/pages/Account/container/statistics/DashboardHeader.tsx';
+import DashboardBody from '@/pages/Account/container/statistics/DashboardBody.tsx';
+// import { Dashboard, StatisticsWrap } from '@/pages/Account/view/PageStatistics.tsx';
+
+const StatisticsLayout = () => {
+  return (
+    // <div className="w-full h-full py-10 desktop-lg:px-72 desktop:px-60 desktop-sm:px-24 laptop:px-72 laptop-sm:px-40 tablet:px-24">
+    //   <div className="block h-full">
+    //     <Outlet />
+    //   </div>
+    // </div>
+
+    <Dashboard>
+      <DashboardHeader />
+      <DashboardBody />
+    </Dashboard>
+  );
+};
+
+export default StatisticsLayout;
+
+export const Dashboard = tw.div`
+  w-full
+  h-full
+  flex
+  flex-col
+  gap-5
+  justify-start
+  items-center
+`;

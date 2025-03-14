@@ -121,6 +121,9 @@ const useChatPlayNameSelectBoxViewModel = ({
   }, [chatbotList, roomInfoState.checkId]);
 
   useEffect(() => {
+    if (placeholder) {
+      setSelectedchatbotLabel(placeholder);
+    }
     if (placeholder && !roomInfoState.checkId) {
       setSelectedchatbotLabel(placeholder);
     }

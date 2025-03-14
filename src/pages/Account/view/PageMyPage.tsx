@@ -111,7 +111,7 @@ const PageMyPage = () => {
             </div>
           ) : (
             <div className="flex flex-row bg-white rounded-md border border-[#d0d9e3] p-2">
-              <div className="mr-36">{name}</div>
+              <div className="flex w-[12rem] justify-start">{name}</div>
               <button onClick={toggleEditing} className="ml-2">
                 <div className="rounded-md w-6 h-6 flex items-center justify-center bg-[#f2f5f9]">
                   <img src={ico_pen} alt="Edit" className="w-4 h-4 cursor-pointer" />

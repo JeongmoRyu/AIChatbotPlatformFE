@@ -175,7 +175,7 @@ const EmbeddingSetting = ({
                     list={embeddingModelList}
                     labelText="임베딩 모델 선택"
                     name="embeddingModel"
-                    activeValue={rrfSelectValue || embeddingModelList[0]?.value}
+                    activeValue={rrfSelectValue}
                     onChange={(value) => handleModelSelect(value, embeddingModelList)}
                   />
                 )}

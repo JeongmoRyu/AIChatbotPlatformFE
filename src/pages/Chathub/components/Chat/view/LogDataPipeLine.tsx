@@ -41,8 +41,20 @@ const LogDataPipeLine = ({ logData }: PipeLineProps) => {
 
   return (
     <div className="scroll_wrap test_log">
-      {logData.total_time && <strong className="total_time">총 소요시간 : {logData.total_time / 1000}초</strong>}
-      {logData.total_time && <strong className="total_time">Total Tokens : {totalTokens}</strong>}
+      {/* {logData.total_time && <strong className="total_time">총 소요시간 : {logData.total_time / 1000}초</strong>}
+      {logData.total_time && <strong className="total_time">Total Tokens : {totalTokens}</strong>} */}
+      {logData.total_time && (
+        <div className="log_section">
+          <div className="log_item">
+            <strong className="log_value">총 소요시간</strong>
+            <span className="log_value"> {(logData.total_time / 1000).toFixed(2)}초</span>
+          </div>
+          <div className="log_item">
+            <strong className="log_value">Total Tokens</strong>
+            <span className="log_value"> {totalTokens}</span>
+          </div>
+        </div>
+      )}
 
       {logData.logs &&
         logData.logs.map((item, index) => (

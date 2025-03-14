@@ -43,6 +43,8 @@ import TaskEmail from '@/pages/LLMTempltes/components/taskEmail/view/TaskEmail';
 import PageAccount from '@/pages/Account/view/PageAccount';
 import PageMyPage from '@/pages/Account/view/PageMyPage';
 import PageStatistics from '@/pages/Account/view/PageStatistics';
+import NewPageChatUI from '@/pages/Chathub/view/PageNewChatUI';
+import PageTemp from '@/pages/Chathub/view/PageTemp';
 
 const AnimatedOutlet = () => {
   const location = useLocation();
@@ -72,7 +74,8 @@ const routes = createRoutesFromElements(
       path="/"
       element={
         <LayoutCommon>
-          <AnimatedOutlet />
+          {/* <AnimatedOutlet /> */}
+          <Outlet />
         </LayoutCommon>
       }
     >
@@ -132,6 +135,8 @@ const routes = createRoutesFromElements(
       <Route path="embedding-ranker" element={<PageEmbeddingRanker />} />
       <Route path="embedding-leaderboard" element={<PageEmbeddingLeaderBoard />} />
       <Route path="embedding-history" element={<PageEmbeddingHistory />} />
+      {/* <Route path="chatui" element={<NewPageChatUI />} /> */}
+      <Route path="temp" element={<PageTemp />} />
       <Route path="mypage" element={<PageMyPage />} />
       <Route path="account" element={<PageAccount />} />
       <Route path="statistics" element={<PageStatistics />} />

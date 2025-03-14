@@ -33,7 +33,7 @@ const AccountModal: React.FC<AccountModalProps> = ({
   handleIDCheck,
 }) => {
   const getSelectValue = (data: UserListType) => {
-    if (data.is_super_admin) return 'Admin';
+    if (data.is_super_admin) return 'SuperAdmin';
     if (data.is_admin) return 'Admin';
     //   if (data.super_admin) return 'SuperAdmin';
     //   if (data.admin) return 'Admin';
@@ -149,6 +149,7 @@ const AccountModal: React.FC<AccountModalProps> = ({
             <option value="User">User (일반 사용자)</option>
             <option value="Editor">Editor (기본 관리자)</option>
             {userAuthority !== 'editor' && <option value="Admin">Admin (관리자)</option>}
+            {userAuthority === 'superAdmin' && <option value="SuperAdmin">SupderAdmin (최고관리자)</option>}
 
             {/* <option value="SuperAdmin">Super Admin (관리자)</option>           */}
             {/* <option value="User">User (일반 사용자)</option>

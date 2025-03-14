@@ -51,7 +51,8 @@ const useFetchRag = () => {
   const setEnginData = useSetRecoilState(chatPlayEngineData);
   const setTotalCount = useSetRecoilState(listTotalCount);
 
-  const setFetchListData = useSetRecoilState(fetchRetreivalListData);
+  const [fetchListData, setFetchListData] = useRecoilState(fetchRetreivalListData);
+
   const setIsModelSaveLoading = useSetRecoilState<boolean>(gptIsModelSaveLoading);
 
   const resetFetchListData = useResetRecoilState(useFetchListData);
@@ -242,12 +243,6 @@ const useFetchRag = () => {
     try {
       const response = await sendRequest('/retriever', 'DELETE', {}, checkList);
 
-      getRagListData(1);
-      setCheckList([]);
-      setCurrentPage(1);
-      setIsRagModalChanged(true);
-      getRetrieverList();
-
       if (response && response.data.code === 'F000') {
         handleClose();
       }
@@ -255,6 +250,16 @@ const useFetchRag = () => {
       if (response && response.data.code === 'R021') {
         handleClose(response.data.message);
       }
+
+      if (response && response.data.code === 'R022') {
+        handleClose(response.data.message);
+      }
+
+      getRagListData(1);
+      setCheckList([]);
+      setCurrentPage(1);
+      setIsRagModalChanged(true);
+      getRetrieverList();
     } catch (error) {
       console.error(error);
       setIsRagModalChanged(false);

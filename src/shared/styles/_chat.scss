@@ -1487,6 +1487,24 @@
       text-align: center;
       color: #4262ff;
     }
+    .log_section {
+      display: flex;
+      justify-content: flex-start; 
+      gap: 16px;
+      height: 2rem;
+      align-items: center;
+      padding: 10px 12px;
+      border: 2px solid #f4f6f8;
+      background-color: white; 
+      border-radius: 10px; 
+      margin-bottom: 7px; 
+    }
+  
+    .log_value {
+      color: black; 
+      font-size: 12px;
+      // font-weight: bold; 
+    }
     .log_box {
       overflow: hidden;
       border: 1px solid #d0d9e3;
@@ -1722,6 +1740,9 @@
     .cell_name{
       width: 15%;
     }
+    .cell_org {
+      width: 10%;  
+    }
     .cell_birth,
     .cell_id {
       width: full;
@@ -1730,15 +1751,11 @@
       width: 10%;
     }
     .cell_no {
-      width: 25px;
+      width: 5%;
       text-align: center;
       justify-items: center;      
     }
-    .cell_no {
-      width: 25px;
-      text-align: center;
-      justify-items: center;      
-    }
+
     .cell_revise {
       width: 50px;
       text-align: center;
@@ -1837,6 +1854,7 @@
 
 // embedding ranker
 .page_ranker {
+  width: 100%;
   overflow: hidden;
   flex: 1;
   height: 100%;
@@ -2257,7 +2275,7 @@
 .chathub-sidebar{
   overflow-y: hidden;
   width: 100%;
-  max-width: 20rem;
+  max-width: 25rem;
   height: 100%;
   ::-webkit-scrollbar {
     width: 8px; 
@@ -2424,6 +2442,24 @@
       padding: 15px 0 5px;
       text-align: center;
       color: #4262ff;
+    }
+    .log_section {
+      display: flex;
+      justify-content: flex-start; 
+      gap: 16px;
+      height: 2rem;
+      align-items: center;
+      padding: 10px 12px;
+      border: 2px solid #f4f6f8;
+      background-color: white; 
+      border-radius: 10px; 
+      margin-bottom: 7px; 
+    }
+  
+    .log_value {
+      color: black; 
+      font-size: 12px;
+      // font-weight: bold; 
     }
     .log_box {
       overflow: hidden;

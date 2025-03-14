@@ -106,25 +106,15 @@ function ChatPlayPipelineFlow({ socket }: { socket: any }) {
 
               {clickStates.ragClick && (
                 <>
-                  {isRagModelCreating ? (
-                    <GeneralButton
-                      name="generating"
-                      className="flex flex-row items-center justify-center w-full h-12 mt-2 mb-4 border rounded-md border-set-border"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <span className="text-primary-darkblue">{t('chatplay:등록_중')}</span>
-                    </GeneralButton>
-                  ) : (
-                    <GeneralButton
-                      type="submit"
-                      name="submit"
-                      className="flex flex-row items-center justify-center w-full h-12 mt-2 mb-4 border rounded-md border-set-border"
-                      onClick={handleOpenRagList}
-                    >
-                      <img src={plus} alt="register rag" className="pr-4" />
-                      <div>{t('chatplay:문서_등록하기')}</div>
-                    </GeneralButton>
-                  )}
+                  <GeneralButton
+                    type="submit"
+                    name="submit"
+                    className="flex flex-row items-center justify-center w-full h-12 mt-2 mb-4 border rounded-md border-set-border"
+                    onClick={handleOpenRagList}
+                  >
+                    <img src={plus} alt="register rag" className="pr-4" />
+                    <div>{t('chatplay:문서_등록하기')}</div>
+                  </GeneralButton>
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       {t('chatplay:문서_선택')}

@@ -1,8 +1,9 @@
 import BgMainTop from '@/shared/assets/images/bg-main-top.svg';
-import LogoSVGKO from '@/shared/assets/images/homeHeaderTitleKO.svg';
+import LogoSVGKO from '/homeHeaderTitleKO.svg';
 import LogoSVGEN from '@/shared/assets/images/homeHeaderTitleEN.svg';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import LOGOMAAL from '/maal_logo_tag.svg';
 
 import email from '@/shared/assets/images/image/llm/Icon-llm-email.svg';
 import news from '@/shared/assets/images/image/llm/Icon-llm-news.svg';
@@ -13,23 +14,15 @@ import edit from '@/shared/assets/images/image/llm/Icon-llm-edit.svg';
 import translate from '@/shared/assets/images/image/llm/Icon-llm-translate.svg';
 import analysis from '@/shared/assets/images/image/llm/Icon-llm-analysis.svg';
 import code from '@/shared/assets/images/image/llm/Icon-llm-code.svg';
-import {
-  LLM_TASK_ANALYSIS_DOC_PATH,
-  LLM_TASK_CODE_PATH,
-  LLM_TASK_CORE_SUMMARY_PATH,
-  LLM_TASK_DOCUMENT_PATH,
-  LLM_TASK_EMAIL_PATH,
-  LLM_TASK_NEWS_PATH,
-  LLM_TASK_PROMOTION_PATH,
-  LLM_TASK_SCRIPT_PATH,
-  LLM_TASK_TRANSLATE_PATH,
-} from '@/shared/lib/urlPath';
+
 import { userAuthority as useUserAuthority } from '@/shared/store/onpromise';
 import { useRecoilValue } from 'recoil';
+import { useRestfulCustomAxios } from '@/shared/hooks/useRestfulCustomAxios';
 interface HeaderDataItem {
   subTitle: string;
   title: string;
   titleImage: typeof LogoSVGKO;
+  subTitleImage: typeof LOGOMAAL;
   backgroundImage?: typeof LogoSVGKO;
 }
 
@@ -46,16 +39,17 @@ const useHomeModel = () => {
   const [solutionData, setSolutionData] = useState<HomeData['solutionData'] | null>(null);
   const [templateData, setTemplateData] = useState<HomeData['templateData'] | null>(null);
   const userAuthority = useRecoilValue(useUserAuthority);
+  const { sendRequest } = useRestfulCustomAxios();
 
   useEffect(() => {
     const fetchData = async () => {
       const header = await fetchHeaderData(i18n.language);
-      const solution = await fetchSolutionsData();
+      const solution = await fetchSolutionsData(sendRequest);
       const template = await fetchTemplateData();
 
       const adjustedSolution =
         userAuthority === ''
-          ? { ...solution, list: solution.list.filter((item) => item.title !== 'Embedding Ranker') }
+          ? { ...solution, list: solution.list.filter((item: any) => item.title !== 'Embedding Ranker') }
           : solution;
       setHeaderData(header);
       setSolutionData(adjustedSolution);
@@ -71,8 +65,11 @@ const useHomeModel = () => {
 export default useHomeModel;
 
 const fetchHeaderData = async (language: string): Promise<HomeData['headerData']> => {
+  const LogoSVGKO = `/${window.TITLE_IMAGE || '/homeHeaderTitleKO.svg'}`;
+
   const headerData = {
     subTitle: 'menu:On_premise_LLM_플랫폼',
+    subTitleImage: LOGOMAAL,
     titleImage: language === 'ko' ? LogoSVGKO : LogoSVGEN,
     title: 'menu:MAUM_AI의_LLM_솔루션',
     backgroundImage: BgMainTop,
@@ -81,35 +78,30 @@ const fetchHeaderData = async (language: string): Promise<HomeData['headerData']
   return headerData;
 };
 
-const fetchSolutionsData = async () => {
-  const solutionData: CardListProps = {
+const fetchSolutionsData = async (sendRequest: Function) => {
+  const response = await sendRequest('/menu/list/HOME', 'get', undefined, undefined);
+  if (response && response.data && response.data.code === 'F000') {
+    const solutionData: CardListProps = {
+      list: response.data.data.map((item: any) => ({
+        title: item.title,
+        subTitle: item.sub_title,
+        description: item.description,
+        to: item.to,
+      })),
+      type: 'large' as CardType,
+    };
+    return solutionData;
+  }
+  return {
     list: [
       {
         title: 'menu:AI와의_대화',
         description: 'menu:다양한_LLM_모델과_대화해보세요',
         to: '/ai-chat',
       },
-      {
-        title: 'menu:챗플레이',
-        subTitle: 'Chat Play',
-        description: 'menu:쉽고_빠르게_문서를_모델에_학습시키고_해당_문서에_대한_대화를_나눌_수_있습니다',
-        to: '/chat-play',
-      },
-      {
-        title: 'menu:챗허브',
-        subTitle: 'Chat Hub',
-        description: 'menu:Input_데이터와_Output_설정을_조정하여_정교한_커스텀챗봇을_만들_수_있습니다',
-        to: '/chat-hub',
-      },
-      {
-        title: 'Embedding Ranker',
-        description: 'menu:한번에_여러가지_LLM_모델_성능을_시험하고_정답률을_비교할_수_있습니다',
-        to: '/embedding-history',
-      },
     ],
-    type: 'large',
+    type: 'large' as CardType,
   };
-  return solutionData;
 };
 
 const fetchTemplateData = async () => {
@@ -120,55 +112,55 @@ const fetchTemplateData = async () => {
         title: 'llm:이메일_작성',
         description: 'llm:발신_목적과_핵심_내용을_입력하면_완성된_이메일을_작성해드립니다',
         iconURL: email,
-        redirect: LLM_TASK_EMAIL_PATH,
+        to: '/llm-template/task/email',
       },
       {
         title: 'llm:뉴스_기사_작성',
         description: 'llm:홍보_주제_언어_포함할_내용을_입력하면_보도자료나_뉴스_기사를_작성해드립니다',
         iconURL: news,
-        redirect: LLM_TASK_NEWS_PATH,
+        to: '/llm-template/task/news',
       },
       {
         title: 'llm:홍보_문구_작성',
         description: 'llm:제품_정보_홍보_키워드_등을_입력하면_홍보_문구를_작성해드립니다',
         iconURL: promotion,
-        redirect: LLM_TASK_PROMOTION_PATH,
+        to: '/llm-template/task/promotion',
       },
       {
         title: 'llm:영상_스크립트_작성',
         description: 'llm:영상_주제와_포함할_내용을_입력하면_영상_스크립트를_작성해드립니다',
         iconURL: script,
-        redirect: LLM_TASK_SCRIPT_PATH,
+        to: '/llm-template/task/script',
       },
       {
         title: 'llm:문서_핵심_요약',
         description: 'llm:문서_전체를_복사하여_붙여넣어주세요_핵심_내용을_요약해드립니다',
         iconURL: summary,
-        redirect: LLM_TASK_CORE_SUMMARY_PATH,
+        to: '/llm-template/task/summary',
       },
       {
         title: 'llm:문서_첨삭',
         description: 'llm:문서_내용을_입력하면_교정_교열을_포함한_문서_첨삭을_해드립니다',
         iconURL: edit,
-        redirect: LLM_TASK_DOCUMENT_PATH,
+        to: '/llm-template/task/edit',
       },
       {
         title: 'llm:한_영_번역',
         description: 'llm:한국어_텍스트를_입력하면_영문으로_번역해드립니다',
         iconURL: translate,
-        redirect: LLM_TASK_TRANSLATE_PATH,
+        to: '/llm-template/task/translate',
       },
       {
         title: 'llm:문서_분석',
         description: 'llm:문서를_입력하고_분석_방향을_제시하면_분석한_내용을_제공합니다',
         iconURL: analysis,
-        redirect: LLM_TASK_ANALYSIS_DOC_PATH,
+        to: '/llm-template/task/analysis',
       },
       {
         title: 'llm:코드_작성',
         description: 'llm:프로그래밍_언어를_선택하고_코딩_목적을_입력하면_코드를_작성해드립니다',
         iconURL: code,
-        redirect: LLM_TASK_CODE_PATH,
+        to: '/llm-template/task/code',
       },
     ],
     type: 'small',

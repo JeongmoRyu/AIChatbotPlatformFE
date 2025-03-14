@@ -11,7 +11,7 @@ import usePageAccountViewModel from '../viewModel/usePageAccountViewModel';
 
 const PageAccount = () => {
   const {
-    // userAuthority,
+    userAuthority,
     userList,
     selectedUsers,
     toggleSelectUser,
@@ -75,6 +75,11 @@ const PageAccount = () => {
           <td className="cell_no">
             <label htmlFor={id}>{index + 1}</label>
           </td>
+          {userAuthority === 'superAdmin' && (
+            <td className="cell_org">
+              <label htmlFor={id}>{item.organization}</label>
+            </td>
+          )}
           <td className="cell_id">
             <label htmlFor={id}>{item.username}</label>
           </td>
@@ -85,7 +90,7 @@ const PageAccount = () => {
           <td className="cell_admin">
             <label htmlFor={id}>
               {/* {item.super_admin ? 'Admin' : item.admin ? 'Editor' : '-'} */}
-              {item.is_super_admin ? 'Admin' : item.is_admin ? 'Admin' : item.is_editor ? 'Editor' : 'User'}
+              {item.is_super_admin ? 'Super_Admin' : item.is_admin ? 'Admin' : item.is_editor ? 'Editor' : 'User'}
             </label>
           </td>
           <td className="cell_date">
@@ -148,6 +153,7 @@ const PageAccount = () => {
               <colgroup>
                 <col className="cell_checked" />
                 <col className="cell_no" />
+                {userAuthority === 'superAdmin' && <col className="cell_org" />}
                 <col className="cell_id" />
                 <col className="cell_name" />
                 <col className="cell_admin" />
@@ -168,6 +174,11 @@ const PageAccount = () => {
                   <th scope="col" className="cell_no">
                     No.
                   </th>
+                  {userAuthority === 'superAdmin' && (
+                    <th scope="col" className="cell_org">
+                      조직
+                    </th>
+                  )}
                   <th scope="col" className="cell_id">
                     ID
                   </th>

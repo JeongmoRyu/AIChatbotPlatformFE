@@ -102,7 +102,7 @@ const useModalRetreivalSettingViewModel = () => {
   };
 
   const closeModal = (modalMsg?: string | React.MouseEvent<HTMLButtonElement>) => {
-    console.log('nextModalMsg', modalMsg);
+    // console.log('nextModalMsg', modalMsg);
 
     setIsShowBackdrop(false);
     resetCurrentPage();

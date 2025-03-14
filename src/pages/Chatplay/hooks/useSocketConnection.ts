@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { useTranslation } from 'react-i18next';
 
@@ -34,7 +34,7 @@ const useSocketConnection = () => {
 
   const [isLoading, setIsLoading] = useRecoilState<boolean>(isChatLoading);
 
-  const connectSocketIo = () => {
+  const connectSocketIo = useCallback(() => {
     if (socket && socket.connected) return;
 
     console.log('%c*** ChatPlay Connecting Socket ***', 'color:blue;');
@@ -56,8 +56,7 @@ const useSocketConnection = () => {
     } else {
       console.log('Socket Connection is failed!!');
     }
-  };
-
+  }, [socket]);
   useEffect(() => {
     if (socket && !roomInfoState.isMakingQuestions) {
       console.log('%c*** ChatPlay Socket Connection is established ***', 'color: green;');
