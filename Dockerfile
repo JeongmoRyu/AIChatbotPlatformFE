@@ -1,4 +1,5 @@
 # Stage 1: Build the React application
+# Test Git Guardian
 FROM node:18.20.3-slim AS build
 
 WORKDIR /builddir
